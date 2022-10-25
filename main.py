@@ -31,6 +31,8 @@ class Player:
     def down(self, event):
         self.movements(0, 10)
 
+
+
 def show(event):
     global line
     print(f"{event.x} {event.y}")
