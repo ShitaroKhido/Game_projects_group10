@@ -1,11 +1,11 @@
+from re import A
 from tkinter import *
 
-### helllo
+
 
 root = Tk()
+root.geometry("1000x600")
+root.resizable(0,0)
 
 
-### Hello
-
-
-root.mainloop()
+mainloop()
