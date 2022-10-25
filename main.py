@@ -4,9 +4,9 @@ class Player:
     
     PLAYER_POSITION = [10,10,120,120]
 
-    def __init__(self, master) -> None:
+    def __init__(self, master, player, crosshair = None) -> None:
         Canvas().__init__(master)
-        self._player_img = PhotoImage(file="Game_projects_group10/assets/image/virus2.png")
+        self._player_img = player
         self._crosshair_img = PhotoImage(file="Game_projects_group10/assets/image/crosshairs.png")
         self._canvas = Canvas(master)
         self._canvas.pack(expand=True, fill=BOTH)
@@ -59,6 +59,9 @@ if __name__=="__main__":
     root.geometry("1000x600")
     root.resizable(0,0)
     
-    player = Player(root)
+    p1 = PhotoImage(file="Game_projects_group10/assets/image/virus2.png")
+    cross = PhotoImage(file="Game_projects_group10/assets/image/crosshairs.png")
+
+    player = Player(root,p1,cross)
 
     mainloop()
