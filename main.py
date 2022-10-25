@@ -7,7 +7,7 @@ class Player:
     def __init__(self, master, player, crosshair = None) -> None:
         Canvas().__init__(master)
         self._player_img = player
-        self._crosshair_img = PhotoImage(file="Game_projects_group10/assets/image/crosshairs.png")
+        self._crosshair_img = crosshair
         self._canvas = Canvas(master)
         self._canvas.pack(expand=True, fill=BOTH)
         self._player = self._canvas.create_image(10, 10 , image=self._player_img)
