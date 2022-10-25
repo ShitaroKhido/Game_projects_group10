@@ -63,7 +63,7 @@ class Player:
     def down(self, event):
         self.movements(0, 20)
 
-
+########################################################################################
 
 
 if __name__=="__main__":
@@ -71,7 +71,6 @@ if __name__=="__main__":
     root = Tk()
     root.geometry("1000x600")
     root.resizable(0,0)
-
     
     player = Player(root)
 
