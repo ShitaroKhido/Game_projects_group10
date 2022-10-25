@@ -7,6 +7,7 @@ class Player:
     def __init__(self, master) -> None:
         Canvas().__init__(master)
         self._player_img = PhotoImage(file="Game_projects_group10/assets/image/virus2.png")
+        self._crosshair_img = PhotoImage(file="Game_projects_group10/assets/image/crosshair.png")
         self._canvas = Canvas(master)
         self._canvas.pack(expand=True, fill=BOTH)
         self._player = self._canvas.create_image(10, 10 , image=self._player_img)
@@ -15,6 +16,11 @@ class Player:
             self._canvas.coords(self._player)[1]+20,
             self._canvas.coords(self._player)[0]+20,
             self._canvas.coords(self._player)[1]+20,
+        )
+        self._crosshair = self._canvas.create_image(
+            self._canvas.coords(self._player)[0]+20,
+            self._canvas.coords(self._player)[1]+20,
+            image=self._crosshair_img
         )
         self._master = master
         ### MOVEMENTS KEY
@@ -30,25 +36,31 @@ class Player:
 
     def _show(self, event):
         self._canvas.delete(self._laser)
+        self._canvas.delete(self._crosshair)
         self._laser = self._canvas.create_line(
             self._canvas.coords(self._player)[0],
             self._canvas.coords(self._player)[1],
             event.x,
             event.y,
         )
+        self._crosshair = self._canvas.create_image(
+            event.x,
+            event.y,
+            image=self._crosshair_img
+        )
         print(f"{event.x} {event.y}")
 
     def right(self, event):
-        self.movements(10, 0)
+        self.movements(20, 0)
 
     def left(self, event):
-        self.movements(-10, 0)
+        self.movements(-20, 0)
 
     def up(self, event):
-        self.movements(0, -10)
+        self.movements(0, -20)
 
     def down(self, event):
-        self.movements(0, 10)
+        self.movements(0, 20)
 
 
 
