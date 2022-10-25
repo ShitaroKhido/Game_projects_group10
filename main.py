@@ -29,6 +29,7 @@ class Player:
         self._canvas.move(self._player, x, y)
 
     def _show(self, event):
+        self._canvas.delete(self._laser)
         self._laser = self._canvas.create_line(
             self._canvas.coords(self._player)[0],
             self._canvas.coords(self._player)[1],
