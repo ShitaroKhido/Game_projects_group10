@@ -7,16 +7,10 @@ class Player:
     def __init__(self, master) -> None:
         Canvas().__init__(master)
         self._player_img = PhotoImage(file="Game_projects_group10/assets/image/virus2.png")
-        self._crosshair_img = PhotoImage(file="Game_projects_group10/assets/image/crosshair.png")
+        self._crosshair_img = PhotoImage(file="Game_projects_group10/assets/image/crosshairs.png")
         self._canvas = Canvas(master)
         self._canvas.pack(expand=True, fill=BOTH)
         self._player = self._canvas.create_image(10, 10 , image=self._player_img)
-        self._laser = self._canvas.create_line(
-            self._canvas.coords(self._player)[0]+20,
-            self._canvas.coords(self._player)[1]+20,
-            self._canvas.coords(self._player)[0]+20,
-            self._canvas.coords(self._player)[1]+20,
-        )
         self._crosshair = self._canvas.create_image(
             self._canvas.coords(self._player)[0]+20,
             self._canvas.coords(self._player)[1]+20,
@@ -29,17 +23,10 @@ class Player:
         self._master.bind("<s>", self.down)
         self._master.bind("<d>", self.right)
         ### AIMING MOTION
-        self._master.bind("<Motion>", self._show)
+        self._master.bind("<Motion>", self._player_crosshair)
 
-    def _show(self, event):
-        self._canvas.delete(self._laser)
+    def _player_crosshair(self, event):
         self._canvas.delete(self._crosshair)
-        self._laser = self._canvas.create_line(
-            self._canvas.coords(self._player)[0],
-            self._canvas.coords(self._player)[1],
-            event.x,
-            event.y,
-        )
         self._crosshair = self._canvas.create_image(
             event.x,
             event.y,
