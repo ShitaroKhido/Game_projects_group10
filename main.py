@@ -31,9 +31,6 @@ class Player:
         ### AIMING MOTION
         self._master.bind("<Motion>", self._show)
 
-    def movements(self, x,y):
-        self._canvas.move(self._player, x, y)
-
     def _show(self, event):
         self._canvas.delete(self._laser)
         self._canvas.delete(self._crosshair)
@@ -50,6 +47,10 @@ class Player:
         )
         print(f"{event.x} {event.y}")
 
+    def movements(self, x,y):
+        self._canvas.move(self._player, x, y)
+
+    
     def right(self, event):
         self.movements(20, 0)
 
@@ -61,10 +62,6 @@ class Player:
 
     def down(self, event):
         self.movements(0, 20)
-
-
-
-
 
 
 
