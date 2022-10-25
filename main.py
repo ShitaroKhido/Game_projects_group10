@@ -11,8 +11,8 @@ class Player:
         self._canvas.pack(expand=True, fill=BOTH)
         self._player = self._canvas.create_image(10, 10 , image=self._player_img)
         self._laser = self._canvas.create_line(
-            self._canvas.coords(self._player)[0],
-            self._canvas.coords(self._player)[1],
+            self._canvas.coords(self._player)[0]+20,
+            self._canvas.coords(self._player)[1]+20,
             self._canvas.coords(self._player)[0]+20,
             self._canvas.coords(self._player)[1]+20,
         )
