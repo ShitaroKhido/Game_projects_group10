@@ -1,4 +1,4 @@
-from tkinter import Frame, PhotoImage, Tk, Canvas, mainloop, BOTH
+from tkinter import Button, Frame, PhotoImage, Tk, Canvas, mainloop, BOTH
 
 
 ### CONSTANT
@@ -17,17 +17,16 @@ class Player:
         self._player = self._canvas.create_image(position, image = player_img, tag="player")
         self._master = master
 
-        self._master.bindtag("player","<w>", self.move_up)
-        self._master.bindtag("player", "<a>", self.move_left)
-        self._master.bindtag("player", "<s>", self.move_down)
-        self._master.bindtag("player", "<d>", self.move_right)
-
+        self._master.bind("<w>", self.move_up)
+        self._master.bind("<a>", self.move_left)
+        self._master.bind("<s>", self.move_down)
+        self._master.bind("<d>", self.move_right)
 
     def movement(self, x = 0, y = 0):
         self._canvas.move(self._player, x, y)
     
     def move_left(self, event):
-        self.movement(x =- 10)
+        self.movement(x = -10)
     
     def move_right(self, event):
         self.movement(x = 10)
@@ -39,6 +38,13 @@ class Player:
         self.movement(y = 10)
     
 
+
+class Home:
+    
+
+    def __init__(self, canvas, background_location) -> None:
+        self.background = PhotoImage(file= background_location)
+        self.add_background = canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, image=self.background)
 
 
 
@@ -52,24 +58,9 @@ if __name__ == "__main__":
     root.title(GAME_TITLE)
     root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 
-    ### MAIN GAME FRAME
+    main_canvas = Canvas(root)
+    main_canvas.pack(expand=True, fill=BOTH)
 
-    level_selection = Frame(root)
-    frame_level_1 = Frame(root)
-    frame_level_2 = Frame(root)
-    frame_level_3 = Frame(root)
-
-    # level_selection.pack(expand=True, fill=BOTH)
-    frame_level_1.pack(expand=True, fill=BOTH)
-    # frame_level_2.pack(expand=True, fill=BOTH)
-    # frame_level_3.pack(expand=True, fill=BOTH)
-    ### MAIN CANVAS
-    canvas = Canvas(frame_level_1)
-    canvas.pack(expand=True, fill=BOTH)
-    ### PLAYER IMAGES
     player_img = PhotoImage(file=CHARACTER_IMG_LOCATION)
-
-    main_player = Player(frame_level_1, canvas, [100,100], player_img)
-
 
     mainloop()
