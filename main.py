@@ -22,7 +22,7 @@ class Character:
     def player_coord(self):
         return self._canvas.coords(self._player)
 
-    def movements(self, event, x = 0 , y = 0):
+    def movements(self, x = 0 , y = 0):
         self._canvas.move(self._player, x, y)
 
     def move_right(self, event):
