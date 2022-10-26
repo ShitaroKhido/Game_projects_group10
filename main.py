@@ -3,7 +3,7 @@ from turtle import position
 
 
 ### CONSTANT
-WINDOW_WIDTH = 1001
+WINDOW_WIDTH = 1000
 WINDOW_HEIGHT = 600
 
 
@@ -14,13 +14,22 @@ GMAE_ICON_LOCATION = ""
 
 
 
-
+### Khid
 class Character:
     
     def __init__(self, canvas) -> None:
         pass
 
 
+
+
+
+
+
+
+
+
+### SeangEng
 class Draw:
     
     def __init__(self, canvas, grid, x, y, grid_size):
