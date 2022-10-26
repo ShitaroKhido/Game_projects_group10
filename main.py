@@ -1,8 +1,19 @@
 from tkinter import Tk, Canvas, mainloop, BOTH
 
+
+### CONSTANT
+WINDOW_WIDTH = 1000
+WINDOW_HEIGHT = 600
+
+
+
+
+
+
 class Character:
     
-    pass
+    def __init__(self, canvas) -> None:
+        pass
 
 
 class Draw:
