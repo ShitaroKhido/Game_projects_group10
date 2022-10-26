@@ -17,22 +17,22 @@ CROSSHAIR = "Game_projects_group10\\assets\image\crosshairs.png"
 ### MAIN CODE ###
 #################
 
-#############################
-### GUI WINDOWS INTERFACE ###
-#############################
-
+###### GUI WINDOWS INTERFACE ######
 root = Tk()
 root.title(GAME_TITLE)
 root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 
+###### MAIN CANVAS ######
 main_canvas = Canvas(root)
 main_canvas.pack(expand=True, fill=BOTH)
 
+###### PLAYER CANVAS ######
 player_canvas = main_canvas.create_oval(100,100, 150,150)
 
+###### PLAYER FUNTION ######
 main_player = Character(main_canvas, player_canvas)
 
-### PLAYER KEY BIND
+###### PLAYER KEY BIND ######
 root.bind("<w>", main_player.move_up)
 root.bind("<a>", main_player.move_left)
 root.bind("<s>", main_player.move_down)
