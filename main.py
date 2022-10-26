@@ -37,7 +37,6 @@ class Character:
     def move_down(self, event):
         self.movements(event, y = 60)
 
-
 class Gun:
     
     AIM_ALIGNMENT = 12
@@ -52,21 +51,22 @@ class Gun:
         self.y2 = self._player_coord[3]
 
     def projectile(self, event):
+        ### VECTORS CALCULATION
         vector_a = (self.x1+self.x2) / 2
         vector_b = (self.y1+self.y2) / 2
-
+        ### PLAYER COORDINATION POINT
         player_x = event.x - vector_a
         player_y = event.y - vector_b
-
+        ### VOLOCITY OF DIRECTION
         x_direction = (player_x + 2) - (player_x - 2) / self.AIM_ALIGNMENT
         y_direction = (player_y + 2) - (player_y - 2) / self.AIM_ALIGNMENT
 
         return [x_direction, y_direction]
 
-
     def shoot(self, event):
         direction = self.projectile(event)
         self._canvas.move(None, direction[0], direction[1])
+
 
 #################
 ### MAIN CODE ###
