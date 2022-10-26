@@ -40,7 +40,24 @@ class Draw:
         self.y = y
 
     def level(self):
-        pass
+        brick=2
+        man=1
+        virus=3
+        alcohol=4
+        mask=5
+        for row in self.canvas:
+            for col in row:
+                if col==brick:
+                    pass
+                elif col==man:
+                    pass
+                elif col==virus:
+                    pass
+                elif col==alcohol:
+                    pass
+                elif col==mask:
+                    pass
+                canvas.create_image(self.x,self.y,image="")
 
 grid=[
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
@@ -65,7 +82,7 @@ grid=[
     ]
 position_x=0
 position_y=0
-box_size=20
+grid_size=20
 
 
 
@@ -78,7 +95,16 @@ if __name__ == "__main__":
     root = Tk()
     root.title(GAME_TITLE)
     root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
+    canvas=Canvas(root)
 
-    gird=Draw()
+
+
+
+
+
+
+
+
+    gird=Draw(canvas,grid,position_x,position_y,grid_size)
 
     root.mainloop()
