@@ -14,13 +14,15 @@ class Player:
     
     def __init__(self, master, canvas, position, player_img) -> None:
         self._canvas = canvas
-        self._player = self._canvas.create_image(position, image = player_img)
+        self._player = self._canvas.create_image(position, image = player_img, tag="player")
         self._master = master
 
-        self._master.bind("<w>", self.move_up)
-        self._master.bind("<a>", self.move_left)
-        self._master.bind("<s>", self.move_down)
-        self._master.bind("<d>", self.move_right)
+        self._master.bindtag("player","<w>", self.move_up)
+        self._master.bindtag("player", "<a>", self.move_left)
+        self._master.bindtag("player", "<s>", self.move_down)
+        self._master.bindtag("player", "<d>", self.move_right)
+
+
     def movement(self, x = 0, y = 0):
         self._canvas.move(self._player, x, y)
     
