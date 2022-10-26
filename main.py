@@ -19,23 +19,36 @@ class Character:
         self._player =  player
         self._canvas = main_canvas
 
+    def player_coord(self):
+        return self._canvas.coords(self._player)
+
     def movements(self, event, x = 0 , y = 0):
         self._canvas.move(self._player, x, y)
 
     def move_right(self, event):
-        self.movements(event, x = 20)
+        self.movements(event, x = 60)
 
     def move_left(self, event):
-        self.movements(event, x = -20)
+        self.movements(event, x = -60)
     
     def move_up(self, event):
-        self.movements(event, y = -20)
+        self.movements(event, y = -60)
     
     def move_down(self, event):
-        self.movements(event, y = 20)
+        self.movements(event, y = 60)
 
+    
+class Gun:
+    
 
+    def __init__(self,player, gun, ammo) -> None:
+        self._ammo_type = ammo
+        self._gun_type = gun
+        self._player = player
 
+    def creat_bullet(self, event):
+        p_coords = self.Canvas.coord(self._player)
+        Canvas.create_image(event.x, event.y, )
 # def click(event):
     
 #     A = (main_canvas.coords(player)[0] + main_canvas.coords(player)[2]) /2
@@ -77,5 +90,5 @@ if __name__ == "__main__":
     root.bind("<a>", players.move_left)
     root.bind("<s>", players.move_down)
     root.bind("<d>", players.move_right)
-    root.bind("<Button-1>", click)
+    # root.bind("<Button-1>", click)
     mainloop()
