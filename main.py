@@ -16,8 +16,9 @@ GMAE_ICON_LOCATION = ""
 ### Khid
 class Character:
     
-    def __init__(self, canvas) -> None:
-        pass
+    def __init__(self, canvas, player_image, xPos, yPos) -> None:
+        self._canvas = canvas
+        self._player = self._canvas.create(xPos, yPos, image=player_image)
 
 
 
