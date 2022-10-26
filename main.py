@@ -7,7 +7,7 @@ WINDOW_HEIGHT = 600
 
 
 GAME_TITLE = "THE CORAVID"
-GMAE_ICON_LOCATION = 
+GMAE_ICON_LOCATION = ""
 
 
 
@@ -31,3 +31,14 @@ class Draw:
 
     def level(self):
         pass
+
+
+
+if __name__ == "__main__":
+    
+    root = Tk()
+    root.title(GAME_TITLE)
+    root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
+
+
+    root.mainloop()
