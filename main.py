@@ -37,32 +37,6 @@ class Character:
     def move_down(self, event):
         self.movements(event, y = 60)
 
-    
-class Gun:
-    
-
-    def __init__(self,player, gun, ammo) -> None:
-        self._ammo_type = ammo
-        self._gun_type = gun
-        self._player = player
-
-    def creat_bullet(self, event):
-        p_coords = self.Canvas.coord(self._player)
-        Canvas.create_image(event.x, event.y, )
-# def click(event):
-    
-#     A = (main_canvas.coords(player)[0] + main_canvas.coords(player)[2]) /2
-#     B = (main_canvas.coords(player)[1] + main_canvas.coords(player)[3]) /2
-    
-#     x_player = event.x - A
-#     y_player = event.y - B
-
-#     x_point = (x_player + 2) - (x_player - 2) / 12
-#     y_point = (y_player + 2) - (y_player - 2) / 12
-
-#     main_canvas.move(bullets, x_point, y_player)
-#     main_canvas.after( 40, lambda:click(event))
-    
 
 #################
 ### MAIN CODE ###
@@ -76,19 +50,5 @@ if __name__ == "__main__":
 
     main_canvas = Canvas(root,)
     main_canvas.pack(expand=True, fill=BOTH)
-
-    l1 = PhotoImage(file="Game_projects_group10\\assets\image\LEVEL1.png")
-
-    Level_1 = main_canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, image=l1)
-
-    character = PhotoImage(file=CHARACTER_IMG_LOCATION)
-    player = main_canvas.create_oval(WINDOW_WIDTH/2-25, WINDOW_HEIGHT/2-25,WINDOW_WIDTH/2+25, WINDOW_HEIGHT/2+25)
-    
-
-    players = Character(main_canvas, player)
-    root.bind("<w>", players.move_up)
-    root.bind("<a>", players.move_left)
-    root.bind("<s>", players.move_down)
-    root.bind("<d>", players.move_right)
     # root.bind("<Button-1>", click)
     mainloop()
