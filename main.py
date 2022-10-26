@@ -33,6 +33,9 @@ class Draw:
         pass
 
 
+#################
+### MAIN CODE ###
+#################
 
 if __name__ == "__main__":
     
