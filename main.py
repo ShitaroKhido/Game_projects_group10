@@ -16,20 +16,24 @@ class Player:
         self._canvas = canvas
         self._player = self._canvas.create_image(position, image = player_img)
         self._master = master
-    
+
+        self._master.bind("<w>", self.move_up)
+        self._master.bind("<a>", self.move_left)
+        self._master.bind("<s>", self.move_down)
+        self._master.bind("<d>", self.move_right)
     def movement(self, x = 0, y = 0):
         self._canvas.move(self._player, x, y)
     
-    def move_left(self):
+    def move_left(self, event):
         self.movement(x =- 10)
     
-    def move_right(self):
+    def move_right(self, event):
         self.movement(x = 10)
     
-    def move_up(self):
+    def move_up(self, event):
         self.movement(y = -10)
     
-    def move_down(self):
+    def move_down(self, event):
         self.movement(y = 10)
     
 
@@ -47,15 +51,23 @@ if __name__ == "__main__":
     root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 
     ### MAIN GAME FRAME
-    frame = Frame(root)
-    frame.pack(expand=True, fill=BOTH)
+
+    level_selection = Frame(root)
+    frame_level_1 = Frame(root)
+    frame_level_2 = Frame(root)
+    frame_level_3 = Frame(root)
+
+    # level_selection.pack(expand=True, fill=BOTH)
+    frame_level_1.pack(expand=True, fill=BOTH)
+    # frame_level_2.pack(expand=True, fill=BOTH)
+    # frame_level_3.pack(expand=True, fill=BOTH)
     ### MAIN CANVAS
-    canvas = Canvas(frame)
+    canvas = Canvas(frame_level_1)
     canvas.pack(expand=True, fill=BOTH)
     ### PLAYER IMAGES
     player_img = PhotoImage(file=CHARACTER_IMG_LOCATION)
 
-    main_player = Player(frame, canvas, [100,100], player_img)
+    main_player = Player(frame_level_1, canvas, [100,100], player_img)
 
 
     mainloop()
