@@ -2,8 +2,10 @@ from tkinter import Button, Frame, PhotoImage, Tk, Canvas, mainloop, BOTH
 from mechanism import *
 
  
+################
+### CONSTANT ###
+################
 
-### CONSTANT
 WINDOW_WIDTH = 1000
 WINDOW_HEIGHT = 600
 GAME_TITLE = "THE CORAVID"
