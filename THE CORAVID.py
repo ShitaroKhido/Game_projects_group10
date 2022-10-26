@@ -1,5 +1,5 @@
 from tkinter import Button, Frame, PhotoImage, Tk, Canvas, mainloop, BOTH
-from Game_projects_group10.mechanism import *
+from mechanism import *
 
  
 
@@ -13,20 +13,29 @@ CHARACTER_IMG_LOCATION = "Game_projects_group10\\assets\image\\virus2.png"
 VIRUS_IMG_LOCATION = "Game_projects_group10\\assets\image\\b2.png"
 CROSSHAIR = "Game_projects_group10\\assets\image\crosshairs.png"
 
-
-
-
-
-
 #################
 ### MAIN CODE ###
 #################
 
-  
+#############################
+### GUI WINDOWS INTERFACE ###
+#############################
+
 root = Tk()
 root.title(GAME_TITLE)
 root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 
 main_canvas = Canvas(root)
 main_canvas.pack(expand=True, fill=BOTH)
+
+player_canvas = main_canvas.create_oval(100,100, 150,150)
+
+main_player = Character(main_canvas, player_canvas)
+
+### PLAYER KEY BIND
+root.bind("<w>", main_player.move_up)
+root.bind("<a>", main_player.move_left)
+root.bind("<s>", main_player.move_down)
+root.bind("<d>", main_player.move_right)
+
 root.mainloop()

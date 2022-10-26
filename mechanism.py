@@ -6,6 +6,7 @@ from tkinter import Button, Frame, PhotoImage, Tk, Canvas, mainloop, BOTH
 
 
 class Character:
+
     """Character model
 
 
@@ -20,6 +21,7 @@ class Character:
     self.move_up(self, event)
     self.move_down(self, event)
     """
+
     def __init__(self, main_canvas, player):
         Canvas().__init__()
         self._player =  player
@@ -28,22 +30,25 @@ class Character:
     def player_coord(self):
         return self._canvas.coords(self._player)
 
-    def movements(self, x = 0 , y = 0):
+    def movements(self,  x=0 , y=0):
         self._canvas.move(self._player, x, y)
 
     def move_right(self, event):
-        self.movements(event, x = 60)
+        self.movements(60, 0)
 
     def move_left(self, event):
-        self.movements(event, x = -60)
+        self.movements(-60, 0)
     
     def move_up(self, event):
-        self.movements(event, y = -60)
+        self.movements(0, -60)
     
     def move_down(self, event):
-        self.movements(event, y = 60)
+        self.movements(0, 60,)
+
+    
 
 class Gun:
+
     """Gun
 
     Is the model item for charcter.
@@ -51,6 +56,7 @@ class Gun:
     projectile(self, event)
     shoot(self, event)
     """
+    
     AIM_ALIGNMENT = 12
 
     def __init__(self, canvas, player) -> None:
