@@ -1,4 +1,9 @@
+#######################################
+### COPYRIGHTS AND RESERVED BY KHID ###
+#######################################
+
 from tkinter import Button, Frame, PhotoImage, Tk, Canvas, mainloop, BOTH
+
 
 class Character:
     """Character model
