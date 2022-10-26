@@ -1,4 +1,4 @@
-from tkinter import PhotoImage, Tk, Canvas, mainloop, BOTH
+from tkinter import Frame, PhotoImage, Tk, Canvas, mainloop, BOTH
 
 
 ### CONSTANT
@@ -17,7 +17,6 @@ class Player:
         self._player = self._canvas.create_image(position, image = player_img)
         self._master = master
     
-
     def movement(self, x = 0, y = 0):
         self._canvas.move(self._player, x, y)
     
@@ -46,6 +45,16 @@ if __name__ == "__main__":
     root = Tk()
     root.title(GAME_TITLE)
     root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
+
+    frame = Frame(root)
+    frame.pack(expand=True, fill=BOTH)
+
+    canvas = Canvas(frame)
+    canvas.pack(expand=True, fill=BOTH)
+
+    player_img = PhotoImage(file=CHARACTER_IMG_LOCATION)
+
+    main_player = Player(frame, canvas, [100,100], player_img)
 
 
     mainloop()
