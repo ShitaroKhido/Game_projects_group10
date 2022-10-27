@@ -16,6 +16,7 @@ class Character:
         self._crosshair = None
         self._bullet_img = None
         self._gun = Gun(self._canvas, self._coord, self._bullet_img )
+        self._bullet = self._gun.bullet()
 
     def get_coord(self):
         return self._coord
@@ -33,8 +34,24 @@ class Character:
         self._gun.get_bullet(count)
         print(self._gun.AMMUNITION)
 
-    def shoot(self):
-        pass
+    def projectile(self, event):
+        A = self._coord[0] + self._coord[2] / 2
+        B = self._coord[1] + self._coord[3] / 2
+
+        x_player = event.x - A
+        y_player = event.y - B
+
+        des_x = (x_player + 2) - (x_player - 2) / 12
+        des_y = (y_player + 2) - (y_player - 2) / 12
+    
+        return [des_x, des_y]
+
+    def shoot(self, event):
+        coord = self.projectile(event)
+        
+        self._canvas.move(self.bullet[0], coord[0], coord[1])
+        self._canvas.after(40, self.shoot)
+
 
 
 class Movements(Character):
@@ -122,8 +139,8 @@ class Gun:
             self.AMMUNITION.append(self._canvas.create_image(self._player_pos[0], self._player_pos[1], image = self._bullet ))
 
 
-    def bullet_info(self):
-        print(self.AMMUNITION)
+    def bullet(self):
+        return self.AMMUNITION
 
 
 

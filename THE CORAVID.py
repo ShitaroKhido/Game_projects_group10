@@ -56,6 +56,8 @@ main_player.gun_bullet(bullet)
 main_player.add_bullet(10)
 
 ###### PLAYER KEY BIND ######
+
+root.bind("<Button-1>", main_player.shoot)
 root.bind("<w>", main_player.move_up)
 root.bind("<a>", main_player.move_left)
 root.bind("<s>", main_player.move_down)
