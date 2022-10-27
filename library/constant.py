@@ -4,7 +4,7 @@ GAME_TITLE = "THE CORAVID"
 
 GAME_ICON_LOCATION = ""
 CHARACTER_IMG_LOCATION = "Game_projects_group10\\assets\image\character.png"
-VIRUS_IMG_LOCATION = "Game_projects_group10\\assets\image\\b2.png"
+BULLET_IMG_LOCATION = "Game_projects_group10\\assets\image\\b2.png"
 CROSSHAIR = "Game_projects_group10\\assets\image\crosshairs.png"
 ENEMY_IMG_LOCATION = "Game_projects_group10\\assets\image\\virus2.png"
 AIM_ADJUSTMENT = 40
