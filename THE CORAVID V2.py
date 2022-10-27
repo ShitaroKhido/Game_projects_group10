@@ -12,7 +12,7 @@ player_position = [200, 200, 240, 240]
 #########################
 
 #>>>>>> CHARACTER MOVEMENTS <<<<<<#
-def movement(canvas_id, x, y):
+def movement(canvas_id, x=0, y=0):
     canvas.move(canvas_id, x, y)
 
 
@@ -32,13 +32,19 @@ def move_down(event):
     movement(canvas_id=player, y=40)
 
 
+def crosshair(event):
+    canvas.moveto(player_crosshair, event.x-AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT)
+
 def deploy_sprite(number_of_enemy: int):
+    global player, player_box, player_crosshair
     player_box = canvas.create_oval(player_position, fill="black")
-    player = canvas.create_image(player_position[0])
-    enemy = Enemy()
+    player = canvas.create_image(player_position[0]-40 , player_position[1]-40, image=player_img)
+    player_crosshair = canvas.create_image(player_position[0] , player_position[1], image=player_crosshair_img)
+
+    enemy = Enemy(root, canvas, enemy_img)
     enemy.number_of_enemy(number_of_enemy)
 
-
+#>>>>>> INTERFACE <<<<<<#
 def home():
     canvas.delete('all')
     canvas.create_image(500, 300, image=background_home_img)
@@ -49,8 +55,7 @@ def home():
         890, 495, image=button_setting_img, tags='button_setting')
     button_exit = canvas.create_image(
         890, 560, image=button_exit_img, tags='button_exit')
-    pass
-
+        
 
 def start(event):
     PlaySound(MUSIC_CHOICE, SND_FILENAME | SND_ASYNC)
@@ -100,7 +105,7 @@ def level3(event):
     canvas.create_image(500, 300, image=background_level3_img)
     Inlevel()
 
-
+#>>>>>> SOUND <<<<<<#
 def Inlevel():
     PlaySound(MUSIC_IN_GAME, SND_FILENAME | SND_ASYNC)
     canvas.create_image(
@@ -120,6 +125,8 @@ def key_bind():
     root.bind("<a>", move_left)
     root.bind("<s>", move_down)
     root.bind("<d>", move_right)
+    root.bind("<Motion>", crosshair)
+
 
     canvas.tag_bind("button_start", "<Button-1>", start)
     canvas.tag_bind("button_setting", "<Button-1>", setting)
@@ -148,11 +155,12 @@ canvas.pack(expand=True, fill=BOTH)
 
 
 #>>>>>> PLAYER PROPERTIES <<<<<<#
-player_crosshair = PhotoImage(file=CROSSHAIR)
+player_crosshair_img = PhotoImage(file=CROSSHAIR)
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 player_img = PhotoImage(file=CHARACTER_IMG_LOCATION)
 bullet_img = PhotoImage(file=BULLET_IMG_LOCATION)
 player = None
+player_crosshair =  None
 
 #>>>>>> BACKGROUND <<<<<<#
 background_home_img = PhotoImage(file=HOME_BACKGROUND_IMAGE_LOCATION)
@@ -178,5 +186,6 @@ button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
 #>>>>>> HOME <<<<<<#
 home()
+deploy_sprite(10)
 key_bind()
 root.mainloop()
