@@ -64,16 +64,27 @@ def number_bullet(number: int, bullet_size=10):
 
 #>>>>>> INTERFACE <<<<<<#
 def home():
-    pass
+    global home_frame
+    home_frame = Frame(root)
+    home_frame.pack(expand=True, fill=BOTH)
+    
+    home_frame.config(background="grey")
 
 
-def start(event):
-    pass
+def start():
+    global start_frame
+    start_frame = Frame(root)
+    start_frame.pack(expand=True, fill=BOTH)
+    
+    start_frame.config(background="red")
     
 
 
 def setting(event):
-    pass
+    setting_frame = Frame(root)
+    setting_frame.pack(expand=True, fill=BOTH)
+    
+    setting_frame.config(background="blue")
     
 
 
@@ -112,16 +123,16 @@ def key_bind():
     root.bind("<s>", move_down)
     root.bind("<d>", move_right)
     root.bind("<Motion>", crosshair)
-    canvas.tag_bind("level_1", "<Button-1>", shoot)
+    # canvas.tag_bind("level_1", "<Button-1>", shoot)
 
-    canvas.tag_bind("button_start", "<Button-1>", start)
-    canvas.tag_bind("button_setting", "<Button-1>", setting)
-    canvas.tag_bind("button_exit", "<Button-1>", quit)
-    canvas.tag_bind("back_in_start", "<Button-1>", back_to_home)
-    canvas.tag_bind("back_in_game", "<Button-1>", back_to_start)
-    canvas.tag_bind("button_level1", "<Button-1>", level1)
-    canvas.tag_bind("button_level2", "<Button-1>", level2)
-    canvas.tag_bind("button_level3", "<Button-1>", level3)
+    # canvas.tag_bind("button_start", "<Button-1>", start)
+    # canvas.tag_bind("button_setting", "<Button-1>", setting)
+    # canvas.tag_bind("button_exit", "<Button-1>", quit)
+    # canvas.tag_bind("back_in_start", "<Button-1>", back_to_home)
+    # canvas.tag_bind("back_in_game", "<Button-1>", back_to_start)
+    # canvas.tag_bind("button_level1", "<Button-1>", level1)
+    # canvas.tag_bind("button_level2", "<Button-1>", level2)
+    # canvas.tag_bind("button_level3", "<Button-1>", level3)
 
 #########################
 #>>>>>> MAIN CODE <<<<<<#
@@ -138,10 +149,6 @@ root.resizable(0, 0)
 
 
 
-#>>>>>> MAIN CANVAS <<<<<<#
-canvas = Canvas()
-canvas.pack(expand=True, fill=BOTH)
-
 
 #>>>>>> PLAYER PROPERTIES <<<<<<#
 player_crosshair_img = PhotoImage(file=CROSSHAIR)
@@ -149,7 +156,7 @@ enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 player_img = PhotoImage(file=CHARACTER_IMG_LOCATION)
 bullet_img = PhotoImage(file=BULLET_IMG_LOCATION)
 player = None
-player_crosshair = canvas.create_rectangle(player_position)
+# player_crosshair = canvas.create_rectangle(player_position)
 
 #>>>>>> BACKGROUND <<<<<<#
 background_home_img = PhotoImage(file=HOME_BACKGROUND_IMAGE_LOCATION)
@@ -172,6 +179,7 @@ button_level3_img = PhotoImage(file=BUTTON_LEVEL3_IMG_LOCATION)
 button_on_img = PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
-
+home()
+start()
 #>>>>>> HOME <<<<<<#
 root.mainloop()
