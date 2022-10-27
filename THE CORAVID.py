@@ -100,23 +100,41 @@ def back_to_start(event):
 def level1(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 120, image=background_level1)
+<<<<<<< HEAD
     deploy_sprite(10)
     main_canvas.create_image(
         70, 560, image=button_back_img, tags='back_in_game')
 
+=======
+    deploy_sprite(10, [150, 150])
+    Inlevel()
+>>>>>>> b834fbfde9f08b64688c9b3352e6be9d3c6a0921
 
 def level2(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 120, image=background_level2_img)
+<<<<<<< HEAD
     main_canvas.create_image(
         70, 560, image=button_back_img, tags='back_in_game')
 
+=======
+    Inlevel()
+>>>>>>> b834fbfde9f08b64688c9b3352e6be9d3c6a0921
 
 def level3(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 300, image=background_level3_img)
+<<<<<<< HEAD
     main_canvas.create_image(
         70, 560, image=button_back_img, tags='back_in_game')
+=======
+    Inlevel()
+
+def Inlevel():
+    winsound.PlaySound(MUSIC_IN_GAME, winsound.SND_FILENAME |
+                       winsound.SND_ASYNC)
+    main_canvas.create_image(70, 560, image=button_back_img, tags='back_in_game')
+>>>>>>> b834fbfde9f08b64688c9b3352e6be9d3c6a0921
 
 
 ########################################################################
