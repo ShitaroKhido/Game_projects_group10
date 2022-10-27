@@ -41,7 +41,7 @@ background_level1=PhotoImage(file="Game_projects_group10\\assets\image\LEVEL1.pn
 main_canvas.create_image(500,120,image=background_level1)
 
 ###### PLAYER CANVAS ######
-player_canvas = main_canvas.create_oval(100,100, 150,150)
+player_canvas = main_canvas.create_oval(110,110, 150,150)
 player_crosshair = PhotoImage(file=CROSSHAIR)
 ###### PLAYER FUNTION ######
 main_player = Movements(root, main_canvas, player_canvas)
