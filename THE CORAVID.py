@@ -77,21 +77,22 @@ def level1(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 120, image=background_level1)
     deploy_sprite(10, [150, 150])
-    main_canvas.create_image(70, 560, image=button_back_img, tags='back_in_game')
+    Inlevel()
 
 def level2(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 120, image=background_level2_img)
-    main_canvas.create_image(70, 560, image=button_back_img, tags='back_in_game')
-
+    Inlevel()
 
 def level3(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 300, image=background_level3_img)
+    Inlevel()
+
+def Inlevel():
+    winsound.PlaySound(MUSIC_IN_GAME, winsound.SND_FILENAME |
+                       winsound.SND_ASYNC)
     main_canvas.create_image(70, 560, image=button_back_img, tags='back_in_game')
-
-
-
 
 
 ########################################################################
