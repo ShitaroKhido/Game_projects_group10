@@ -11,10 +11,10 @@ WINDOW_HEIGHT = 600
 GAME_TITLE = "THE CORAVID"
 
 GAME_ICON_LOCATION = ""
-CHARACTER_IMG_LOCATION = "Game_projects_group10\\assets\image\\virus2.png"
+CHARACTER_IMG_LOCATION = ""
 VIRUS_IMG_LOCATION = "Game_projects_group10\\assets\image\\b2.png"
 CROSSHAIR = "Game_projects_group10\\assets\image\crosshairs.png"
-ENEMY_IMG_LOCATION = ""
+ENEMY_IMG_LOCATION = "Game_projects_group10\\assets\image\\virus2.png"
 #################
 ### MAIN CODE ###
 #################
@@ -38,10 +38,10 @@ main_player.crosshair(player_crosshair)
 
 
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
-
-
-
-
+enemy = Enemy(root, main_canvas, enemy_img)
+enemy.number_of_enemy(10)
+enemy.enem_dictionary()
+enemy.move_enemy()
 root.bind("<Motion>", main_player.aim)
 
 
