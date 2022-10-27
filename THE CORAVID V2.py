@@ -145,6 +145,10 @@ level2_frame = Frame(root)
 level3_frame = Frame(root)
 
 
+#>>>>>> CANVAS <<<<<<#
+
+
+
 
 
 
