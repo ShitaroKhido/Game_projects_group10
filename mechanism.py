@@ -24,6 +24,9 @@ class Character:
     def crosshair(self, crosshair_image):
         self._crosshair = self._canvas.create_image(self._coord[0], self._coord[0], image=crosshair_image)
 
+    def shoot(self, bullet_img):
+        pass
+        
 
 class Movements(Character):
     

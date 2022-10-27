@@ -29,14 +29,6 @@ root.title(GAME_TITLE)
 root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 root.resizable(0,0)
 
-
-#########################
-######## Back############
-#########################
-
-    
-
-
 ###### MAIN CANVAS ######
 main_canvas = Canvas(root)
 main_canvas.pack(expand=True, fill=BOTH)
@@ -54,7 +46,7 @@ main_player = Movements(root, main_canvas, player_canvas)
 ###### ENEMY
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 enemy = Enemy(root, main_canvas, enemy_img)
-enemy.number_of_enemy(10)
+enemy.number_of_enemy(1000)
 enemy.enem_dictionary()
 enemy.move_enemy()
 root.bind("<Motion>", main_player.aim)
