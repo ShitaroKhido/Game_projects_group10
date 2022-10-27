@@ -36,6 +36,7 @@ BUTTON_LEVEL3_IMG_LOCATION='3.png'
 BUTTON_ON_IMG_LOCATION='no.png'
 BUTTON_OFF_IMG_LOCATION='off.png'
 
+HOME_BACKGROUND_IMAGE_LOCATION=""
 BACKGROUND_LEVEL1_LOCATION="level1.png"
 BACKGROUND_LEVEL2_LOCATION="level2.png"
 BACKGROUND_LEVEL3_LOCATION="level3.png"
@@ -49,7 +50,7 @@ SETTING_IMAGE_LOCATION='setting.png'
 #################
 
 def home():
-    lbl=main_canvas.create_image(500,300,image=mario)
+    main_canvas.create_image(500,300,image=mario)
     main_canvas.create_image(890,500,image=black1)
     button_start=main_canvas.create_image(890,430,image=start1,tags='button_start')
     button_setting=main_canvas.create_image(890,495,image=setting1,tags='button_setting')
