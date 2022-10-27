@@ -71,15 +71,21 @@ class Enemy:
     def move_enemy(self):
 
         for key in self.DICT_OF_ENEMY:
+
             if self._canvas.coords(self.DICT_OF_ENEMY[key])[0] >= 1000:
                 self.VOLOCITY[key]["x"] = -self.VOLOCITY[key]["x"]
+
             elif self._canvas.coords(self.DICT_OF_ENEMY[key])[1] >= 600:
                 self.VOLOCITY[key]["y"] = -self.VOLOCITY[key]["y"]
+
             elif self._canvas.coords(self.DICT_OF_ENEMY[key])[0] <= 0:
                 self.VOLOCITY[key]["x"] = -1*self.VOLOCITY[key]["x"]
+
             elif self._canvas.coords(self.DICT_OF_ENEMY[key])[1] <= 0:
                 self.VOLOCITY[key]["y"] = -1*self.VOLOCITY[key]["y"]
+
             self._canvas.move(self.DICT_OF_ENEMY[key], self.VOLOCITY[key]["x"], self.VOLOCITY[key]["y"])
+        
         self._canvas.after(40, self.move_enemy)
 
     def enem_dictionary(self):
