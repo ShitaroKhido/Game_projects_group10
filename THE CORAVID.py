@@ -71,7 +71,7 @@ def setting(event):
     sound_off = main_canvas.create_image(700,155,image=button_off,tags='button_off')
     music_on = main_canvas.create_image(600,250,image=button_on,tags='button_on')
     music_off = main_canvas.create_image(700,250,image=button_off,tags='button_off')
-    
+
 def back(event):
     home()
 
@@ -136,17 +136,21 @@ root.resizable(0,0)
 main_canvas = Canvas(root)
 main_canvas.pack(expand=True, fill=BOTH)
 
+
+###### BACKGROUND ######
 background_level1=PhotoImage(file="Game_projects_group10\\assets\image\LEVEL1.png"
 main_canvas.create_image(500,120,image=background_level1)
+
 
 ###### PLAYER CANVAS ######
 player_canvas = main_canvas.create_oval(110,110, 150,150)
 player_crosshair = PhotoImage(file=CROSSHAIR)
+
+
 ###### PLAYER FUNTION ######
 main_player = Movements(root, main_canvas, player_canvas)
 bullet = PhotoImage(file=BULLET_IMG_LOCATION)
 
-###### PLAYER FUNTION ######
 
 ###### ENEMY ######
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
