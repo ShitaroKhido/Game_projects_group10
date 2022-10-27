@@ -42,7 +42,7 @@ def start(event):
     winsound.PlaySound(MUSIC_CHOICE, winsound.SND_FILENAME |
                        winsound.SND_ASYNC)
     main_canvas.create_image(500, 300, image=background_start_img)
-    main_canvas.create_image(70, 40, image=button_back_img, tags='text')
+    main_canvas.create_image(70, 40, image=button_back_img, tags='back_in_start')
     button_level1 = main_canvas.create_image(
         200, 300, image=button_level1_img, tags='button_level1')
     button_level2 = main_canvas.create_image(
@@ -55,7 +55,7 @@ def setting(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 300, image=background_start_img)
     main_canvas.create_image(500, 300, image=background_setting_img)
-    main_canvas.create_image(70, 40, image=button_back_img, tags='text')
+    main_canvas.create_image(70, 40, image=button_back_img, tags='back_in_start')
 
     sound_on = main_canvas.create_image(
         600, 155, image=button_on_img, tags='button_on')
@@ -67,27 +67,31 @@ def setting(event):
         700, 250, image=button_off_img, tags='button_off')
 
 
-def back(event):
+def back_to_home(event):
     home()
 
+def back_to_start(event):
+    start(event)
 
 def level1(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 120, image=background_level1)
-    main_canvas.create_image(70, 560, image=button_back_img, tags='text')
     deploy_sprite(10, [150, 150])
-
+    main_canvas.create_image(70, 560, image=button_back_img, tags='back_in_game')
 
 def level2(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 120, image=background_level2_img)
-    main_canvas.create_image(70, 560, image=button_back_img, tags='text')
+    main_canvas.create_image(70, 560, image=button_back_img, tags='back_in_game')
 
 
 def level3(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 300, image=background_level3_img)
-    main_canvas.create_image(70, 560, image=button_back_img, tags='text')
+    main_canvas.create_image(70, 560, image=button_back_img, tags='back_in_game')
+
+
+
 
 
 ########################################################################
@@ -156,7 +160,8 @@ home()
 main_canvas.tag_bind("button_start", "<Button-1>", start)
 main_canvas.tag_bind("button_setting", "<Button-1>", setting)
 main_canvas.tag_bind("button_exit", "<Button-1>", quit)
-main_canvas.tag_bind("text", "<Button-1>", back)
+main_canvas.tag_bind("back_in_start", "<Button-1>", back_to_home)
+main_canvas.tag_bind("back_in_game", "<Button-1>", back_to_start)
 main_canvas.tag_bind("button_level1", "<Button-1>", level1)
 main_canvas.tag_bind("button_level2", "<Button-1>", level2)
 main_canvas.tag_bind("button_level3", "<Button-1>", level3)
