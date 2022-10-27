@@ -31,3 +31,7 @@ BACKGROUND_LEVEL2_LOCATION="Game_projects_group10\\assets\image\LEVEL2.png"
 BACKGROUND_LEVEL3_LOCATION="Game_projects_group10\\assets\image\LEVEL3.png"
 BACKGROUND_START_LOCATION='Game_projects_group10\\assets\image\wall.png'
 SETTING_IMAGE_LOCATION='Game_projects_group10\\assets\image\setting.png'
+
+MUSIC_CHOICE="Game_projects_group10\\assets\Sound\sound_music.wav"
+MUSIC_HOME="Game_projects_group10\\assets\Sound\sound_music.wav"
+MUSIC_IN_GAME="Game_projects_group10\\assets\Sound\sound_music.wav"
