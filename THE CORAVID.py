@@ -1,6 +1,6 @@
 from tkinter import Button, Frame, PhotoImage, Tk, Canvas, mainloop, BOTH
-from Game_projects_group10.library.mechanism import *
-from Game_projects_group10.library.constant import * 
+from library.mechanism import *
+from library.constant import * 
 import winsound 
 
 #################
