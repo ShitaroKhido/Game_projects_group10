@@ -21,7 +21,7 @@ def deploy_sprite(enemy_count: int, player_pos: list):
     enemy = Enemy(root, main_canvas, enemy_img)
     enemy.move_enemy()
     enemy.number_of_enemy(enemy_count)
-    deploy_character(player_pos[0], player_pos[1], 20, None)
+    deploy_character(player_pos[0], player_pos[1], 40, None)
     key_bind()
 
 
@@ -73,7 +73,7 @@ def back(event):
 
 def level1(event):
     main_canvas.delete('all')
-    main_canvas.create_image(500, 120, image=background_level1)
+    main_canvas.create_image(500, 120, image=background_level1_img)
     main_canvas.create_image(70, 560, image=button_back_img, tags='text')
     deploy_sprite(10, [150, 150])
 
@@ -97,7 +97,7 @@ def deploy_character(poxX: float, posY: float, player_size: int, image=None):
     player_box = main_canvas.create_oval(
         poxX, posY, poxX + player_size, posY + player_size)
     mid_point = main_canvas.coords(player_box)
-    player = Player(main_canvas, player_box, player_crosshair)
+    player = Player(main_canvas, player_box, character_img)
     player.crosshair(player_crosshair)
 
 
@@ -117,10 +117,9 @@ main_canvas.pack(expand=True, fill=BOTH)
 
 
 ###### PhotoImage ######
-background_level1 = PhotoImage(
-    file="Game_projects_group10\\assets\image\LEVEL1.png")
 player_crosshair = PhotoImage(file=CROSSHAIR)
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
+character_img = PhotoImage(file=CHARACTER_IMG_LOCATION)
 # >>>>> BACKGROUND
 background_home_img = PhotoImage(file=HOME_BACKGROUND_IMAGE_LOCATION)
 background_black_img = PhotoImage(file=BLACK_IMG_LOCATION)
