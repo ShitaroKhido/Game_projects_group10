@@ -89,17 +89,20 @@ def setting(event):
 
 
 def level1(event):
-    pass
+    level1_frame = Frame(root)
+    level1_frame.pack(expand=True, fill=BOTH)
 
 
 
 def level2(event):
-    pass
+    level2_frame = Frame(root)
+    level3_frame.pack(expand=True, fill=BOTH)
     
 
 
 def level3(event):
-    pass
+    level3_frame = Frame(root)
+    level3_frame.pack(expand=True, fill=BOTH)
     
 
 #>>>>>> SOUND <<<<<<#
