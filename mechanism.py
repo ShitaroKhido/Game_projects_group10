@@ -13,7 +13,7 @@ class Player:
         self._canvas = canvas
         self._player = player_canvas
 
-    def player_movements(self, x, y):
+    def player_movements(self, x=0, y=0):
         self._canvas.move(self._player, x, y)
 
     def move_right(self, event):
