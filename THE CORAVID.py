@@ -66,8 +66,8 @@ def start(event):
     main_canvas.delete('all')
     main_canvas.create_image(500,300,image=background_start_img)
     main_canvas.create_image(70,40,image=button_back_img,tags='text')
-    button_level1 = main_canvas.create_image(300,300,image=button_level1_img,tags='button_level1')
-    button_level2 = main_canvas.create_image(550,300,image=button_level2_img,tags='button_level2')
+    button_level1 = main_canvas.create_image(200,300,image=button_level1_img,tags='button_level1')
+    button_level2 = main_canvas.create_image(500,300,image=button_level2_img,tags='button_level2')
     button_level3 = main_canvas.create_image(800,300,image=button_level3_img,tags='button_level3')
 
 def setting(event):
