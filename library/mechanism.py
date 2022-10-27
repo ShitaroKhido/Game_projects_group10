@@ -7,7 +7,7 @@ from tkinter import Canvas
 
 class Player:
     """Player
-    
+
     Player class containe:
 
         self.move_right(self, event)
@@ -18,10 +18,12 @@ class Player:
 
     PLAYER_MOVE_SPEED = 40
 
-    def __init__(self, canvas, player_canvas, player_skin:None):
+    def __init__(self, canvas, player_canvas, player_skin: None):
         self._canvas = canvas
         self._player = player_canvas
-        self._skin = self._canvas.create_image(self._canvas.coords(self._player)[0]+10, self._canvas.coords(self._player)[1]+10, image = player_skin)
+        self._skin = self._canvas.create_image(self._canvas.coords(
+            self._player)[0]+10, self._canvas.coords(self._player)[1]+10, image=player_skin)
+        self._aim_adjustment = 40
 
     def _player_movements(self, x=0, y=0):
         self._canvas.move(self._player, x, y)
@@ -38,6 +40,15 @@ class Player:
 
     def move_up(self, event):
         self._player_movements(y=-self.PLAYER_MOVE_SPEED)
+
+    def crosshair(self, img):
+        self._crosshair = self._canvas.create_image(self._canvas.coords(
+            self._player)[0], self._canvas.coords(self._player)[1], image=img)
+
+    def aim(self, event):
+        self._canvas.moveto(self._crosshair, event.x -
+                            self._aim_adjustment, event.y-self._aim_adjustment)
+
 
 ##### ENEMY MODEL ######
 
