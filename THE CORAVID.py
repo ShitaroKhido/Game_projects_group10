@@ -146,11 +146,6 @@ setting_image=PhotoImage(file=SETTING_IMAGE_LOCATION)
 
 deploy_character(100,100, 20, None)
 
-
-###### PLAYER CANVAS ######
-player_canvas = main_canvas.create_oval(110,110, 150,150)
-
-
 ###### ENEMY ######
 
 # enemy = Enemy(root, main_canvas, enemy_img)
@@ -163,6 +158,7 @@ root.bind("<w>", player.move_up)
 root.bind("<a>", player.move_left)
 root.bind("<s>", player.move_down)
 root.bind("<d>", player.move_right)
+#>>> SHAPE BIND
 main_canvas.tag_bind("button_start","<Button-1>", start)
 main_canvas.tag_bind("button_setting","<Button-1>", setting)
 main_canvas.tag_bind("button_exit","<Button-1>", quit)
