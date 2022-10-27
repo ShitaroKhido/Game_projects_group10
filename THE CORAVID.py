@@ -81,8 +81,6 @@ def deploy_character(poxX:float, posY:float, player_size:int, image=None):
 
 
 
-
-
 #################
 ### MAIN CODE ###
 #################
