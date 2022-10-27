@@ -121,11 +121,6 @@ enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 
 deploy_character(100,100, 20, None)
 
-
-###### PLAYER CANVAS ######
-player_canvas = main_canvas.create_oval(110,110, 150,150)
-
-
 ###### ENEMY ######
 
 # enemy = Enemy(root, main_canvas, enemy_img)
