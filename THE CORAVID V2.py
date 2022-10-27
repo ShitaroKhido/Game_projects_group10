@@ -1,6 +1,6 @@
 from library.constant import *
 from library.enemy import *
-from tkinter import Button, Frame, Tk, Canvas, PhotoImage, mainloop, BOTH
+from tkinter import Button, Frame, Tk, Canvas, PhotoImage, Toplevel, mainloop, BOTH
 from winsound import *
 
 
@@ -12,30 +12,6 @@ bullet_count = []
 #########################
 
 #>>>>>> CHARACTER MOVEMENTS <<<<<<#
-
-
-def movement(frame, canvac, x=0, y=0):
-    pass
-
-
-def move_left(event):
-    movement(x=-40)
-
-
-def move_right(event):
-    movement(x=40)
-
-
-def move_up(event):
-    movement(y=-40)
-
-
-def move_down(event):
-    movement(y=40)
-
-
-def crosshair(event):
-    pass
 
 # def shoot(event):
 #     a = (canvas.coords(player_box)[2]+canvas.coords(player_box)[0])/2
@@ -56,6 +32,8 @@ def deploy_sprite(frame, canvas, number_of_enemy: int):
     enemy = Enemy(frame, canvas, enemy_img)
     enemy.number_of_enemy(number_of_enemy)
     enemy.move_enemy()
+
+    key_bind(frame)
 
 
 def number_bullet(number: int, bullet_size=10):
@@ -111,28 +89,29 @@ def setting(event):
 
 
 def level1():
-    global level1_canvas
-    level1_frame.pack(expand=True, fill=BOTH)
+    global level1_top
+    level1_top = Toplevel(root)
     level1_canvas.pack(expand=True, fill=BOTH)
 
     level1_canvas.create_image(500, 120, image=background_level1_img)
     level1_canvas.create_image(
         70, 560, image=button_back_img, tags='back_in_game')
+    deploy_sprite(level1_top, level1_canvas, 20)
 
 
 def level2(event):
-    level2_frame.pack(expand=True, fill=BOTH)
+    global level2_top
+    level2_top = Toplevel(root)
     level2_canvas.pack(expand=True, fill=BOTH)
-
     level2_canvas.create_image(500, 120, image=background_level2_img)
     level2_canvas.create_image(
         70, 560, image=button_back_img, tags='back_in_game')
 
 
 def level3(event):
-    level3_frame.pack(expand=True, fill=BOTH)
+    global level3_top
+    level3_top = Toplevel(root)
     level3_canvas.pack(expand=True, fill=BOTH)
-
     level3_canvas.create_image(500, 300, image=background_level3_img)
     level3_canvas.create_image(
         70, 560, image=button_back_img, tags='back_in_game')
@@ -153,12 +132,13 @@ def back_to_start(event):
     start(event)
 
 
-def key_bind():
-    root.bind("<w>", move_up)
-    root.bind("<a>", move_left)
-    root.bind("<s>", move_down)
-    root.bind("<d>", move_right)
-    root.bind("<Motion>", crosshair)
+def key_bind(master):
+    # master.bind("<w>", move_up)
+    # master.bind("<a>", move_left)
+    # master.bind("<s>", move_down)
+    # master.bind("<d>", move_right)
+    # master.bind("<Motion>", crosshair)
+    pass
 
 
 #########################
@@ -177,17 +157,15 @@ root.resizable(0, 0)
 home_frame = Frame(root)
 start_frame = Frame(root)
 setting_frame = Frame(root)
-level1_frame = Frame(root)
-level2_frame = Frame(root)
-level3_frame = Frame(root)
+level3_top = Toplevel(root)
 
 #>>>>>> CANVAS <<<<<<#
 home_canvas = Canvas(home_frame)
 start_canvas = Canvas(start_frame)
 setting_canvas = Canvas(setting_frame)
-level1_canvas = Canvas(level1_frame)
-level2_canvas = Canvas(level2_frame)
-level3_canvas = Canvas(level3_frame)
+level1_canvas = Canvas(level1_top)
+level2_canvas = Canvas(level2_top)
+level3_canvas = Canvas(level3_top)
 
 #>>>>>> PLAYER PROPERTIES <<<<<<#
 player_crosshair_img = PhotoImage(file=CROSSHAIR)
@@ -219,7 +197,11 @@ button_on_img = PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
 
-home()
+
+level1()
+
+
+
 
 #>>>>>> HOME <<<<<<#
 root.mainloop()
