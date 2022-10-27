@@ -52,6 +52,7 @@ enemy.number_of_enemy(10)
 enemy.move_enemy()
 root.bind("<Motion>", main_player.aim)
 main_player.crosshair(player_crosshair)
+main_player.add_bullet_img(bullet)
 
 ###### PLAYER KEY BIND ######
 

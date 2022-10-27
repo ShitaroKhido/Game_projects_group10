@@ -29,25 +29,17 @@ class Character:
     def crosshair(self, crosshair_image):
         self._crosshair = self._canvas.create_image(self._coord[0], self._coord[0], image=crosshair_image)
 
-    def projectile(self, event):
-        A = self._coord[0] + self._coord[2] / 2
-        B = self._coord[1] + self._coord[3] / 2
+    # def projectile(self, event):
+    #     A = self._coord[0] + self._coord[2] / 2
+    #     B = self._coord[1] + self._coord[3] / 2
 
-        x_player = event.x - A
-        y_player = event.y - B
+    #     x_player = event.x - A
+    #     y_player = event.y - B
 
-        des_x = (x_player + 2) - (x_player - 2) / 12
-        des_y = (y_player + 2) - (y_player - 2) / 12
+    #     des_x = (x_player + 2) - (x_player - 2) / 12
+    #     des_y = (y_player + 2) - (y_player - 2) / 12
     
-        return [des_x, des_y]
-
-    def add_bullet_img(self, img):
-        self._bullet_img = img
-    def create_bullet(self):
-        
-
-    def shoot(self, event):
-        pass
+    #     return [des_x, des_y]
 
 
 
@@ -73,7 +65,6 @@ class Movements(Character):
 
     def move_down(self, event):
         self.move_character( y = self.MOVES_VOLOCITY)
-
 
 
 
