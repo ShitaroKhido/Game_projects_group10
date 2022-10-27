@@ -1,12 +1,11 @@
 from tkinter import Button, Frame, PhotoImage, Tk, Canvas, mainloop, BOTH
-from mechanism import *
+from Game_projects_group10.library.mechanism import *
 import winsound 
 
  
 ################
 ### CONSTANT ###
 ################
-
 
 
 WINDOW_WIDTH = 1000
@@ -49,6 +48,11 @@ SETTING_IMAGE_LOCATION='Game_projects_group10\\assets\image\setting.png'
 ### FOUCTION ####
 #################
 ########################################################################
+def key_bind():
+    root.bind("<w>", player.move_up)
+    root.bind("<a>", player.move_left)
+    root.bind("<s>", player.move_down)
+    root.bind("<d>", player.move_right)
 
 def home():
 
@@ -85,6 +89,7 @@ def level1(event):
     main_canvas.create_image(500,120,image=background_level1)
     main_canvas.create_image(70,560,image=button_back_img,tags='text')
     deploy_character(100,100, 20, None)
+    key_bind()
     
 def level2(event):
     main_canvas.delete('all')
@@ -169,10 +174,7 @@ home()
 
 ###### KEY BINDING ######
 #>>> PLAYER
-# root.bind("<w>", player.move_up)
-# root.bind("<a>", player.move_left)
-# root.bind("<s>", player.move_down)
-# root.bind("<d>", player.move_right)
+
 #>>> SHAPE BIND
 main_canvas.tag_bind("button_start","<Button-1>", start)
 main_canvas.tag_bind("button_setting","<Button-1>", setting)
