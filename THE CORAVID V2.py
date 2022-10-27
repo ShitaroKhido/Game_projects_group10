@@ -65,6 +65,7 @@ def number_bullet(number: int, bullet_size=10):
 #>>>>>> INTERFACE <<<<<<#
 def home():
     home_frame.pack(expand=True, fill=BOTH)
+<<<<<<< HEAD
     home_frame.create_image(500, 300, image=background_home_img)
     home_frame.create_image(890, 500, image=background_black_img)
     button_start = home_frame.create_image(
@@ -73,6 +74,9 @@ def home():
         890, 495, image=button_setting_img, tags='button_setting')
     button_exit = home_frame.create_image(
         890, 560, image=button_exit_img, tags='button_exit')
+=======
+
+>>>>>>> e63fb4e70c88c5c2d7cb3e9e62eed9a89bfca770
 
 def start():
     start_frame.pack(expand=True, fill=BOTH)
@@ -96,16 +100,19 @@ def setting(event):
 
 def level1(event):
     level1_frame.pack(expand=True, fill=BOTH)
-
+    level1_canvas.create_image(500, 120, image=background_level1_img)
+    
 
 
 def level2(event):
     level2_frame.pack(expand=True, fill=BOTH)
+    level2_canvas.create_image(500, 120, image=background_level2_img)
     
 
 
 def level3(event):
     level3_frame.pack(expand=True, fill=BOTH)
+    level3_canvas.create_image(500, 300, image=background_level3_img)
     
 
 #>>>>>> SOUND <<<<<<#
@@ -129,16 +136,7 @@ def key_bind():
     root.bind("<s>", move_down)
     root.bind("<d>", move_right)
     root.bind("<Motion>", crosshair)
-    # canvas.tag_bind("level_1", "<Button-1>", shoot)
 
-    # canvas.tag_bind("button_start", "<Button-1>", start)
-    # canvas.tag_bind("button_setting", "<Button-1>", setting)
-    # canvas.tag_bind("button_exit", "<Button-1>", quit)
-    # canvas.tag_bind("back_in_start", "<Button-1>", back_to_home)
-    # canvas.tag_bind("back_in_game", "<Button-1>", back_to_start)
-    # canvas.tag_bind("button_level1", "<Button-1>", level1)
-    # canvas.tag_bind("button_level2", "<Button-1>", level2)
-    # canvas.tag_bind("button_level3", "<Button-1>", level3)
 
 #########################
 #>>>>>> MAIN CODE <<<<<<#
@@ -163,9 +161,15 @@ level3_frame = Frame(root)
 
 #>>>>>> CANVAS <<<<<<#
 home_canvas = Canvas(home_frame)
+<<<<<<< HEAD
 start_frame = Canvas(start_frame)
 setting_frame = Canvas(setting_frame)
 
+=======
+level1_canvas = Canvas(level1_frame)
+level2_canvas = Canvas(level2_frame)
+level3_canvas = Canvas(level3_frame)
+>>>>>>> e63fb4e70c88c5c2d7cb3e9e62eed9a89bfca770
 
 
 
