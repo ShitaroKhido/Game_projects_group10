@@ -50,12 +50,6 @@ enemy.number_of_enemy(10)
 enemy.move_enemy()
 
 ###### PLAYER KEY BIND ######
-# root.bind("<Motion>", main_player.aim)
-# root.bind("<Button-1>", main_player.shoot)
-# root.bind("<w>", main_player.move_up)
-# root.bind("<a>", main_player.move_left)
-# root.bind("<s>", main_player.move_down)
-# root.bind("<d>", main_player.move_right)
 
 
 root.mainloop()
