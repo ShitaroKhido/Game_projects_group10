@@ -35,7 +35,6 @@ def key_bind():
     root.bind("<a>", move_left)
     root.bind("<s>", move_down)
     root.bind("<d>", move_right)
-    root.bind("Button-1", lambda:shoot)
 
 def aiming(event):
     main_canvas.moveto(crosshair, event.x-AIM_ADJUSTMENT,
@@ -191,7 +190,7 @@ button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
 # home()
 # player = main_canvas.create_image(120, 120, image=player_img)
-deploy_sprite(10)
+# deploy_sprite(10)
 ###### ENEMY ######
 
 # enemy = Enemy(root, main_canvas, enemy_img)

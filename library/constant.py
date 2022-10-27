@@ -9,6 +9,12 @@ CROSSHAIR = "Game_projects_group10\\assets\image\crosshairs.png"
 ENEMY_IMG_LOCATION = "Game_projects_group10\\assets\image\\virus2.png"
 AIM_ADJUSTMENT = 40
 
+NUMBER_OF_ENEMY_LEVEL_1 = 10
+NUMBER_OF_ENEMY_LEVEL_2 = 20
+NUMBER_OF_ENEMY_LEVEL_3 = 30
+
+
+
 
 BLACK_IMG_LOCATION="Game_projects_group10\\assets\image\Black_background.png"
 BUTTON_START_IMG_LOCATION='Game_projects_group10\\assets\image\\button_start.png'
