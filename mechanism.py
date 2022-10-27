@@ -4,6 +4,7 @@
 from random import randint
 from tkinter import Canvas
 
+<<<<<<< HEAD
 ##### CHARACTER MODEL ######
 class Character:
     
@@ -49,6 +50,9 @@ class Movements(Character):
         self.move_character( y = self.MOVES_VOLOCITY)
 
 
+=======
+##### ENEMY MODEL ######
+>>>>>>> 38e2dff4b26f1eaf4ce65ca3a5208d9a22ef7984
 class Enemy:
     
     VOLOCITY = {}
@@ -90,4 +94,16 @@ class Enemy:
 
     def enem_dictionary(self):
         print(self.DICT_OF_ENEMY)
+<<<<<<< HEAD
         print(self.VOLOCITY)
+=======
+        print(self.VOLOCITY)
+
+
+class Player:
+    
+
+    def __init__(self) -> None:
+        pass
+
+>>>>>>> 38e2dff4b26f1eaf4ce65ca3a5208d9a22ef7984

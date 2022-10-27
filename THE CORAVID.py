@@ -100,7 +100,6 @@ def level3(event):
 ### MAIN CODE ###
 #################
 
-
 ###### GUI WINDOWS INTERFACE ######
 root = Tk()
 root.title(GAME_TITLE)
@@ -125,70 +124,26 @@ main_canvas.create_image(500,120,image=background_level1)
 ###### PLAYER CANVAS ######
 player_canvas = main_canvas.create_oval(110,110, 150,150)
 player_crosshair = PhotoImage(file=CROSSHAIR)
-
 ###### PLAYER FUNTION ######
 main_player = Movements(root, main_canvas, player_canvas)
+bullet = PhotoImage(file=BULLET_IMG_LOCATION)
 
-###### ENEMY
+###### PLAYER FUNTION ######
+
+###### ENEMY ######
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 enemy = Enemy(root, main_canvas, enemy_img)
 enemy.number_of_enemy(10)
-enemy.enem_dictionary()
+# enemy.enem_dictionary()
 enemy.move_enemy()
 root.bind("<Motion>", main_player.aim)
 main_player.crosshair(player_crosshair)
-
-
-#####################
-##### BUTTON ########
-########3############
-
-main_canvas.tag_bind("button_start","<Button-1>", start)
-main_canvas.tag_bind("button_setting","<Button-1>", setting)
-main_canvas.tag_bind("button_exit","<Button-1>", quit)
-main_canvas.tag_bind("text","<Button-1>", back)
-main_canvas.tag_bind("button_level1","<Button-1>", level1)
-main_canvas.tag_bind("button_level2","<Button-1>", level2)
-main_canvas.tag_bind("button_level3","<Button-1>", level3)
-
-##############################
-#### BACKGROUND IMAGES########
-##############################
-
-background_level1=PhotoImage(file="level1.png")
-background_level2=PhotoImage(file="level2.png")
-background_level3=PhotoImage(file="level3.png")
-background_start=PhotoImage(file='wall.png')
-pic=PhotoImage(file='setting.png')
-
-#############################
-######## BUTTTON IMAGES######
-#############################
-
-black1=PhotoImage(file="12345.png")
-start1=PhotoImage(file='button_start.png')
-setting1=PhotoImage(file='button_setting.png')
-exit1=PhotoImage(file='button_exit.png')
-back1=PhotoImage(file='button_back.png')
-
-button_on=PhotoImage(file='no.png')
-button_off=PhotoImage(file='off.png')
-
-one=PhotoImage(file='1.png')
-two=PhotoImage(file='2.png')
-three=PhotoImage(file='3.png')
-
-###########################
-####### SOUND #############
-###########################
-music=winsound.PlaySound("Pirates.wav",winsound.SND_FILENAME | winsound.SND_ASYNC )
-
-
-
-######## CALL FUNCATION HOME#####
-home()
+main_player.gun_bullet(bullet)
+main_player.add_bullet(10)
 
 ###### PLAYER KEY BIND ######
+
+root.bind("<Button-1>", main_player.shoot)
 root.bind("<w>", main_player.move_up)
 root.bind("<a>", main_player.move_left)
 root.bind("<s>", main_player.move_down)
