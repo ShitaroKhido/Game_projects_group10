@@ -56,7 +56,6 @@ def home():
     button_setting=main_canvas.create_image(890,495,image=setting1,tags='button_setting')
     button_exit=main_canvas.create_image(890,560,image=exit1,tags='button_exit')
 
-
 def start(event):
     main_canvas.delete('all')
     main_canvas.create_image(500,300,image=background_start)
@@ -79,21 +78,15 @@ def setting(event):
 def back(event):
     home()
 
-
 def level1(event):
     main_canvas.delete('all')
     main_canvas.create_image(500,120,image=background_level1)
     main_canvas.create_image(70,560,image=back1,tags='text')
     
-   
-
 def level2(event):
     main_canvas.delete('all')
     main_canvas.create_image(500,120,image=background_level2)
     main_canvas.create_image(70,560,image=back1,tags='text')
-
-
-
 
 def level3(event):
     main_canvas.delete('all')
@@ -124,29 +117,6 @@ player_crosshair = PhotoImage(file=CROSSHAIR)
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 
 
-###### BACKGROUND ######
-main_canvas.create_image(500,120,image=background_level1)
-
-black1=PhotoImage(file=BLACK_IMG_LOCATION)
-start1=PhotoImage(file=BUTTON_START_IMG_LOCATION)
-setting1=PhotoImage(file=BUTTON_SETTING_IMG_LOCATION)
-exit1=PhotoImage(file=BUTTON_EXIT_IMG_LOCATION)
-back1=PhotoImage(file=BUTTON_BACK_IMG_LOCATION)
-
-one=PhotoImage(file=BUTTON_LEVEL1_IMG_LOCATION)
-two=PhotoImage(file=BUTTON_LEVEL2_IMG_LOCATION)
-three=PhotoImage(file=BUTTON_LEVEL3_IMG_LOCATION)
-
-
-button_on=PhotoImage(file=BUTTON_ON_IMG_LOCATION)
-button_off=PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
-
-background_home=PhotoImage(file=HOME_BACKGROUND_IMAGE_LOCATION)
-background_level1=PhotoImage(file=BACKGROUND_LEVEL1_LOCATION)
-background_level2=PhotoImage(file=BACKGROUND_LEVEL2_LOCATION)
-background_level3=PhotoImage(file=BACKGROUND_LEVEL3_LOCATION)
-background_start=PhotoImage(file=BACKGROUND_START_LOCATION)
-setting_image=PhotoImage(file=SETTING_IMAGE_LOCATION)
 
 
 ###### PLAYER CANVAS ######
@@ -154,9 +124,10 @@ player_canvas = main_canvas.create_oval(110,110, 150,150)
 
 
 ###### ENEMY ######
-enemy = Enemy(root, main_canvas, enemy_img)
-enemy.number_of_enemy(10)
-enemy.move_enemy()
+
+# enemy = Enemy(root, main_canvas, enemy_img)
+# enemy.number_of_enemy(10)
+# enemy.move_enemy()
 
 ###### KEY BINDING ######
 main_canvas.tag_bind("button_start","<Button-1>", start)
