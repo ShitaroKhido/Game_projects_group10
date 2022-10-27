@@ -19,6 +19,27 @@ VIRUS_IMG_LOCATION = "Game_projects_group10\\assets\image\\b2.png"
 CROSSHAIR = "Game_projects_group10\\assets\image\crosshairs.png"
 ENEMY_IMG_LOCATION = "Game_projects_group10\\assets\image\\virus2.png"
 
+BLACK_IMG_LOCATION="black_background.png"
+BUTTON_START_IMG_LOCATION='button_start.png'
+BUTTON_SETTING_IMG_LOCATION='button_setting.png'
+BUTTON_EXIT_IMG_LOCATION='button_exit.png'
+BUTTON_BACK_IMG_LOCATION='button_back.png'
+
+BUTTON_LEVEL1_IMG_LOCATION='1.png'
+BUTTON_LEVEL2_IMG_LOCATION='2.png'
+BUTTON_LEVEL3_IMG_LOCATION='3.png'
+
+
+BUTTON_ON_IMG_LOCATION='no.png'
+BUTTON_OFF_IMG_LOCATION='off.png'
+
+BACKGROUND_LEVEL1_LOCATION="level1.png"
+BACKGROUND_LEVEL2_LOCATION="level2.png"
+BACKGROUND_LEVEL3_LOCATION="level3.png"
+BACKGROUND_START_LOCATION='wall.png'
+SETTING_IMAGE_LOCATION='setting.png'
+
+
 
 #################
 ### FOUCTION ####
@@ -104,7 +125,7 @@ def level3(event):
 ###### GUI WINDOWS INTERFACE ######
 root = Tk()
 root.title(GAME_TITLE)
-root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
+root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}"
 root.resizable(0,0)
 
 
@@ -119,7 +140,7 @@ root.resizable(0,0)
 main_canvas = Canvas(root)
 main_canvas.pack(expand=True, fill=BOTH)
 
-background_level1=PhotoImage(file="Game_projects_group10\\assets\image\LEVEL1.png")
+background_level1=PhotoImage(file="Game_projects_group10\\assets\image\LEVEL1.png"
 main_canvas.create_image(500,120,image=background_level1)
 
 ###### PLAYER CANVAS ######
