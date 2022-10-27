@@ -19,11 +19,14 @@ VIRUS_IMG_LOCATION = "Game_projects_group10\\assets\image\\b2.png"
 CROSSHAIR = "Game_projects_group10\\assets\image\crosshairs.png"
 ENEMY_IMG_LOCATION = "Game_projects_group10\\assets\image\\virus2.png"
 
+
+
 BLACK_IMG_LOCATION="black_background.png"
 BUTTON_START_IMG_LOCATION='button_start.png'
 BUTTON_SETTING_IMG_LOCATION='button_setting.png'
 BUTTON_EXIT_IMG_LOCATION='button_exit.png'
 BUTTON_BACK_IMG_LOCATION='button_back.png'
+
 
 BUTTON_LEVEL1_IMG_LOCATION='1.png'
 BUTTON_LEVEL2_IMG_LOCATION='2.png'
