@@ -1,4 +1,3 @@
-from sys import float_repr_style
 from tkinter import Button, Frame, PhotoImage, Tk, Canvas, mainloop, BOTH
 from mechanism import *
 import winsound 
@@ -49,8 +48,10 @@ SETTING_IMAGE_LOCATION='Game_projects_group10\\assets\image\setting.png'
 #################
 ### FOUCTION ####
 #################
+########################################################################
 
 def home():
+
     main_canvas.create_image(500,300,image=background_home)
     main_canvas.create_image(890,500,image=black_background)
     button_start=main_canvas.create_image(890,430,image=button_start,tags='button_start')
@@ -95,10 +96,26 @@ def level3(event):
     main_canvas.create_image(500,300,image=background_level3)
     main_canvas.create_image(70,560,image=button_back,tags='text')
 
+
+
+
+
+
+########################################################################
+
+
+
+
+
 def deploy_character(poxX:float, posY:float, player_size:int, image=None):
     global player
     player_box = main_canvas.create_oval(poxX, posY, poxX + player_size, posY + player_size)
     player = Player(main_canvas, player_box)
+
+
+
+
+    
 
 #################
 ### MAIN CODE ###
