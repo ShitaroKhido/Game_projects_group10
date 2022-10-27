@@ -52,30 +52,30 @@ SETTING_IMAGE_LOCATION='Game_projects_group10\\assets\image\setting.png'
 
 def home():
 
-    main_canvas.create_image(500,300,image=background_home)
-    main_canvas.create_image(890,500,image=black_background)
-    button_start=main_canvas.create_image(890,430,image=button_start,tags='button_start')
-    button_setting=main_canvas.create_image(890,495,image=button_setting,tags='button_setting')
-    button_exit=main_canvas.create_image(890,560,image=button_exit,tags='button_exit')
+    main_canvas.create_image(500,300,image=background_home_img)
+    main_canvas.create_image(890,500,image=background_black_img)
+    button_start=main_canvas.create_image(890,430,image=button_start_img,tags='button_start')
+    button_setting=main_canvas.create_image(890,495,image=button_setting_img,tags='button_setting')
+    button_exit=main_canvas.create_image(890,560,image=button_exit_img,tags='button_exit')
 
 def start(event):
     main_canvas.delete('all')
-    main_canvas.create_image(500,300,image=background_start)
-    main_canvas.create_image(70,40,image=button_back,tags='text')
-    button_level1 = main_canvas.create_image(300,300,image=button_level1,tags='button_level1')
-    button_level2 = main_canvas.create_image(550,300,image=button_level2,tags='button_level2')
-    button_level3 = main_canvas.create_image(800,300,image=button_level3,tags='button_level3')
+    main_canvas.create_image(500,300,image=background_start_img)
+    main_canvas.create_image(70,40,image=button_back_img,tags='text')
+    button_level1 = main_canvas.create_image(300,300,image=button_level1_img,tags='button_level1')
+    button_level2 = main_canvas.create_image(550,300,image=button_level2_img,tags='button_level2')
+    button_level3 = main_canvas.create_image(800,300,image=button_level3_img,tags='button_level3')
 
 def setting(event):
     main_canvas.delete('all')
-    main_canvas.create_image(500,300,image=background_start)
-    main_canvas.create_image(500,300,image=setting_image)
-    main_canvas.create_image(70,40,image=button_back,tags='text')
+    main_canvas.create_image(500,300,image=background_start_img)
+    main_canvas.create_image(500,300,image=setting_image_img)
+    main_canvas.create_image(70,40,image=button_back_img,tags='text')
     
-    sound_on = main_canvas.create_image(600,155,image=button_on,tags='button_on')
-    sound_off = main_canvas.create_image(700,155,image=button_off,tags='button_off')
-    music_on = main_canvas.create_image(600,250,image=button_on,tags='button_on')
-    music_off = main_canvas.create_image(700,250,image=button_off,tags='button_off')
+    sound_on = main_canvas.create_image(600,155,image=button_on_img,tags='button_on')
+    sound_off = main_canvas.create_image(700,155,image=button_off_img,tags='button_off')
+    music_on = main_canvas.create_image(600,250,image=button_on_img,tags='button_on')
+    music_off = main_canvas.create_image(700,250,image=button_off_img,tags='button_off')
 
 def back(event):
     home()
