@@ -157,6 +157,10 @@ button_on_img=PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img=PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
 
+
+home()
+
+
 ###### ENEMY ######
 
 # enemy = Enemy(root, main_canvas, enemy_img)
@@ -165,10 +169,10 @@ button_off_img=PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
 ###### KEY BINDING ######
 #>>> PLAYER
-root.bind("<w>", player.move_up)
-root.bind("<a>", player.move_left)
-root.bind("<s>", player.move_down)
-root.bind("<d>", player.move_right)
+# root.bind("<w>", player.move_up)
+# root.bind("<a>", player.move_left)
+# root.bind("<s>", player.move_down)
+# root.bind("<d>", player.move_right)
 #>>> SHAPE BIND
 main_canvas.tag_bind("button_start","<Button-1>", start)
 main_canvas.tag_bind("button_setting","<Button-1>", setting)
