@@ -65,33 +65,78 @@ def number_bullet(number: int, bullet_size=10):
 #>>>>>> INTERFACE <<<<<<#
 def home():
     home_frame.pack(expand=True, fill=BOTH)
+    home_canvas.pack(expand=True, fill=BOTH)
+    home_canvas.create_image(500, 300, image=background_home_img)
+    home_canvas.create_image(890, 500, image=background_black_img)
+    button_start = home_canvas.create_image(
+        890, 430, image=button_start_img, tags='button_start')
+    button_setting = home_canvas.create_image(
+        890, 495, image=button_setting_img, tags='button_setting')
+    button_exit = home_canvas.create_image(
+        890, 560, image=button_exit_img, tags='button_exit')
 
 
-def start():
+def start(event):
     start_frame.pack(expand=True, fill=BOTH)
+    start_canvas.pack(expand=True, fill=BOTH)
+
+    start_frame.create_image(500, 300, image=background_start_img)
+    start_frame.create_image(
+        70, 40, image=button_back_img, tags='back_in_start')
+    button_level1 = start_frame.create_image(
+        200, 300, image=button_level1_img, tags='button_level1')
+    button_level2 = start_frame.create_image(
+        500, 300, image=button_level2_img, tags='button_level2')
+    button_level3 = start_frame.create_image(
+        800, 300, image=button_level3_img, tags='button_level3')
 
 
 def setting(event):
     setting_frame.pack(expand=True, fill=BOTH)
+    setting_canvas.pack(expand=True, fill=BOTH)
+
+    setting_canvas.create_image(500, 300, image=background_start_img)
+    setting_canvas.create_image(500, 300, image=background_setting_img)
+    setting_canvas.create_image(
+        70, 40, image=button_back_img, tags='back_in_start')
+
+    sound_on = setting_canvas.create_image(
+        600, 155, image=button_on_img, tags='button_on')
+    sound_off = setting_canvas.create_image(
+        700, 155, image=button_off_img, tags='button_off')
+    music_on = setting_canvas.create_image(
+        600, 250, image=button_on_img, tags='button_on')
+    music_off = setting_canvas.create_image(
+        700, 250, image=button_off_img, tags='button_off')
 
 
 def level1():
     global level1_canvas
     level1_frame.pack(expand=True, fill=BOTH)
     level1_canvas.pack(expand=True, fill=BOTH)
+
     level1_canvas.create_image(500, 120, image=background_level1_img)
-    deploy_sprite(level1_frame, level1_canvas, 10)
+    level1_canvas.create_image(
+        70, 560, image=button_back_img, tags='back_in_game')
 
 
 def level2(event):
     level2_frame.pack(expand=True, fill=BOTH)
+    level2_canvas.pack(expand=True, fill=BOTH)
+
     level2_canvas.create_image(500, 120, image=background_level2_img)
+    level2_canvas.create_image(
+        70, 560, image=button_back_img, tags='back_in_game')
 
 
 def level3(event):
     level3_frame.pack(expand=True, fill=BOTH)
-    level3_canvas.create_image(500, 300, image=background_level3_img)
+    level3_canvas.pack(expand=True, fill=BOTH)
 
+    level3_canvas.create_image(500, 300, image=background_level3_img)
+    level3_canvas.create_image(
+        70, 560, image=button_back_img, tags='back_in_game')
+    
 
 #>>>>>> SOUND <<<<<<#
 
@@ -136,16 +181,20 @@ level1_frame = Frame(root)
 level2_frame = Frame(root)
 level3_frame = Frame(root)
 
-
 #>>>>>> CANVAS <<<<<<#
 home_canvas = Canvas(home_frame)
+start_canvas = Canvas(start_frame)
+setting_canvas = Canvas(setting_frame)
 level1_canvas = Canvas(level1_frame)
 level2_canvas = Canvas(level2_frame)
 level3_canvas = Canvas(level3_frame)
 
+<<<<<<< HEAD
 home_canvas.create_rectangle(100, 100, 150, 150, fill="black")
 
 
+=======
+>>>>>>> e5b090d5544e0040a4297eb62ee48958e9ad2955
 #>>>>>> PLAYER PROPERTIES <<<<<<#
 player_crosshair_img = PhotoImage(file=CROSSHAIR)
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
@@ -176,6 +225,11 @@ button_on_img = PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
 
+<<<<<<< HEAD
 level1()
+=======
+home()
+
+>>>>>>> e5b090d5544e0040a4297eb62ee48958e9ad2955
 #>>>>>> HOME <<<<<<#
 root.mainloop()
