@@ -46,30 +46,26 @@ def home():
     home_canvas.pack(expand=True, fill=BOTH)
     home_canvas.create_image(500, 300, image=background_home_img)
     home_canvas.create_image(890, 500, image=background_black_img)
-    button_start = home_canvas.create_image(
-        890, 430, image=button_start_img, tags='button_start')
-    button_setting = home_canvas.create_image(
-        890, 495, image=button_setting_img, tags='button_setting')
-    button_exit = home_canvas.create_image(
-        890, 560, image=button_exit_img, tags='button_exit')
+    button_start.place(x=816, y=400 )
+    button_setting.place (x=816, y=470)
+    button_exit.place (x=816, y=540)
 
 
-def start(event):
+def start():
+    home_frame.forget()
     start_frame.pack(expand=True, fill=BOTH)
     start_canvas.pack(expand=True, fill=BOTH)
-
-    start_frame.create_image(500, 300, image=background_start_img)
-    start_frame.create_image(
+    start_canvas.create_image(500, 300, image=background_start_img)
+    start_canvas.create_image(
         70, 40, image=button_back_img, tags='back_in_start')
-    button_level1 = start_frame.create_image(
-        200, 300, image=button_level1_img, tags='button_level1')
-    button_level2 = start_frame.create_image(
-        500, 300, image=button_level2_img, tags='button_level2')
-    button_level3 = start_frame.create_image(
-        800, 300, image=button_level3_img, tags='button_level3')
+    button_back_home.place(x=10,y=10)
+    button_level1 .place( x = 100, y = 250)
+    button_level2 .place ( x = 390, y = 250)
+    button_level3 .place( x = 680, y = 250)
 
 
-def setting(event):
+def setting():
+    home_frame.forget()
     setting_frame.pack(expand=True, fill=BOTH)
     setting_canvas.pack(expand=True, fill=BOTH)
 
@@ -89,8 +85,14 @@ def setting(event):
 
 
 def level1():
+<<<<<<< HEAD
     global level1_top
     level1_top = Toplevel(root)
+=======
+    start_frame.forget()
+    global level1_canvas
+    level1_frame.pack(expand=True, fill=BOTH)
+>>>>>>> e0278bb99270a14da0aca9a210162756eda8ec5e
     level1_canvas.pack(expand=True, fill=BOTH)
 
     level1_canvas.create_image(500, 120, image=background_level1_img)
@@ -102,6 +104,9 @@ def level1():
 def level2(event):
     global level2_top
     level2_top = Toplevel(root)
+def level2():
+    start_frame.forget()
+    level2_frame.pack(expand=True, fill=BOTH)
     level2_canvas.pack(expand=True, fill=BOTH)
     level2_canvas.create_image(500, 120, image=background_level2_img)
     level2_canvas.create_image(
@@ -111,6 +116,9 @@ def level2(event):
 def level3(event):
     global level3_top
     level3_top = Toplevel(root)
+def level3():
+    start_frame.forget()
+    level3_frame.pack(expand=True, fill=BOTH)
     level3_canvas.pack(expand=True, fill=BOTH)
     level3_canvas.create_image(500, 300, image=background_level3_img)
     level3_canvas.create_image(
@@ -167,6 +175,8 @@ level1_canvas = Canvas(level1_top)
 level2_canvas = Canvas(level2_top)
 level3_canvas = Canvas(level3_top)
 
+
+
 #>>>>>> PLAYER PROPERTIES <<<<<<#
 player_crosshair_img = PhotoImage(file=CROSSHAIR)
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
@@ -185,7 +195,7 @@ background_start_img = PhotoImage(file=BACKGROUND_START_LOCATION)
 background_setting_img = PhotoImage(file=SETTING_IMAGE_LOCATION)
 
 
-#>>>>>> BUTTON <<<<<<#
+#>>>>>> BUTTON IMG<<<<<<#
 button_start_img = PhotoImage(file=BUTTON_START_IMG_LOCATION)
 button_setting_img = PhotoImage(file=BUTTON_SETTING_IMG_LOCATION)
 button_exit_img = PhotoImage(file=BUTTON_EXIT_IMG_LOCATION)
@@ -195,6 +205,16 @@ button_level2_img = PhotoImage(file=BUTTON_LEVEL2_IMG_LOCATION)
 button_level3_img = PhotoImage(file=BUTTON_LEVEL3_IMG_LOCATION)
 button_on_img = PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
+
+#>>>>>> BUTTON <<<<<<#
+button_start=Button(home_canvas,image=button_start_img,command=start)
+button_setting=Button(home_canvas,image=button_setting_img,command=setting)
+button_exit=Button(home_canvas,image=button_exit_img,command=root.destroy)
+button_back_home=Button(start_canvas,image=button_back_img,command=back_to_home)
+
+button_level1=Button(start_canvas,image=button_level1_img,command=level1)
+button_level2=Button(start_canvas,image=button_level2_img,command=level2)
+button_level3=Button(start_canvas,image=button_level3_img,command=level3)
 
 
 
