@@ -1,5 +1,5 @@
 from tkinter import Button, Frame, PhotoImage, Tk, Canvas, mainloop, BOTH
-from mechanism import *
+from Mechanism import *
 
  
 ################
@@ -30,9 +30,10 @@ main_canvas.pack(expand=True, fill=BOTH)
 
 ###### PLAYER CANVAS ######
 player_canvas = main_canvas.create_oval(100,100, 150,150)
-
 ###### PLAYER FUNTION ######
-main_player = Character(main_canvas, player_canvas)
+main_player = Movements(root, main_canvas, player_canvas)
+
+
 
 ###### PLAYER KEY BIND ######
 root.bind("<w>", main_player.move_up)

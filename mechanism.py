@@ -1,87 +1,57 @@
-#######################################
-### COPYRIGHTS AND RESERVED BY KHID ###
-#######################################
-
-from tkinter import Button, Frame, PhotoImage, Tk, Canvas, mainloop, BOTH
-
+###########################################
+##### COPYRIGHTS AND RESERVED BY KHID #####
+###########################################
+from tkinter import Canvas
 
 class Character:
-
-    """Character model
-
-
-    This is the character class which container the method:
-
-    CHARACTER COORDINATION:
-    def player_coord(self)
-
-    DIRECITON MOVEMENTS:
-    self.move_right(self, event)
-    self.move_left(self, event)
-    self.move_up(self, event)
-    self.move_down(self, event)
-    """
-
-    def __init__(self, main_canvas, player):
-        Canvas().__init__()
-        self._player =  player
+    
+    def __init__(self, master_window, main_canvas, player_canvas):
+        self._master = master_window
         self._canvas = main_canvas
+        self._player = player_canvas
+        #### PLAYER COORDINATION
+        self._coord = self._canvas.coords(self._player)
 
-    def player_coord(self):
-        return self._canvas.coords(self._player)
+    def get_coord(self):
+        return self._coord
 
-    def movements(self,  x=0 , y=0):
-        self._canvas.move(self._player, x, y)
+
+class Movements(Character):
+    
+    MOVES_VOLOCITY = 20
+    PLATFORM_SIZE = [1000, 600]
+    def __init__(self, master_window, main_canvas, player_canvas):
+        super().__init__(master_window, main_canvas, player_canvas)
+        
+    def check_if_wall(self):
+        x = self._coord[0] + self._coord[2] / 2
+        y = self._coord[1] + self._coord[3] / 2
+        player_coord = [x, y]
+        
+        if player_coord[0] >= self.PLATFORM_SIZE[0]:
+            move = False
+        elif player_coord[1] >= self.PLATFORM_SIZE[1]:
+            move = False
+        else:
+            move = True
+        return move
+    
+    def move_character(self, x=0, y=0):
+        return self._canvas.move(self._player, x, y)
 
     def move_right(self, event):
-        self.movements(60, 0)
-
+        if self.check_if_wall:
+            self.move_character(x = self.MOVES_VOLOCITY)
+    
     def move_left(self, event):
-        self.movements(-60, 0)
+        if self.check_if_wall:
+            self.move_character( x = -(self.MOVES_VOLOCITY))
     
     def move_up(self, event):
-        self.movements(0, -60)
-    
+        if self.check_if_wall:
+            self.move_character( y = -(self.MOVES_VOLOCITY))
+
     def move_down(self, event):
-        self.movements(0, 60,)
-
+        if self.check_if_wall:
+            self.move_character( y = self.MOVES_VOLOCITY)
     
-
-class Gun:
-
-    """Gun
-
-    Is the model item for charcter.
-    METHOD:
-    projectile(self, event)
-    shoot(self, event)
-    """
-    
-    AIM_ALIGNMENT = 12
-
-    def __init__(self, canvas, player) -> None:
-        self._player = player
-        self._canvas = canvas
-        self._player_coord = self._canvas.coords(self._player)
-        self.x1 = self._player_coord[0]
-        self.y1 = self._player_coord[1]
-        self.x2 = self._player_coord[2]
-        self.y2 = self._player_coord[3]
-
-    def projectile(self, event):
-        ### VECTORS CALCULATION
-        vector_a = (self.x1+self.x2) / 2
-        vector_b = (self.y1+self.y2) / 2
-        ### PLAYER COORDINATION POINT
-        player_x = event.x - vector_a
-        player_y = event.y - vector_b
-        ### VOLOCITY OF DIRECTION
-        x_direction = (player_x + 2) - (player_x - 2) / self.AIM_ALIGNMENT
-        y_direction = (player_y + 2) - (player_y - 2) / self.AIM_ALIGNMENT
-
-        return [x_direction, y_direction]
-
-    def shoot(self, event):
-        direction = self.projectile(event)
-        self._canvas.move(None, direction[0], direction[1])
-
