@@ -83,6 +83,7 @@ def level1(event):
     main_canvas.delete('all')
     main_canvas.create_image(500,120,image=background_level1)
     main_canvas.create_image(70,560,image=button_back,tags='text')
+    deploy_character(100,100, 20, None)
     
 def level2(event):
     main_canvas.delete('all')
@@ -144,8 +145,7 @@ setting_image=PhotoImage(file=SETTING_IMAGE_LOCATION)
 
 
 
-deploy_character(100,100, 20, None)
-
+home()
 ###### ENEMY ######
 
 # enemy = Enemy(root, main_canvas, enemy_img)
