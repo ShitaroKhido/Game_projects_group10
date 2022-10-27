@@ -69,7 +69,7 @@ def start(event):
 def setting(event):
     main_canvas.delete('all')
     main_canvas.create_image(500,300,image=background_start_img)
-    main_canvas.create_image(500,300,image=setting_image_img)
+    main_canvas.create_image(500,300,image=background_setting_img)
     main_canvas.create_image(70,40,image=button_back_img,tags='text')
     
     sound_on = main_canvas.create_image(600,155,image=button_on_img,tags='button_on')
@@ -83,18 +83,18 @@ def back(event):
 def level1(event):
     main_canvas.delete('all')
     main_canvas.create_image(500,120,image=background_level1)
-    main_canvas.create_image(70,560,image=button_back,tags='text')
+    main_canvas.create_image(70,560,image=button_back_img,tags='text')
     deploy_character(100,100, 20, None)
     
 def level2(event):
     main_canvas.delete('all')
-    main_canvas.create_image(500,120,image=background_level2)
-    main_canvas.create_image(70,560,image=button_back,tags='text')
+    main_canvas.create_image(500,120,image=background_level2_img)
+    main_canvas.create_image(70,560,image=button_back_img,tags='text')
 
 def level3(event):
     main_canvas.delete('all')
-    main_canvas.create_image(500,300,image=background_level3)
-    main_canvas.create_image(70,560,image=button_back,tags='text')
+    main_canvas.create_image(500,300,image=background_level3_img)
+    main_canvas.create_image(70,560,image=button_back_img,tags='text')
 
 
 
