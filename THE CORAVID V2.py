@@ -96,7 +96,7 @@ def level1(event):
 
 def level2(event):
     level2_frame = Frame(root)
-    level3_frame.pack(expand=True, fill=BOTH)
+    level2_frame.pack(expand=True, fill=BOTH)
     
 
 
