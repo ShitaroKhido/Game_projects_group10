@@ -13,6 +13,13 @@ def key_bind():
     root.bind("<s>", player.move_down)
     root.bind("<d>", player.move_right)
 
+def deploy_sprite(enemy_count:int, player_pos:list):
+    enemy = Enemy(root, main_canvas, enemy_img)
+    enemy.move_enemy()
+    enemy.number_of_enemy(enemy_count)
+    deploy_character(player_pos[0], player_pos[1], 20, None)
+    key_bind()
+
 def home():
 
     main_canvas.create_image(500,300,image=background_home_img)
@@ -47,8 +54,6 @@ def level1(event):
     main_canvas.delete('all')
     main_canvas.create_image(500,120,image=background_level1)
     main_canvas.create_image(70,560,image=button_back_img,tags='text')
-    deploy_character(100,100, 20, None)
-    key_bind()
     
 def level2(event):
     main_canvas.delete('all')
@@ -71,7 +76,7 @@ def deploy_character(poxX:float, posY:float, player_size:int, image=None):
     global player
     player_box = main_canvas.create_oval(poxX, posY, poxX + player_size, posY + player_size)
     mid_point = main_canvas.coords(player_box)
-    player = Player(main_canvas, player_box, enemy_img )
+    player = Player(main_canvas, player_box, player_crosshair)
 
 
 
