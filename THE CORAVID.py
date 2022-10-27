@@ -21,7 +21,7 @@ def deploy_sprite(enemy_count:int, player_pos:list):
     key_bind()
 
 def home():
-
+    main_canvas.delete('all')
     main_canvas.create_image(500,300,image=background_home_img)
     main_canvas.create_image(890,500,image=background_black_img)
     button_start=main_canvas.create_image(890,430,image=button_start_img,tags='button_start')
@@ -29,7 +29,8 @@ def home():
     button_exit=main_canvas.create_image(890,560,image=button_exit_img,tags='button_exit')
 
 def start(event):
-    main_canvas.delete('all')
+
+    winsound.PlaySound(MUSIC_CHOICE,winsound.SND_FILENAME | winsound.SND_ASYNC )
     main_canvas.create_image(500,300,image=background_start_img)
     main_canvas.create_image(70,40,image=button_back_img,tags='text')
     button_level1 = main_canvas.create_image(200,300,image=button_level1_img,tags='button_level1')
@@ -123,7 +124,6 @@ button_off_img=PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
 
 home()
-music=winsound.PlaySound("Game_projects_group10\\assets\Sound\sound_music.wav",winsound.SND_FILENAME | winsound.SND_ASYNC )
 
 ###### ENEMY ######
 
