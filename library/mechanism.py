@@ -49,6 +49,8 @@ class Player:
         self._canvas.moveto(self._crosshair, event.x -
                             self._aim_adjustment, event.y-self._aim_adjustment)
 
+    def get_player_position(self):
+        return self._canvas.coords(self._player)
 
 ##### ENEMY MODEL ######
 
