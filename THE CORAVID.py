@@ -55,7 +55,6 @@ def home():
     button_setting=main_canvas.create_image(890,495,image=setting1,tags='button_setting')
     button_exit=main_canvas.create_image(890,560,image=exit1,tags='button_exit')
 
-
 def start(event):
     main_canvas.delete('all')
     main_canvas.create_image(500,300,image=background_start)
@@ -78,21 +77,15 @@ def setting(event):
 def back(event):
     home()
 
-
 def level1(event):
     main_canvas.delete('all')
     main_canvas.create_image(500,120,image=background_level1)
     main_canvas.create_image(70,560,image=back1,tags='text')
     
-   
-
 def level2(event):
     main_canvas.delete('all')
     main_canvas.create_image(500,120,image=background_level2)
     main_canvas.create_image(70,560,image=back1,tags='text')
-
-
-
 
 def level3(event):
     main_canvas.delete('all')
