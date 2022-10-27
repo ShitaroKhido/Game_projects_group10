@@ -88,7 +88,6 @@ class Enemy:
         
         self._canvas.after(40, self.move_enemy)
 
-
     def enem_dictionary(self):
         print(self.DICT_OF_ENEMY)
         print(self.VOLOCITY)
