@@ -108,6 +108,7 @@ def deploy_character(poxX: float, posY: float, player_size: int, image=None):
 #################
 ### MAIN CODE ###
 #################
+
 ###### GUI WINDOWS INTERFACE ######
 root = Tk()
 root.title(GAME_TITLE)
