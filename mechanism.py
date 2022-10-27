@@ -14,6 +14,8 @@ class Character:
         #### PLAYER COORDINATION
         self._coord = self._canvas.coords(self._player)
         self._crosshair = None
+        self._bullet_img = None
+        self._gun = Gun(self._canvas, self._coord, self._bullet_img )
 
     def get_coord(self):
         return self._coord
@@ -24,9 +26,16 @@ class Character:
     def crosshair(self, crosshair_image):
         self._crosshair = self._canvas.create_image(self._coord[0], self._coord[0], image=crosshair_image)
 
-    def shoot(self, bullet_img):
+    def gun_bullet(self, img):
+        self._bullet_img = img
+    
+    def add_bullet(self, count):
+        self._gun.get_bullet(count)
+        print(self._gun.AMMUNITION)
+
+    def shoot(self):
         pass
-        
+
 
 class Movements(Character):
     
@@ -50,6 +59,8 @@ class Movements(Character):
 
     def move_down(self, event):
         self.move_character( y = self.MOVES_VOLOCITY)
+
+
 
 
 class Enemy:
@@ -94,3 +105,25 @@ class Enemy:
     def enem_dictionary(self):
         print(self.DICT_OF_ENEMY)
         print(self.VOLOCITY)
+
+
+class Gun:
+    
+    AMMUNITION = []
+
+    def __init__(self, main_canvas, player_pos, bullet_img):
+        self._canvas = main_canvas
+        self._bullet = bullet_img
+        self._player_pos = player_pos
+
+    
+    def get_bullet(self, number:int):
+        for i in range(number):
+            self.AMMUNITION.append(self._canvas.create_image(self._player_pos[0], self._player_pos[1], image = self._bullet ))
+
+
+    def bullet_info(self):
+        print(self.AMMUNITION)
+
+
+

@@ -12,8 +12,9 @@ WINDOW_HEIGHT = 600
 GAME_TITLE = "THE CORAVID"
 
 GAME_ICON_LOCATION = ""
+BULLET_IMG_LOCATION = "Game_projects_group10\\assets\image\\b2.png"
 CHARACTER_IMG_LOCATION = ""
-VIRUS_IMG_LOCATION = "Game_projects_group10\\assets\image\\b2.png"
+VIRUS_IMG_LOCATION = ""
 CROSSHAIR = "Game_projects_group10\\assets\image\crosshairs.png"
 ENEMY_IMG_LOCATION = "Game_projects_group10\\assets\image\\virus2.png"
 
@@ -39,19 +40,20 @@ main_canvas.create_image(500,120,image=background_level1)
 ###### PLAYER CANVAS ######
 player_canvas = main_canvas.create_oval(110,110, 150,150)
 player_crosshair = PhotoImage(file=CROSSHAIR)
-
 ###### PLAYER FUNTION ######
 main_player = Movements(root, main_canvas, player_canvas)
+bullet = PhotoImage(file=BULLET_IMG_LOCATION)
 
 ###### ENEMY
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 enemy = Enemy(root, main_canvas, enemy_img)
-enemy.number_of_enemy(1000)
-enemy.enem_dictionary()
+enemy.number_of_enemy(10)
+# enemy.enem_dictionary()
 enemy.move_enemy()
 root.bind("<Motion>", main_player.aim)
 main_player.crosshair(player_crosshair)
-
+main_player.gun_bullet(bullet)
+main_player.add_bullet(10)
 
 ###### PLAYER KEY BIND ######
 root.bind("<w>", main_player.move_up)
