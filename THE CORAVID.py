@@ -25,9 +25,20 @@ root.title(GAME_TITLE)
 root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 root.resizable(0,0)
 
+
+#########################
+######## Back############
+#########################
+
+    
+
+
 ###### MAIN CANVAS ######
 main_canvas = Canvas(root)
 main_canvas.pack(expand=True, fill=BOTH)
+
+background_level1=PhotoImage(file="Game_projects_group10\\assets\image\LEVEL1.png")
+main_canvas.create_image(500,120,image=background_level1)
 
 ###### PLAYER CANVAS ######
 player_canvas = main_canvas.create_oval(100,100, 150,150)
