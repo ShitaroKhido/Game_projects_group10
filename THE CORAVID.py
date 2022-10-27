@@ -70,7 +70,8 @@ def level3(event):
 def deploy_character(poxX:float, posY:float, player_size:int, image=None):
     global player
     player_box = main_canvas.create_oval(poxX, posY, poxX + player_size, posY + player_size)
-    player = Player(main_canvas, player_box)
+    mid_point = main_canvas.coords(player_box)
+    player = Player(main_canvas, player_box, enemy_img )
 
 
 
