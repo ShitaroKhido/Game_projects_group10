@@ -42,8 +42,6 @@ player_crosshair = PhotoImage(file=CROSSHAIR)
 bullet = PhotoImage(file=BULLET_IMG_LOCATION)
 
 ###### PLAYER FUNTION ######
-main_player = Movements(root, main_canvas, player_canvas)
-main_player.get_bullet_img(bullet)
 
 ###### ENEMY ######
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
@@ -51,15 +49,13 @@ enemy = Enemy(root, main_canvas, enemy_img)
 enemy.number_of_enemy(10)
 enemy.move_enemy()
 
-
-main_player.crosshair(player_crosshair)
 ###### PLAYER KEY BIND ######
-root.bind("<Motion>", main_player.aim)
-root.bind("<Button-1>", main_player.shoot)
-root.bind("<w>", main_player.move_up)
-root.bind("<a>", main_player.move_left)
-root.bind("<s>", main_player.move_down)
-root.bind("<d>", main_player.move_right)
+# root.bind("<Motion>", main_player.aim)
+# root.bind("<Button-1>", main_player.shoot)
+# root.bind("<w>", main_player.move_up)
+# root.bind("<a>", main_player.move_left)
+# root.bind("<s>", main_player.move_down)
+# root.bind("<d>", main_player.move_right)
 
 
 root.mainloop()
