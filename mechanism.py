@@ -6,6 +6,15 @@ from tkinter import Canvas
 
 
 class Player:
+    """Player
+    
+    Player class containe:
+
+        self.move_right(self, event)
+        self.move_left(self, event)
+        self.move_down(self, event)
+        self.move_up(self, event)
+    """
 
     PLAYER_MOVE_SPEED = 40
 
@@ -13,20 +22,20 @@ class Player:
         self._canvas = canvas
         self._player = player_canvas
 
-    def player_movements(self, x=0, y=0):
+    def _player_movements(self, x=0, y=0):
         self._canvas.move(self._player, x, y)
 
     def move_right(self, event):
-        self.player_movements(x=self.PLAYER_MOVE_SPEED)
+        self._player_movements(x=self.PLAYER_MOVE_SPEED)
 
     def move_left(self, event):
-        self.player_movements(x=-self.PLAYER_MOVE_SPEED)
+        self._player_movements(x=-self.PLAYER_MOVE_SPEED)
 
     def move_down(self, event):
-        self.player_movements(y=self.PLAYER_MOVE_SPEED)
+        self._player_movements(y=self.PLAYER_MOVE_SPEED)
 
     def move_up(self, event):
-        self.player_movements(y=-self.PLAYER_MOVE_SPEED)
+        self._player_movements(y=-self.PLAYER_MOVE_SPEED)
 
 ##### ENEMY MODEL ######
 
