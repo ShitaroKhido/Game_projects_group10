@@ -189,12 +189,6 @@ level1_canvas = Canvas(level1_frame)
 level2_canvas = Canvas(level2_frame)
 level3_canvas = Canvas(level3_frame)
 
-<<<<<<< HEAD
-home_canvas.create_rectangle(100, 100, 150, 150, fill="black")
-
-
-=======
->>>>>>> e5b090d5544e0040a4297eb62ee48958e9ad2955
 #>>>>>> PLAYER PROPERTIES <<<<<<#
 player_crosshair_img = PhotoImage(file=CROSSHAIR)
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
@@ -225,11 +219,7 @@ button_on_img = PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
 
-<<<<<<< HEAD
-level1()
-=======
 home()
 
->>>>>>> e5b090d5544e0040a4297eb62ee48958e9ad2955
 #>>>>>> HOME <<<<<<#
 root.mainloop()
