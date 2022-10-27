@@ -65,6 +65,10 @@ def number_bullet(number: int, bullet_size=10):
 #>>>>>> INTERFACE <<<<<<#
 def home():
     home_frame.pack(expand=True, fill=BOTH)
+<<<<<<< HEAD
+
+=======
+>>>>>>> c6565f8a6e7b4d37632f71342f6de8665f055139
 
 
 def start():
