@@ -1,11 +1,11 @@
 from library.constant import *
 from library.enemy import *
-from tkinter import Tk, Canvas, PhotoImage, mainloop, BOTH
+from tkinter import Frame, Tk, Canvas, PhotoImage, mainloop, BOTH
 from winsound import *
 
 
 player_position = [200, 200, 240, 240]
-
+bullet_count = []
 
 #########################
 #>>>>>> FUNCTIONS <<<<<<#
@@ -13,8 +13,9 @@ player_position = [200, 200, 240, 240]
 
 #>>>>>> CHARACTER MOVEMENTS <<<<<<#
 def movement(x=0, y=0):
-    canvas.move(player, x, y)
-    canvas.move(player_box, x, y)
+    # canvas.move(player, x, y)
+    # canvas.move(player_box, x, y)
+    pass
 
 
 def move_left(event):
@@ -34,105 +35,67 @@ def move_down(event):
 
 
 def crosshair(event):
-    canvas.moveto(player_crosshair, event.x -
-                  AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT)
+    pass
 
-def shoot(event):
-    a = (canvas.coords(player_box)[2]+canvas.coords(player_box)[0])/2
-    b = (canvas.coords(player_box)[3]+canvas.coords(player_box)[1])/2
+# def shoot(event):
+#     a = (canvas.coords(player_box)[2]+canvas.coords(player_box)[0])/2
+#     b = (canvas.coords(player_box)[3]+canvas.coords(player_box)[1])/2
     
-    x = event.x - a
-    y = event.y - b
+#     x = event.x - a
+#     y = event.y - b
 
-    canvas.move(bullet,(x+2)-(x-2)/2, (y+2)-(y-2)/2 )
-    aft = canvas.after(100, lambda:shoot(event))
+#     canvas.move(bullet,(x+2)-(x-2)/2, (y+2)-(y-2)/2 )
+#     aft = canvas.after(100, lambda:shoot(event))
 
 
 
 def deploy_sprite(number_of_enemy: int):
-    global player, player_box, player_crosshair
-    player_box = canvas.create_oval(player_position, fill="black")
-    player = canvas.create_image(
-        player_position[0]+20, player_position[1]+20, image=player_img)
+    pass
 
-    enemy = Enemy(root, canvas, enemy_img)
-    enemy.number_of_enemy(number_of_enemy)
-    enemy.move_enemy()
 
-    player_crosshair = canvas.create_image(
-        player_position[0], player_position[1], image=player_crosshair_img)
+
+def number_bullet(number: int, bullet_size=10):
+    pass
+        
+
+
+
 
 
 #>>>>>> INTERFACE <<<<<<#
 def home():
-    canvas.delete('all')
-    canvas.create_image(500, 300, image=background_home_img)
-    canvas.create_image(890, 500, image=background_black_img)
-    button_start = canvas.create_image(
-        890, 430, image=button_start_img, tags='button_start')
-    button_setting = canvas.create_image(
-        890, 495, image=button_setting_img, tags='button_setting')
-    button_exit = canvas.create_image(
-        890, 560, image=button_exit_img, tags='button_exit')
+    pass
 
 
 def start(event):
-    PlaySound(MUSIC_CHOICE, SND_FILENAME | SND_ASYNC)
-    canvas.create_image(500, 300, image=background_start_img)
-    canvas.create_image(
-        70, 40, image=button_back_img, tags='back_in_start')
-    button_level1 = canvas.create_image(
-        200, 300, image=button_level1_img, tags='button_level1')
-    button_level2 = canvas.create_image(
-        500, 300, image=button_level2_img, tags='button_level2')
-    button_level3 = canvas.create_image(
-        800, 300, image=button_level3_img, tags='button_level3')
+    pass
+    
 
 
 def setting(event):
-    canvas.delete('all')
-    canvas.create_image(500, 300, image=background_start_img)
-    canvas.create_image(500, 300, image=background_setting_img)
-    canvas.create_image(
-        70, 40, image=button_back_img, tags='back_in_start')
-
-    sound_on = canvas.create_image(
-        600, 155, image=button_on_img, tags='button_on')
-    sound_off = canvas.create_image(
-        700, 155, image=button_off_img, tags='button_off')
-    music_on = canvas.create_image(
-        600, 250, image=button_on_img, tags='button_on')
-    music_off = canvas.create_image(
-        700, 250, image=button_off_img, tags='button_off')
+    pass
+    
 
 
 def level1(event):
-    canvas.delete('all')
-    canvas.create_image(500, 120, image=background_level1_img, tags="level_1")
-    deploy_sprite(NUMBER_OF_ENEMY_LEVEL_1)
-    Inlevel()
+    pass
+
 
 
 def level2(event):
-    canvas.delete('all')
-    canvas.create_image(500, 120, image=background_level2_img)
-    deploy_sprite(NUMBER_OF_ENEMY_LEVEL_2)
-    Inlevel()
+    pass
+    
 
 
 def level3(event):
-    canvas.delete('all')
-    canvas.create_image(500, 300, image=background_level3_img)
-    deploy_sprite(NUMBER_OF_ENEMY_LEVEL_3)
-    Inlevel()
+    pass
+    
 
 #>>>>>> SOUND <<<<<<#
 
 
 def Inlevel():
-    PlaySound(MUSIC_IN_GAME, SND_FILENAME | SND_ASYNC)
-    canvas.create_image(
-        70, 560, image=button_back_img, tags='back_in_game')
+    pass
 
 
 def back_to_home(event):
@@ -149,7 +112,7 @@ def key_bind():
     root.bind("<s>", move_down)
     root.bind("<d>", move_right)
     root.bind("<Motion>", crosshair)
-    root.bind("<Button-1>", shoot)
+    canvas.tag_bind("level_1", "<Button-1>", shoot)
 
     canvas.tag_bind("button_start", "<Button-1>", start)
     canvas.tag_bind("button_setting", "<Button-1>", setting)
@@ -172,8 +135,11 @@ root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 root.resizable(0, 0)
 
 
+
+
+
 #>>>>>> MAIN CANVAS <<<<<<#
-canvas = Canvas(root)
+canvas = Canvas()
 canvas.pack(expand=True, fill=BOTH)
 
 
@@ -208,6 +174,4 @@ button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
 
 #>>>>>> HOME <<<<<<#
-home()
-key_bind()
 root.mainloop()
