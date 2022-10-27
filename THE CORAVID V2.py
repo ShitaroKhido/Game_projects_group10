@@ -65,15 +65,28 @@ def number_bullet(number: int, bullet_size=10):
 #>>>>>> INTERFACE <<<<<<#
 def home():
     home_frame.pack(expand=True, fill=BOTH)
-<<<<<<< HEAD
-
-=======
->>>>>>> c6565f8a6e7b4d37632f71342f6de8665f055139
-
+    home_frame.create_image(500, 300, image=background_home_img)
+    home_frame.create_image(890, 500, image=background_black_img)
+    button_start = home_frame.create_image(
+        890, 430, image=button_start_img, tags='button_start')
+    button_setting = home_frame.create_image(
+        890, 495, image=button_setting_img, tags='button_setting')
+    button_exit = home_frame.create_image(
+        890, 560, image=button_exit_img, tags='button_exit')
 
 def start():
     start_frame.pack(expand=True, fill=BOTH)
-    
+    winsound.PlaySound(MUSIC_CHOICE, winsound.SND_FILENAME |
+                       winsound.SND_ASYNC)
+    start_frame.create_image(500, 300, image=background_start_img)
+    start_frame.create_image(
+        70, 40, image=button_back_img, tags='back_in_start')
+    button_level1 = start_frame.create_image(
+        200, 300, image=button_level1_img, tags='button_level1')
+    button_level2 = start_frame.create_image(
+        500, 300, image=button_level2_img, tags='button_level2')
+    button_level3 = start_frame.create_image(
+        800, 300, image=button_level3_img, tags='button_level3')
 
 
 def setting(event):
