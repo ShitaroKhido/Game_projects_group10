@@ -21,7 +21,7 @@ def deploy_sprite(enemy_count: int, player_pos: list):
     enemy = Enemy(root, main_canvas, enemy_img)
     enemy.move_enemy()
     enemy.number_of_enemy(enemy_count)
-    deploy_character(player_pos[0], player_pos[1], 40, None)
+    deploy_character(player_pos[0], player_pos[1], 20, None)
     key_bind()
 
 
@@ -42,7 +42,7 @@ def start(event):
     winsound.PlaySound(MUSIC_CHOICE, winsound.SND_FILENAME |
                        winsound.SND_ASYNC)
     main_canvas.create_image(500, 300, image=background_start_img)
-    main_canvas.create_image(70, 40, image=button_back_img, tags='text')
+    main_canvas.create_image(70, 40, image=button_back_img, tags='back_in_start')
     button_level1 = main_canvas.create_image(
         200, 300, image=button_level1_img, tags='button_level1')
     button_level2 = main_canvas.create_image(
@@ -55,7 +55,7 @@ def setting(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 300, image=background_start_img)
     main_canvas.create_image(500, 300, image=background_setting_img)
-    main_canvas.create_image(70, 40, image=button_back_img, tags='text')
+    main_canvas.create_image(70, 40, image=button_back_img, tags='back_in_start')
 
     sound_on = main_canvas.create_image(
         600, 155, image=button_on_img, tags='button_on')
@@ -67,27 +67,31 @@ def setting(event):
         700, 250, image=button_off_img, tags='button_off')
 
 
-def back(event):
+def back_to_home(event):
     home()
 
+def back_to_start(event):
+    start(event)
 
 def level1(event):
     main_canvas.delete('all')
-    main_canvas.create_image(500, 120, image=background_level1_img)
-    main_canvas.create_image(70, 560, image=button_back_img, tags='text')
+    main_canvas.create_image(500, 120, image=background_level1)
     deploy_sprite(10, [150, 150])
-
+    main_canvas.create_image(70, 560, image=button_back_img, tags='back_in_game')
 
 def level2(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 120, image=background_level2_img)
-    main_canvas.create_image(70, 560, image=button_back_img, tags='text')
+    main_canvas.create_image(70, 560, image=button_back_img, tags='back_in_game')
 
 
 def level3(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 300, image=background_level3_img)
-    main_canvas.create_image(70, 560, image=button_back_img, tags='text')
+    main_canvas.create_image(70, 560, image=button_back_img, tags='back_in_game')
+
+
+
 
 
 ########################################################################
@@ -97,7 +101,7 @@ def deploy_character(poxX: float, posY: float, player_size: int, image=None):
     player_box = main_canvas.create_oval(
         poxX, posY, poxX + player_size, posY + player_size)
     mid_point = main_canvas.coords(player_box)
-    player = Player(main_canvas, player_box, character_img)
+    player = Player(main_canvas, player_box, player_crosshair)
     player.crosshair(player_crosshair)
 
 
@@ -117,9 +121,10 @@ main_canvas.pack(expand=True, fill=BOTH)
 
 
 ###### PhotoImage ######
+background_level1 = PhotoImage(
+    file="Game_projects_group10\\assets\image\LEVEL1.png")
 player_crosshair = PhotoImage(file=CROSSHAIR)
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
-character_img = PhotoImage(file=CHARACTER_IMG_LOCATION)
 # >>>>> BACKGROUND
 background_home_img = PhotoImage(file=HOME_BACKGROUND_IMAGE_LOCATION)
 background_black_img = PhotoImage(file=BLACK_IMG_LOCATION)
@@ -154,7 +159,8 @@ home()
 main_canvas.tag_bind("button_start", "<Button-1>", start)
 main_canvas.tag_bind("button_setting", "<Button-1>", setting)
 main_canvas.tag_bind("button_exit", "<Button-1>", quit)
-main_canvas.tag_bind("text", "<Button-1>", back)
+main_canvas.tag_bind("back_in_start", "<Button-1>", back_to_home)
+main_canvas.tag_bind("back_in_game", "<Button-1>", back_to_start)
 main_canvas.tag_bind("button_level1", "<Button-1>", level1)
 main_canvas.tag_bind("button_level2", "<Button-1>", level2)
 main_canvas.tag_bind("button_level3", "<Button-1>", level3)
