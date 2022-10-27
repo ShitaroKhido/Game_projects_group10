@@ -8,9 +8,12 @@ import winsound
 #################
 ########################################################################
 
+def aiming(event):
+    main_canvas.moveto(crosshair, event.x-AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT)
 
 def movement(x=0, y=0):
     main_canvas.move(player, x, y)
+    main_canvas.move(player_box, x, y)
 
 
 def move_left(event):
@@ -30,6 +33,7 @@ def move_down(event):
 
 
 def key_bind():
+    root.bind("<Motion>", aiming)
     root.bind("<w>", move_up)
     root.bind("<a>", move_left)
     root.bind("<s>", move_down)
@@ -37,12 +41,15 @@ def key_bind():
 
 
 def deploy_sprite(enemy_count: int):
-    global player
-    player = main_canvas.create_image(150, 150, image=player_img)
+    global player, player_box, crosshair
+    player = main_canvas.create_image(120, 120, image=player_img)
+    player_box = main_canvas.create_oval(100,100,140,140)
     enemy = Enemy(root, main_canvas, enemy_img)
     enemy.move_enemy()
     enemy.number_of_enemy(enemy_count)
     key_bind()
+    crosshair = main_canvas.create_image(0, 0, image=player_crosshair)
+    
 
 
 def home():
@@ -100,41 +107,23 @@ def back_to_start(event):
 def level1(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 120, image=background_level1)
-<<<<<<< HEAD
     deploy_sprite(10)
-    main_canvas.create_image(
-        70, 560, image=button_back_img, tags='back_in_game')
-
-=======
-    deploy_sprite(10, [150, 150])
     Inlevel()
->>>>>>> b834fbfde9f08b64688c9b3352e6be9d3c6a0921
 
 def level2(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 120, image=background_level2_img)
-<<<<<<< HEAD
-    main_canvas.create_image(
-        70, 560, image=button_back_img, tags='back_in_game')
-
-=======
     Inlevel()
->>>>>>> b834fbfde9f08b64688c9b3352e6be9d3c6a0921
 
 def level3(event):
     main_canvas.delete('all')
     main_canvas.create_image(500, 300, image=background_level3_img)
-<<<<<<< HEAD
-    main_canvas.create_image(
-        70, 560, image=button_back_img, tags='back_in_game')
-=======
     Inlevel()
 
 def Inlevel():
     winsound.PlaySound(MUSIC_IN_GAME, winsound.SND_FILENAME |
                        winsound.SND_ASYNC)
     main_canvas.create_image(70, 560, image=button_back_img, tags='back_in_game')
->>>>>>> b834fbfde9f08b64688c9b3352e6be9d3c6a0921
 
 
 ########################################################################
@@ -196,8 +185,10 @@ home()
 
 ###### KEY BINDING ######
 # >>> PLAYER
+# >>>>> CROSSHAIR
 
 # >>> SHAPE BIND
+
 main_canvas.tag_bind("button_start", "<Button-1>", start)
 main_canvas.tag_bind("button_setting", "<Button-1>", setting)
 main_canvas.tag_bind("button_exit", "<Button-1>", quit)

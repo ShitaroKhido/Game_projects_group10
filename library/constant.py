@@ -7,7 +7,7 @@ CHARACTER_IMG_LOCATION = "Game_projects_group10\\assets\image\character.png"
 VIRUS_IMG_LOCATION = "Game_projects_group10\\assets\image\\b2.png"
 CROSSHAIR = "Game_projects_group10\\assets\image\crosshairs.png"
 ENEMY_IMG_LOCATION = "Game_projects_group10\\assets\image\\virus2.png"
-
+AIM_ADJUSTMENT = 40
 
 
 BLACK_IMG_LOCATION="Game_projects_group10\\assets\image\Black_background.png"

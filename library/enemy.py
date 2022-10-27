@@ -2,7 +2,7 @@
 ##### COPYRIGHTS AND RESERVED BY KHID #####
 ###########################################
 from random import randint
-from tkinter import Canvas
+
 
 class Enemy:
 
