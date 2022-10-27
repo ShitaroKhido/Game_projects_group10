@@ -150,9 +150,9 @@ level3_frame = Frame(root)
 
 #>>>>>> CANVAS <<<<<<#
 home_canvas = Canvas(home_frame)
+start_frame = Canvas(start_frame)
+setting_frame = Canvas(setting_frame)
 
-
-home_canvas.create_rectangle(100,100,150,150, fill="black")
 
 
 
