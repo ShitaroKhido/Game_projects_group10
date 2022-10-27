@@ -1,6 +1,8 @@
 ###########################################
 ##### COPYRIGHTS AND RESERVED BY KHID #####
 ###########################################
+from doctest import master
+from random import randint
 from tkinter import Canvas
 
 class Character:
@@ -45,4 +47,21 @@ class Movements(Character):
 
     def move_down(self, event):
         self.move_character( y = self.MOVES_VOLOCITY)
+
+
+class Enemy:
+    
+    VOLOCITY = []
+
+    def __init__(self,master_window, main_canvas, enemy_img):
+        self._master = master_window
+        self._canvas = main_canvas
+        self._enemy_img = enemy_img
+
+    def number_of_enemy(number:int):
+        return number
+    
+    def get_volocity(self):        
+        self.VOLOCITY = [randint(0, self.number_of_enemy) for i in range(self.number_of_enemy)]
+
     

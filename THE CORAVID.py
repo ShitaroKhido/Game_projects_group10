@@ -14,7 +14,7 @@ GAME_ICON_LOCATION = ""
 CHARACTER_IMG_LOCATION = "Game_projects_group10\\assets\image\\virus2.png"
 VIRUS_IMG_LOCATION = "Game_projects_group10\\assets\image\\b2.png"
 CROSSHAIR = "Game_projects_group10\\assets\image\crosshairs.png"
-
+ENEMY_IMG_LOCATION = ""
 #################
 ### MAIN CODE ###
 #################
@@ -35,6 +35,12 @@ player_crosshair = PhotoImage(file=CROSSHAIR)
 ###### PLAYER FUNTION ######
 main_player = Movements(root, main_canvas, player_canvas)
 main_player.crosshair(player_crosshair)
+
+
+enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
+
+
+
 
 root.bind("<Motion>", main_player.aim)
 
