@@ -6,10 +6,7 @@ import winsound
 #################
 ### FOUCTION ####
 #################
-########################################################################
 
-def aiming(event):
-    main_canvas.moveto(crosshair, event.x-AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT)
 
 def movement(x=0, y=0):
     main_canvas.move(player, x, y)
@@ -39,17 +36,35 @@ def key_bind():
     root.bind("<s>", move_down)
     root.bind("<d>", move_right)
 
+def aiming(event):
+    main_canvas.moveto(crosshair, event.x-AIM_ADJUSTMENT,
+                       event.y-AIM_ADJUSTMENT)
+
+
+# def projectile(event):
+#     A = main_canvas.coords(player_box)[0] - main_canvas.coords(player_box)[2] / 2
+#     B = main_canvas.coords(player_box)[1] - main_canvas.coords(player_box)[3] / 2
+
+#     player_x = event.x - A
+#     player_y = event.y - B
+
+#     x_volocity = ((player_x + 2) - (player_x - 2)) / 12
+#     y_volocity = ((player_y + 2) - (player_y - 2)) / 12
+
+    
+#     return [x_volocity, y_volocity]    
+
 
 def deploy_sprite(enemy_count: int):
-    global player, player_box, crosshair
+    global player, player_box, crosshair, bullet
     player = main_canvas.create_image(120, 120, image=player_img)
-    player_box = main_canvas.create_oval(100,100,140,140)
+    bullet = main_canvas.create_image( main_canvas.coords(player)[0], main_canvas.coords(player)[1], image=bullet_img)
+    player_box = main_canvas.create_oval(100, 100, 140, 140)
     enemy = Enemy(root, main_canvas, enemy_img)
-    enemy.move_enemy()
     enemy.number_of_enemy(enemy_count)
-    key_bind()
+    enemy.move_enemy()
     crosshair = main_canvas.create_image(0, 0, image=player_crosshair)
-    
+    key_bind()
 
 
 def home():
@@ -96,6 +111,32 @@ def setting(event):
         700, 250, image=button_off_img, tags='button_off')
 
 
+def level1(event):
+    main_canvas.delete('all')
+    main_canvas.create_image(500, 120, image=background_level1)
+    deploy_sprite(10)
+    Inlevel()
+
+
+def level2(event):
+    main_canvas.delete('all')
+    main_canvas.create_image(500, 120, image=background_level2_img)
+    Inlevel()
+
+
+def level3(event):
+    main_canvas.delete('all')
+    main_canvas.create_image(500, 300, image=background_level3_img)
+    Inlevel()
+
+
+def Inlevel():
+    winsound.PlaySound(MUSIC_IN_GAME, winsound.SND_FILENAME |
+                       winsound.SND_ASYNC)
+    main_canvas.create_image(
+        70, 560, image=button_back_img, tags='back_in_game')
+
+
 def back_to_home(event):
     home()
 
@@ -104,38 +145,9 @@ def back_to_start(event):
     start(event)
 
 
-def level1(event):
-    main_canvas.delete('all')
-    main_canvas.create_image(500, 120, image=background_level1)
-    deploy_sprite(10)
-    Inlevel()
-
-def level2(event):
-    main_canvas.delete('all')
-    main_canvas.create_image(500, 120, image=background_level2_img)
-    Inlevel()
-
-def level3(event):
-    main_canvas.delete('all')
-    main_canvas.create_image(500, 300, image=background_level3_img)
-    Inlevel()
-
-def Inlevel():
-    winsound.PlaySound(MUSIC_IN_GAME, winsound.SND_FILENAME |
-                       winsound.SND_ASYNC)
-    main_canvas.create_image(70, 560, image=button_back_img, tags='back_in_game')
-
-
-########################################################################
-
-def deploy_character(poxX: float, posY: float, player_size: int, image=None):
-    pass
-
 #################
 ### MAIN CODE ###
 #################
-
-
 ###### GUI WINDOWS INTERFACE ######
 root = Tk()
 root.title(GAME_TITLE)
@@ -154,6 +166,7 @@ background_level1 = PhotoImage(
 player_crosshair = PhotoImage(file=CROSSHAIR)
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 player_img = PhotoImage(file=CHARACTER_IMG_LOCATION)
+bullet_img = PhotoImage(file=BULLET_IMG_LOCATION)
 
 
 # >>>>> BACKGROUND
@@ -175,8 +188,9 @@ button_level3_img = PhotoImage(file=BUTTON_LEVEL3_IMG_LOCATION)
 button_on_img = PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
-home()
-
+# home()
+# player = main_canvas.create_image(120, 120, image=player_img)
+# deploy_sprite(10)
 ###### ENEMY ######
 
 # enemy = Enemy(root, main_canvas, enemy_img)
@@ -188,7 +202,6 @@ home()
 # >>>>> CROSSHAIR
 
 # >>> SHAPE BIND
-
 main_canvas.tag_bind("button_start", "<Button-1>", start)
 main_canvas.tag_bind("button_setting", "<Button-1>", setting)
 main_canvas.tag_bind("button_exit", "<Button-1>", quit)
