@@ -64,44 +64,31 @@ def number_bullet(number: int, bullet_size=10):
 
 #>>>>>> INTERFACE <<<<<<#
 def home():
-    global home_frame
-    home_frame = Frame(root)
     home_frame.pack(expand=True, fill=BOTH)
     
-    home_frame.config(background="grey")
 
 
 def start():
-    global start_frame
-    start_frame = Frame(root)
     start_frame.pack(expand=True, fill=BOTH)
-    
-    start_frame.config(background="red")
     
 
 
 def setting(event):
-    setting_frame = Frame(root)
     setting_frame.pack(expand=True, fill=BOTH)
-    
-    setting_frame.config(background="blue")
     
 
 
 def level1(event):
-    level1_frame = Frame(root)
     level1_frame.pack(expand=True, fill=BOTH)
 
 
 
 def level2(event):
-    level2_frame = Frame(root)
     level2_frame.pack(expand=True, fill=BOTH)
     
 
 
 def level3(event):
-    level3_frame = Frame(root)
     level3_frame.pack(expand=True, fill=BOTH)
     
 
@@ -148,6 +135,14 @@ root.title(GAME_TITLE)
 root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 root.resizable(0, 0)
 
+
+#>>>>>> Frame <<<<<<#
+start_frame = Frame(root)
+home_frame = Frame(root)
+setting_frame = Frame(root)
+level1_frame = Frame(root)
+level2_frame = Frame(root)
+level3_frame = Frame(root)
 
 
 
