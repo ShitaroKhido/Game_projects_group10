@@ -120,7 +120,7 @@ button_off_img=PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
 
 home()
-
+music=winsound.PlaySound("Game_projects_group10\\assets\Sound\sound_music.wav",winsound.SND_FILENAME | winsound.SND_ASYNC )
 
 ###### ENEMY ######
 
