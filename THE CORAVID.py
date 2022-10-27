@@ -117,18 +117,12 @@ player_crosshair = PhotoImage(file=CROSSHAIR)
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 
 
-###### BACKGROUND ######
-main_canvas.create_image(500,120,image=background_level1)
-
-
-###### PLAYER CANVAS ######
-player_canvas = main_canvas.create_oval(110,110, 150,150)
-
 
 ###### ENEMY ######
-enemy = Enemy(root, main_canvas, enemy_img)
-enemy.number_of_enemy(10)
-enemy.move_enemy()
+
+# enemy = Enemy(root, main_canvas, enemy_img)
+# enemy.number_of_enemy(10)
+# enemy.move_enemy()
 
 ###### KEY BINDING ######
 
