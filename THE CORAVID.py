@@ -21,27 +21,27 @@ ENEMY_IMG_LOCATION = "Game_projects_group10\\assets\image\\virus2.png"
 
 
 
-BLACK_IMG_LOCATION="black_background.png"
-BUTTON_START_IMG_LOCATION='button_start.png'
-BUTTON_SETTING_IMG_LOCATION='button_setting.png'
-BUTTON_EXIT_IMG_LOCATION='button_exit.png'
-BUTTON_BACK_IMG_LOCATION='button_back.png'
+BLACK_IMG_LOCATION="Game_projects_group10\\assets\image\Black_background.png"
+BUTTON_START_IMG_LOCATION='Game_projects_group10\\assets\image\\button_start.png'
+BUTTON_SETTING_IMG_LOCATION='Game_projects_group10\\assets\image\\button_setting.png'
+BUTTON_EXIT_IMG_LOCATION='Game_projects_group10\\assets\image\\button_exit.png'
+BUTTON_BACK_IMG_LOCATION='Game_projects_group10\\assets\image\\button_back.png'
 
 
-BUTTON_LEVEL1_IMG_LOCATION='1.png'
-BUTTON_LEVEL2_IMG_LOCATION='2.png'
-BUTTON_LEVEL3_IMG_LOCATION='3.png'
+BUTTON_LEVEL1_IMG_LOCATION='Game_projects_group10\\assets\image\\1.png'
+BUTTON_LEVEL2_IMG_LOCATION='Game_projects_group10\\assets\image\\2.png'
+BUTTON_LEVEL3_IMG_LOCATION='Game_projects_group10\\assets\image\\3.png'
 
 
-BUTTON_ON_IMG_LOCATION='no.png'
-BUTTON_OFF_IMG_LOCATION='off.png'
+BUTTON_ON_IMG_LOCATION='Game_projects_group10\\assets\image\\no.png'
+BUTTON_OFF_IMG_LOCATION='Game_projects_group10\\assets\image\off.png'
 
-HOME_BACKGROUND_IMAGE_LOCATION=""
-BACKGROUND_LEVEL1_LOCATION="level1.png"
-BACKGROUND_LEVEL2_LOCATION="level2.png"
-BACKGROUND_LEVEL3_LOCATION="level3.png"
-BACKGROUND_START_LOCATION='wall.png'
-SETTING_IMAGE_LOCATION='setting.png'
+HOME_BACKGROUND_IMAGE_LOCATION="Game_projects_group10\\assets\image\\background.png"
+BACKGROUND_LEVEL1_LOCATION="Game_projects_group10\\assets\image\LEVEL1.png"
+BACKGROUND_LEVEL2_LOCATION="Game_projects_group10\\assets\image\LEVEL2.png"
+BACKGROUND_LEVEL3_LOCATION="Game_projects_group10\\assets\image\LEVEL3.png"
+BACKGROUND_START_LOCATION='Game_projects_group10\\assets\image\wall.png'
+SETTING_IMAGE_LOCATION='Game_projects_group10\\assets\image\setting.png'
 
 
 
@@ -50,7 +50,7 @@ SETTING_IMAGE_LOCATION='setting.png'
 #################
 
 def home():
-    main_canvas.create_image(500,300,image=mario)
+    main_canvas.create_image(500,300,image=background_home)
     main_canvas.create_image(890,500,image=black1)
     button_start=main_canvas.create_image(890,430,image=start1,tags='button_start')
     button_setting=main_canvas.create_image(890,495,image=setting1,tags='button_setting')
@@ -68,7 +68,7 @@ def start(event):
 def setting(event):
     main_canvas.delete('all')
     main_canvas.create_image(500,300,image=background_start)
-    main_canvas.create_image(500,300,image=pic)
+    main_canvas.create_image(500,300,image=setting_image)
     main_canvas.create_image(70,40,image=back1,tags='text')
     
     sound_on = main_canvas.create_image(600,155,image=button_on,tags='button_on')
@@ -127,6 +127,27 @@ enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 ###### BACKGROUND ######
 main_canvas.create_image(500,120,image=background_level1)
 
+black1=PhotoImage(file=BLACK_IMG_LOCATION)
+start1=PhotoImage(file=BUTTON_START_IMG_LOCATION)
+setting1=PhotoImage(file=BUTTON_SETTING_IMG_LOCATION)
+exit1=PhotoImage(file=BUTTON_EXIT_IMG_LOCATION)
+back1=PhotoImage(file=BUTTON_BACK_IMG_LOCATION)
+
+one=PhotoImage(file=BUTTON_LEVEL1_IMG_LOCATION)
+two=PhotoImage(file=BUTTON_LEVEL2_IMG_LOCATION)
+three=PhotoImage(file=BUTTON_LEVEL3_IMG_LOCATION)
+
+
+button_on=PhotoImage(file=BUTTON_ON_IMG_LOCATION)
+button_off=PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
+
+background_home=PhotoImage(file=HOME_BACKGROUND_IMAGE_LOCATION)
+background_level1=PhotoImage(file=BACKGROUND_LEVEL1_LOCATION)
+background_level2=PhotoImage(file=BACKGROUND_LEVEL2_LOCATION)
+background_level3=PhotoImage(file=BACKGROUND_LEVEL3_LOCATION)
+background_start=PhotoImage(file=BACKGROUND_START_LOCATION)
+setting_image=PhotoImage(file=SETTING_IMAGE_LOCATION)
+
 
 ###### PLAYER CANVAS ######
 player_canvas = main_canvas.create_oval(110,110, 150,150)
@@ -138,5 +159,15 @@ enemy.number_of_enemy(10)
 enemy.move_enemy()
 
 ###### KEY BINDING ######
+main_canvas.tag_bind("button_start","<Button-1>", start)
+main_canvas.tag_bind("button_setting","<Button-1>", setting)
+main_canvas.tag_bind("button_exit","<Button-1>", quit)
+main_canvas.tag_bind("text","<Button-1>", back)
+main_canvas.tag_bind("button_level1","<Button-1>", level1)
+main_canvas.tag_bind("button_level2","<Button-1>", level2)
+main_canvas.tag_bind("button_level3","<Button-1>", level3)
+
+
+
 
 root.mainloop()
