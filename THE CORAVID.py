@@ -60,9 +60,9 @@ def start(event):
     main_canvas.delete('all')
     main_canvas.create_image(500,300,image=background_start)
     main_canvas.create_image(70,40,image=back1,tags='text')
-    button_level1=main_canvas.create_image(300,300,image=one,tags='button_level1')
-    button_level2=main_canvas.create_image(550,300,image=two,tags='button_level2')
-    button_level3=main_canvas.create_image(800,300,image=three,tags='button_level3')
+    button_level1 = main_canvas.create_image(300,300,image=one,tags='button_level1')
+    button_level2 = main_canvas.create_image(550,300,image=two,tags='button_level2')
+    button_level3 = main_canvas.create_image(800,300,image=three,tags='button_level3')
 
 def setting(event):
     main_canvas.delete('all')
@@ -70,15 +70,11 @@ def setting(event):
     main_canvas.create_image(500,300,image=pic)
     main_canvas.create_image(70,40,image=back1,tags='text')
     
-    sound_on=main_canvas.create_image(600,155,image=button_on,tags='button_on')
-    sound_off=main_canvas.create_image(700,155,image=button_off,tags='button_off')
-    music_on=main_canvas.create_image(600,250,image=button_on,tags='button_on')
-    music_off=main_canvas.create_image(700,250,image=button_off,tags='button_off')
-
-
-def quit(event):
-    root.destroy()
-
+    sound_on = main_canvas.create_image(600,155,image=button_on,tags='button_on')
+    sound_off = main_canvas.create_image(700,155,image=button_off,tags='button_off')
+    music_on = main_canvas.create_image(600,250,image=button_on,tags='button_on')
+    music_off = main_canvas.create_image(700,250,image=button_off,tags='button_off')
+    
 def back(event):
     home()
 
@@ -159,20 +155,10 @@ bullet = PhotoImage(file=BULLET_IMG_LOCATION)
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 enemy = Enemy(root, main_canvas, enemy_img)
 enemy.number_of_enemy(10)
-# enemy.enem_dictionary()
 enemy.move_enemy()
-root.bind("<Motion>", main_player.aim)
-main_player.crosshair(player_crosshair)
-main_player.gun_bullet(bullet)
-main_player.add_bullet(10)
+
 
 ###### PLAYER KEY BIND ######
-
-root.bind("<Button-1>", main_player.shoot)
-root.bind("<w>", main_player.move_up)
-root.bind("<a>", main_player.move_left)
-root.bind("<s>", main_player.move_down)
-root.bind("<d>", main_player.move_right)
 
 
 root.mainloop()
