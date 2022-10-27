@@ -22,7 +22,7 @@ class Player:
         self._canvas = canvas
         self._player = player_canvas
         self._skin = self._canvas.create_image(self._canvas.coords(
-            self._player)[0]+10, self._canvas.coords(self._player)[1]+10, image=player_skin)
+            self._player)[0]+20, self._canvas.coords(self._player)[1]+20, image=player_skin)
         self._aim_adjustment = 40
 
     def _player_movements(self, x=0, y=0):
@@ -54,6 +54,7 @@ class Player:
 
 
 class Enemy:
+
     """Enemy
 
     Enemy class containt:
@@ -61,6 +62,7 @@ class Enemy:
     move_enemy(self)
     enem_dictionary(self)
     """
+
     VOLOCITY = {}
     DICT_OF_ENEMY = {}
 
