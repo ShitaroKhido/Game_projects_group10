@@ -65,7 +65,10 @@ def number_bullet(number: int, bullet_size=10):
 #>>>>>> INTERFACE <<<<<<#
 def home():
     home_frame.pack(expand=True, fill=BOTH)
+<<<<<<< HEAD
 
+=======
+>>>>>>> c6565f8a6e7b4d37632f71342f6de8665f055139
 
 
 def start():
@@ -137,8 +140,8 @@ root.resizable(0, 0)
 
 
 #>>>>>> Frame <<<<<<#
-start_frame = Frame(root)
 home_frame = Frame(root)
+start_frame = Frame(root)
 setting_frame = Frame(root)
 level1_frame = Frame(root)
 level2_frame = Frame(root)
@@ -146,7 +149,10 @@ level3_frame = Frame(root)
 
 
 #>>>>>> CANVAS <<<<<<#
+home_canvas = Canvas(home_frame)
 
+
+home_canvas.create_rectangle(100,100,150,150, fill="black")
 
 
 
@@ -182,6 +188,5 @@ button_on_img = PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
 home()
-start()
 #>>>>>> HOME <<<<<<#
 root.mainloop()
