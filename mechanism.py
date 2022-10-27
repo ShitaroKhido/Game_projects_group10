@@ -27,7 +27,7 @@ class Character:
 
 class Movements(Character):
     
-    MOVES_VOLOCITY = 40
+    MOVES_VOLOCITY = 60
     PLATFORM_SIZE = [1000, 600]
 
     def __init__(self, master_window, main_canvas, player_canvas):
