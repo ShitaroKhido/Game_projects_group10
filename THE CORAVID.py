@@ -1,5 +1,5 @@
 from tkinter import Button, Frame, PhotoImage, Tk, Canvas, mainloop, BOTH
-from Mechanism import *
+from mechanism import *
 
  
 ################
