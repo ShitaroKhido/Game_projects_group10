@@ -19,28 +19,42 @@ class Character:
         self._coord = self._canvas.coords(self._player)
         self._crosshair = None
         self._bullet_img = None
+        self._bullet = None
+        self._destination = None
+        # self.bullet = self._canvas.create_line(self._canvas.coords(self._player)[0]+20, self._canvas.coords(self._player)[1]+20, event.x, event.y)
+        self.bullet = self._canvas.create_image(self._canvas.coords(self._player)[0]+20, self._canvas.coords(self._player)[1]+20, image=self._bullet_img)
 
     def get_coord(self):
         return self._coord
+    
+    def get_bullet_img(self, img):
+        self._bullet_img = img
 
     def aim(self, event):
         self._canvas.moveto(self._crosshair, event.x-40, event.y-40)
 
     def crosshair(self, crosshair_image):
         self._crosshair = self._canvas.create_image(self._coord[0], self._coord[0], image=crosshair_image)
+   
+    def shoot(self, event):
+            A = self._canvas.coords(self._player)[0] + self._canvas.coords(self._player)[2] / 2
+            B = self._canvas.coords(self._player)[1] + self._canvas.coords(self._player)[3] / 2
 
-    # def projectile(self, event):
-    #     A = self._coord[0] + self._coord[2] / 2
-    #     B = self._coord[1] + self._coord[3] / 2
+            x_player = event.x - A
+            y_player = event.x - B
 
-    #     x_player = event.x - A
-    #     y_player = event.y - B
+            des_x = x_player
+            des_y = y_player
 
-    #     des_x = (x_player + 2) - (x_player - 2) / 12
-    #     des_y = (y_player + 2) - (y_player - 2) / 12
+            
+            print(des_x, des_y)
+
+            self.move_bullet(des_x, des_y)
+            # self._canvas.after(40, lambda : self._canvas.delete(self.bullet))
     
-    #     return [des_x, des_y]
-
+    def move_bullet(x:float, y:float):
+        self._canvas.move(self.bullet, x, y)
+        self._canvas.after(40, self.move_bullet)
 
 
 class Movements(Character):
@@ -66,7 +80,7 @@ class Movements(Character):
     def move_down(self, event):
         self.move_character( y = self.MOVES_VOLOCITY)
 
-
+    
 
 class Enemy:
     

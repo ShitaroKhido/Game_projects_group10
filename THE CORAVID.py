@@ -23,7 +23,6 @@ ENEMY_IMG_LOCATION = "Game_projects_group10\\assets\image\\virus2.png"
 ### MAIN CODE ###
 #################
 
-
 ###### GUI WINDOWS INTERFACE ######
 root = Tk()
 root.title(GAME_TITLE)
@@ -40,22 +39,22 @@ main_canvas.create_image(500,120,image=background_level1)
 ###### PLAYER CANVAS ######
 player_canvas = main_canvas.create_oval(110,110, 150,150)
 player_crosshair = PhotoImage(file=CROSSHAIR)
-###### PLAYER FUNTION ######
-main_player = Movements(root, main_canvas, player_canvas)
 bullet = PhotoImage(file=BULLET_IMG_LOCATION)
 
-###### ENEMY
+###### PLAYER FUNTION ######
+main_player = Movements(root, main_canvas, player_canvas)
+main_player.get_bullet_img(bullet)
+
+###### ENEMY ######
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 enemy = Enemy(root, main_canvas, enemy_img)
 enemy.number_of_enemy(10)
-# enemy.enem_dictionary()
 enemy.move_enemy()
-root.bind("<Motion>", main_player.aim)
+
+
 main_player.crosshair(player_crosshair)
-main_player.add_bullet_img(bullet)
-
 ###### PLAYER KEY BIND ######
-
+root.bind("<Motion>", main_player.aim)
 root.bind("<Button-1>", main_player.shoot)
 root.bind("<w>", main_player.move_up)
 root.bind("<a>", main_player.move_left)
