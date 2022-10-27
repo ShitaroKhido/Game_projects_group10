@@ -13,133 +13,7 @@ bullet_count = []
 
 #>>>>>> CHARACTER MOVEMENTS <<<<<<#
 
-# def shoot(event):
-#     a = (canvas.coords(player_box)[2]+canvas.coords(player_box)[0])/2
-#     b = (canvas.coords(player_box)[3]+canvas.coords(player_box)[1])/2
-
-#     x = event.x - a
-#     y = event.y - b
-
-#     canvas.move(bullet,(x+2)-(x-2)/2, (y+2)-(y-2)/2 )
-#     aft = canvas.after(100, lambda:shoot(event))
-
-
-def deploy_sprite(frame, canvas, number_of_enemy: int):
-    global player, player_box
-    player_box = canvas.create_oval(player_position, fill="black")
-    player = canvas.create_image(
-        player_position[0], player_position[2], image=player_img)
-    enemy = Enemy(frame, canvas, enemy_img)
-    enemy.number_of_enemy(number_of_enemy)
-    enemy.move_enemy()
-
-    key_bind(frame)
-
-
-def number_bullet(number: int, bullet_size=10):
-    pass
-
-
-#>>>>>> INTERFACE <<<<<<#
-def home():
-    home_frame.pack(expand=True, fill=BOTH)
-    home_canvas.pack(expand=True, fill=BOTH)
-    home_canvas.create_image(500, 300, image=background_home_img)
-    home_canvas.create_image(890, 500, image=background_black_img)
-    button_start = home_canvas.create_image(
-        890, 430, image=button_start_img, tags='button_start')
-    button_setting = home_canvas.create_image(
-        890, 495, image=button_setting_img, tags='button_setting')
-    button_exit = home_canvas.create_image(
-        890, 560, image=button_exit_img, tags='button_exit')
-
-
-def start(event):
-    start_frame.pack(expand=True, fill=BOTH)
-    start_canvas.pack(expand=True, fill=BOTH)
-
-    start_frame.create_image(500, 300, image=background_start_img)
-    start_frame.create_image(
-        70, 40, image=button_back_img, tags='back_in_start')
-    button_level1 = start_frame.create_image(
-        200, 300, image=button_level1_img, tags='button_level1')
-    button_level2 = start_frame.create_image(
-        500, 300, image=button_level2_img, tags='button_level2')
-    button_level3 = start_frame.create_image(
-        800, 300, image=button_level3_img, tags='button_level3')
-
-
-def setting(event):
-    setting_frame.pack(expand=True, fill=BOTH)
-    setting_canvas.pack(expand=True, fill=BOTH)
-
-    setting_canvas.create_image(500, 300, image=background_start_img)
-    setting_canvas.create_image(500, 300, image=background_setting_img)
-    setting_canvas.create_image(
-        70, 40, image=button_back_img, tags='back_in_start')
-
-    sound_on = setting_canvas.create_image(
-        600, 155, image=button_on_img, tags='button_on')
-    sound_off = setting_canvas.create_image(
-        700, 155, image=button_off_img, tags='button_off')
-    music_on = setting_canvas.create_image(
-        600, 250, image=button_on_img, tags='button_on')
-    music_off = setting_canvas.create_image(
-        700, 250, image=button_off_img, tags='button_off')
-
-
-def level1():
-    global level1_top
-    level1_top = Toplevel(root)
-    level1_canvas.pack(expand=True, fill=BOTH)
-
-    level1_canvas.create_image(500, 120, image=background_level1_img)
-    level1_canvas.create_image(
-        70, 560, image=button_back_img, tags='back_in_game')
-    deploy_sprite(level1_top, level1_canvas, 20)
-
-
-def level2():
-    global level2_top
-    level2_top = Toplevel(root)
-    level2_canvas.pack(expand=True, fill=BOTH)
-    level2_canvas.create_image(500, 120, image=background_level2_img)
-    level2_canvas.create_image(
-        70, 560, image=button_back_img, tags='back_in_game')
-
-
-def level3():
-    global level3_top
-    level3_top = Toplevel(root)
-    level3_canvas.pack(expand=True, fill=BOTH)
-    level3_canvas.create_image(500, 300, image=background_level3_img)
-    level3_canvas.create_image(
-        70, 560, image=button_back_img, tags='back_in_game')
-    
-
 #>>>>>> SOUND <<<<<<#
-
-
-def Inlevel():
-    pass
-
-
-def back_to_home(event):
-    home()
-
-
-def back_to_start(event):
-    start(event)
-
-
-def key_bind(master):
-    # master.bind("<w>", move_up)
-    # master.bind("<a>", move_left)
-    # master.bind("<s>", move_down)
-    # master.bind("<d>", move_right)
-    # master.bind("<Motion>", crosshair)
-    pass
-
 
 #########################
 #>>>>>> MAIN CODE <<<<<<#
@@ -198,7 +72,7 @@ button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
 
 
-level1()
+home()
 
 
 
