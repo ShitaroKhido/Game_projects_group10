@@ -99,22 +99,6 @@ def level3(event):
     main_canvas.create_image(500,300,image=background_level3)
     main_canvas.create_image(70,560,image=back1,tags='text')
 
-    
-# def Deplaymusic(event):
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #################
