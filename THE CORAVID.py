@@ -115,7 +115,7 @@ def deploy_character(poxX:float, posY:float, player_size:int, image=None):
 
 
 
-    
+
 
 #################
 ### MAIN CODE ###
@@ -137,32 +137,26 @@ main_canvas.pack(expand=True, fill=BOTH)
 background_level1=PhotoImage(file="Game_projects_group10\\assets\image\LEVEL1.png")
 player_crosshair = PhotoImage(file=CROSSHAIR)
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
-
-background_home=PhotoImage(file=HOME_BACKGROUND_IMAGE_LOCATION)
-black_background=PhotoImage(file=BLACK_IMG_LOCATION)
-button_start=PhotoImage(file=BUTTON_START_IMG_LOCATION)
-button_setting=PhotoImage(file=BUTTON_SETTING_IMG_LOCATION)
-button_exit=PhotoImage(file=BUTTON_EXIT_IMG_LOCATION)
-button_back=PhotoImage(file=BUTTON_BACK_IMG_LOCATION)
-
-button_level1=PhotoImage(file=BUTTON_LEVEL1_IMG_LOCATION)
-button_level2=PhotoImage(file=BUTTON_LEVEL2_IMG_LOCATION)
-button_level3=PhotoImage(file=BUTTON_LEVEL3_IMG_LOCATION)
-
-
-button_on=PhotoImage(file=BUTTON_ON_IMG_LOCATION)
-button_off=PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
-
-background_level1=PhotoImage(file=BACKGROUND_LEVEL1_LOCATION)
-background_level2=PhotoImage(file=BACKGROUND_LEVEL2_LOCATION)
-background_level3=PhotoImage(file=BACKGROUND_LEVEL3_LOCATION)
-background_start=PhotoImage(file=BACKGROUND_START_LOCATION)
-setting_image=PhotoImage(file=SETTING_IMAGE_LOCATION)
+#>>>>> BACKGROUND
+background_home_img=PhotoImage(file=HOME_BACKGROUND_IMAGE_LOCATION)
+background_black_img=PhotoImage(file=BLACK_IMG_LOCATION)
+background_level1_img=PhotoImage(file=BACKGROUND_LEVEL1_LOCATION)
+background_level2_img=PhotoImage(file=BACKGROUND_LEVEL2_LOCATION)
+background_level3_img=PhotoImage(file=BACKGROUND_LEVEL3_LOCATION)
+background_start_img=PhotoImage(file=BACKGROUND_START_LOCATION)
+background_setting_img=PhotoImage(file=SETTING_IMAGE_LOCATION)
+#>>>>> BUTTON
+button_start_img =PhotoImage(file=BUTTON_START_IMG_LOCATION)
+button_setting_img=PhotoImage(file=BUTTON_SETTING_IMG_LOCATION)
+button_exit_img=PhotoImage(file=BUTTON_EXIT_IMG_LOCATION)
+button_back_img=PhotoImage(file=BUTTON_BACK_IMG_LOCATION)
+button_level1_img=PhotoImage(file=BUTTON_LEVEL1_IMG_LOCATION)
+button_level2_img=PhotoImage(file=BUTTON_LEVEL2_IMG_LOCATION)
+button_level3_img=PhotoImage(file=BUTTON_LEVEL3_IMG_LOCATION)
+button_on_img=PhotoImage(file=BUTTON_ON_IMG_LOCATION)
+button_off_img=PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
 
-
-
-home()
 ###### ENEMY ######
 
 # enemy = Enemy(root, main_canvas, enemy_img)
