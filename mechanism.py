@@ -7,6 +7,10 @@ from tkinter import Canvas
 ##### CHARACTER MODEL ######
 class Character:
     
+
+    AMMO_INVENTORY = []
+
+
     def __init__(self, master_window, main_canvas, player_canvas):
         self._master = master_window
         self._canvas = main_canvas
@@ -15,8 +19,6 @@ class Character:
         self._coord = self._canvas.coords(self._player)
         self._crosshair = None
         self._bullet_img = None
-        self._gun = Gun(self._canvas, self._coord, self._bullet_img )
-        self._bullet = self._gun.bullet()
 
     def get_coord(self):
         return self._coord
@@ -26,13 +28,6 @@ class Character:
 
     def crosshair(self, crosshair_image):
         self._crosshair = self._canvas.create_image(self._coord[0], self._coord[0], image=crosshair_image)
-
-    def gun_bullet(self, img):
-        self._bullet_img = img
-    
-    def add_bullet(self, count):
-        self._gun.get_bullet(count)
-        print(self._gun.AMMUNITION)
 
     def projectile(self, event):
         A = self._coord[0] + self._coord[2] / 2
@@ -46,11 +41,13 @@ class Character:
     
         return [des_x, des_y]
 
-    def shoot(self, event):
-        coord = self.projectile(event)
+    def add_bullet_img(self, img):
+        self._bullet_img = img
+    def create_bullet(self):
         
-        self._canvas.move(self.bullet[0], coord[0], coord[1])
-        self._canvas.after(40, self.shoot)
+
+    def shoot(self, event):
+        pass
 
 
 
@@ -123,24 +120,6 @@ class Enemy:
         print(self.DICT_OF_ENEMY)
         print(self.VOLOCITY)
 
-
-class Gun:
-    
-    AMMUNITION = []
-
-    def __init__(self, main_canvas, player_pos, bullet_img):
-        self._canvas = main_canvas
-        self._bullet = bullet_img
-        self._player_pos = player_pos
-
-    
-    def get_bullet(self, number:int):
-        for i in range(number):
-            self.AMMUNITION.append(self._canvas.create_image(self._player_pos[0], self._player_pos[1], image = self._bullet ))
-
-
-    def bullet(self):
-        return self.AMMUNITION
 
 
 
