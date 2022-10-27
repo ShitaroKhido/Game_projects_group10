@@ -69,15 +69,15 @@ class Player:
     def player_movements(self, x, y):
         self._canvas.move(self._player, x, y)
 
-    def move_right(self):
+    def move_right(event, self):
         self.player_movements(x = self.PLAYER_MOVE_SPEED)
 
-    def move_left(self):
+    def move_left(event, self):
         self.player_movements(x = -self.PLAYER_MOVE_SPEED)
 
-    def move_down(self):
+    def move_down(event, self):
         self.player_movements(y = self.PLAYER_MOVE_SPEED)
 
-    def move_up(self):
+    def move_up(event, self):
         self.player_movements(y = -self.PLAYER_MOVE_SPEED)
 

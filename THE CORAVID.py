@@ -93,7 +93,10 @@ def level3(event):
     main_canvas.create_image(500,300,image=background_level3)
     main_canvas.create_image(70,560,image=back1,tags='text')
 
-
+def deploy_character(poxX:float, posY:float, player_size:int, image:None):
+    global player
+    player_box = main_canvas.create_oval(poxX, posY, poxX + player_size, posY + player_size)
+    player = Player(main_canvas, player_box)
 
 #################
 ### MAIN CODE ###
@@ -116,7 +119,7 @@ background_level1=PhotoImage(file="Game_projects_group10\\assets\image\LEVEL1.pn
 player_crosshair = PhotoImage(file=CROSSHAIR)
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 
-
+deploy_character(100,100, 20, None)
 
 ###### ENEMY ######
 
@@ -125,5 +128,10 @@ enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 # enemy.move_enemy()
 
 ###### KEY BINDING ######
+#>>> PLAYER
+root.bind("<w>", player.move_up)
+root.bind("<a>", player.move_left)
+root.bind("<s>", player.move_down)
+root.bind("<d>", player.move_right)
 
 root.mainloop()
