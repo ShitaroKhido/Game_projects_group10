@@ -99,7 +99,7 @@ def level1():
     deploy_sprite(level1_top, level1_canvas, 20)
 
 
-def level2(event):
+def level2():
     global level2_top
     level2_top = Toplevel(root)
     level2_canvas.pack(expand=True, fill=BOTH)
@@ -108,7 +108,7 @@ def level2(event):
         70, 560, image=button_back_img, tags='back_in_game')
 
 
-def level3(event):
+def level3():
     global level3_top
     level3_top = Toplevel(root)
     level3_canvas.pack(expand=True, fill=BOTH)
