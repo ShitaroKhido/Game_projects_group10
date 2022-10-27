@@ -1,6 +1,6 @@
 from library.constant import *
 from library.enemy import *
-from tkinter import Frame, Tk, Canvas, PhotoImage, mainloop, BOTH
+from tkinter import Button, Frame, Tk, Canvas, PhotoImage, mainloop, BOTH
 from winsound import *
 
 
@@ -65,23 +65,21 @@ def number_bullet(number: int, bullet_size=10):
 #>>>>>> INTERFACE <<<<<<#
 def home():
     home_frame.pack(expand=True, fill=BOTH)
-<<<<<<< HEAD
-    home_frame.create_image(500, 300, image=background_home_img)
-    home_frame.create_image(890, 500, image=background_black_img)
-    button_start = home_frame.create_image(
+    home_canvas.pack(expand=True, fill=BOTH)
+    home_canvas.create_image(500, 300, image=background_home_img)
+    home_canvas.create_image(890, 500, image=background_black_img)
+    button_start = home_canvas.create_image(
         890, 430, image=button_start_img, tags='button_start')
-    button_setting = home_frame.create_image(
+    button_setting = home_canvas.create_image(
         890, 495, image=button_setting_img, tags='button_setting')
-    button_exit = home_frame.create_image(
+    button_exit = home_canvas.create_image(
         890, 560, image=button_exit_img, tags='button_exit')
-=======
 
->>>>>>> e63fb4e70c88c5c2d7cb3e9e62eed9a89bfca770
 
-def start():
+def start(event):
     start_frame.pack(expand=True, fill=BOTH)
-    winsound.PlaySound(MUSIC_CHOICE, winsound.SND_FILENAME |
-                       winsound.SND_ASYNC)
+    start_canvas.pack(expand=True, fill=BOTH)
+
     start_frame.create_image(500, 300, image=background_start_img)
     start_frame.create_image(
         70, 40, image=button_back_img, tags='back_in_start')
@@ -95,24 +93,48 @@ def start():
 
 def setting(event):
     setting_frame.pack(expand=True, fill=BOTH)
-    
+    setting_canvas.pack(expand=True, fill=BOTH)
+
+    setting_canvas.create_image(500, 300, image=background_start_img)
+    setting_canvas.create_image(500, 300, image=background_setting_img)
+    setting_canvas.create_image(
+        70, 40, image=button_back_img, tags='back_in_start')
+
+    sound_on = setting_canvas.create_image(
+        600, 155, image=button_on_img, tags='button_on')
+    sound_off = setting_canvas.create_image(
+        700, 155, image=button_off_img, tags='button_off')
+    music_on = setting_canvas.create_image(
+        600, 250, image=button_on_img, tags='button_on')
+    music_off = setting_canvas.create_image(
+        700, 250, image=button_off_img, tags='button_off')
 
 
 def level1(event):
     level1_frame.pack(expand=True, fill=BOTH)
+    level1_canvas.pack(expand=True, fill=BOTH)
+
     level1_canvas.create_image(500, 120, image=background_level1_img)
-    
+    level1_canvas.create_image(
+        70, 560, image=button_back_img, tags='back_in_game')
 
 
 def level2(event):
     level2_frame.pack(expand=True, fill=BOTH)
+    level2_canvas.pack(expand=True, fill=BOTH)
+
     level2_canvas.create_image(500, 120, image=background_level2_img)
-    
+    level2_canvas.create_image(
+        70, 560, image=button_back_img, tags='back_in_game')
 
 
 def level3(event):
     level3_frame.pack(expand=True, fill=BOTH)
+    level3_canvas.pack(expand=True, fill=BOTH)
+
     level3_canvas.create_image(500, 300, image=background_level3_img)
+    level3_canvas.create_image(
+        70, 560, image=button_back_img, tags='back_in_game')
     
 
 #>>>>>> SOUND <<<<<<#
@@ -158,22 +180,13 @@ level1_frame = Frame(root)
 level2_frame = Frame(root)
 level3_frame = Frame(root)
 
-
 #>>>>>> CANVAS <<<<<<#
 home_canvas = Canvas(home_frame)
-<<<<<<< HEAD
-start_frame = Canvas(start_frame)
-setting_frame = Canvas(setting_frame)
-
-=======
+start_canvas = Canvas(start_frame)
+setting_canvas = Canvas(setting_frame)
 level1_canvas = Canvas(level1_frame)
 level2_canvas = Canvas(level2_frame)
 level3_canvas = Canvas(level3_frame)
->>>>>>> e63fb4e70c88c5c2d7cb3e9e62eed9a89bfca770
-
-
-
-
 
 #>>>>>> PLAYER PROPERTIES <<<<<<#
 player_crosshair_img = PhotoImage(file=CROSSHAIR)
@@ -204,6 +217,8 @@ button_level3_img = PhotoImage(file=BUTTON_LEVEL3_IMG_LOCATION)
 button_on_img = PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
+
 home()
+
 #>>>>>> HOME <<<<<<#
 root.mainloop()
