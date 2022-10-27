@@ -81,3 +81,5 @@ class Player:
     def move_up(event, self):
         self.player_movements(y = -self.PLAYER_MOVE_SPEED)
 
+
+
