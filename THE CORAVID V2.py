@@ -1,6 +1,6 @@
 from library.constant import *
 from library.enemy import *
-from tkinter import Frame, Tk, Canvas, PhotoImage, mainloop, BOTH
+from tkinter import Button, Frame, Tk, Canvas, PhotoImage, mainloop, BOTH
 from winsound import *
 
 
@@ -12,9 +12,9 @@ bullet_count = []
 #########################
 
 #>>>>>> CHARACTER MOVEMENTS <<<<<<#
-def movement(x=0, y=0):
-    # canvas.move(player, x, y)
-    # canvas.move(player_box, x, y)
+
+
+def movement(frame, canvac, x=0, y=0):
     pass
 
 
@@ -40,7 +40,7 @@ def crosshair(event):
 # def shoot(event):
 #     a = (canvas.coords(player_box)[2]+canvas.coords(player_box)[0])/2
 #     b = (canvas.coords(player_box)[3]+canvas.coords(player_box)[1])/2
-    
+
 #     x = event.x - a
 #     y = event.y - b
 
@@ -48,18 +48,18 @@ def crosshair(event):
 #     aft = canvas.after(100, lambda:shoot(event))
 
 
-
-def deploy_sprite(number_of_enemy: int):
-    pass
-
+def deploy_sprite(frame, canvas, number_of_enemy: int):
+    global player, player_box
+    player_box = canvas.create_oval(player_position, fill="black")
+    player = canvas.create_image(
+        player_position[0], player_position[2], image=player_img)
+    enemy = Enemy(frame, canvas, enemy_img)
+    enemy.number_of_enemy(number_of_enemy)
+    enemy.move_enemy()
 
 
 def number_bullet(number: int, bullet_size=10):
     pass
-        
-
-
-
 
 
 #>>>>>> INTERFACE <<<<<<#
@@ -69,30 +69,29 @@ def home():
 
 def start():
     start_frame.pack(expand=True, fill=BOTH)
-    
 
 
 def setting(event):
     setting_frame.pack(expand=True, fill=BOTH)
-    
 
 
-def level1(event):
+def level1():
+    global level1_canvas
     level1_frame.pack(expand=True, fill=BOTH)
+    level1_canvas.pack(expand=True, fill=BOTH)
     level1_canvas.create_image(500, 120, image=background_level1_img)
-    
+    deploy_sprite(level1_frame, level1_canvas, 10)
 
 
 def level2(event):
     level2_frame.pack(expand=True, fill=BOTH)
     level2_canvas.create_image(500, 120, image=background_level2_img)
-    
 
 
 def level3(event):
     level3_frame.pack(expand=True, fill=BOTH)
     level3_canvas.create_image(500, 300, image=background_level3_img)
-    
+
 
 #>>>>>> SOUND <<<<<<#
 
@@ -144,10 +143,7 @@ level1_canvas = Canvas(level1_frame)
 level2_canvas = Canvas(level2_frame)
 level3_canvas = Canvas(level3_frame)
 
-home_canvas.create_rectangle(100,100,150,150, fill="black")
-
-
-
+home_canvas.create_rectangle(100, 100, 150, 150, fill="black")
 
 
 #>>>>>> PLAYER PROPERTIES <<<<<<#
@@ -179,6 +175,7 @@ button_level3_img = PhotoImage(file=BUTTON_LEVEL3_IMG_LOCATION)
 button_on_img = PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
-home()
+
+level1()
 #>>>>>> HOME <<<<<<#
 root.mainloop()
