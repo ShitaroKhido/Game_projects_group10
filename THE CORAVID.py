@@ -138,6 +138,7 @@ root.bind("<w>", player.move_up)
 root.bind("<a>", player.move_left)
 root.bind("<s>", player.move_down)
 root.bind("<d>", player.move_right)
+#>>> SHAPE BIND
 main_canvas.tag_bind("button_start","<Button-1>", start)
 main_canvas.tag_bind("button_setting","<Button-1>", setting)
 main_canvas.tag_bind("button_exit","<Button-1>", quit)
