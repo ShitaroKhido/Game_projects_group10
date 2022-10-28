@@ -1,6 +1,6 @@
 
 from library.constant import *
-from library.enemy import *
+from library.sprite import *
 from tkinter import Button, Frame, Tk, Canvas, PhotoImage, Toplevel, mainloop, BOTH
 from winsound import *
 
@@ -10,6 +10,11 @@ bullet_count = []
 enemy_data_dictionary = {}
 player_health = 100
 health_pos = [60, 60]
+enemy_count = 20
+enemy_size = 20
+
+player_inventory = {}
+
 #########################
 #>>>>>> FUNCTIONS <<<<<<#
 #########################
@@ -38,8 +43,8 @@ def move_up(event):
 def build_enemy(enemy_dict_data):
     enemy_dict = {}
     for key in enemy_dict_data:
-        enemy_dict[key] = canvas.create_oval(
-            enemy_dict_data[key]["position"], fill="green"
+        enemy_dict[key] = canvas.create_image(
+            enemy_dict_data[key]["position"], image=enemy_dict_data[key]["img_location"]
         )
     return enemy_dict
 
@@ -64,7 +69,8 @@ def enemy_move(lists):
                 1*enemy_data_dictionary[key]["volocity"][1]
 
         pos = canvas.coords(lists[key])
-        over = canvas.find_overlapping(pos[0], pos[1], pos[2], pos[3])
+        over = canvas.find_overlapping(
+            pos[0]-enemy_size, pos[1]-enemy_size, pos[0]+enemy_size, pos[1]+enemy_size)
 
         if len(over) > 2:
             if over[2] == player:
@@ -73,8 +79,10 @@ def enemy_move(lists):
                     canvas.delete(health)
                 if player_health <= 0:
                     canvas.delete(player)
-                    canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2,
-                                       text="Death", font=("impact", 40))
+                    canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
+                                       text="Death", font=("impact", 200),
+                                       fill="white"
+                                       )
 
                 health = canvas.create_rectangle(
                     0, 0, player_health, 20, fill="red")
@@ -82,6 +90,19 @@ def enemy_move(lists):
         canvas.move(lists[key],
                     enemy_data_dictionary[key]["volocity"][0], enemy_data_dictionary[key]["volocity"][1])
     canvas.after(40, lambda: enemy_move(lists))
+
+
+def deploy_sprite(enemy_data: list):
+    global player, health
+    enemy = MakeEnemy(enemy_data, enemy_img)
+    enemy.create_enemy_data(enemy_count)
+    lists = build_enemy(enemy_data)
+    enemy_move(lists)
+    health = canvas.create_rectangle(0, 0, player_health, 20, fill="red")
+    player = canvas.create_oval(
+        WINDOW_WIDTH/2, WINDOW_HEIGHT/2, WINDOW_WIDTH/2+40, WINDOW_HEIGHT/2+40,
+        fill="red"
+    )
 
 
 def home():
@@ -116,20 +137,11 @@ def setting():
 
 
 def level_1():
-    global player, health
     start_frame.pack_forget()
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
                         2, image=background_level1_img)
-    enemy = MakeEnemy(enemy_data_dictionary, enemy_img)
-    enemy.create_enemy_data(20)
-    lists = build_enemy(enemy_data_dictionary)
-    enemy_move(lists)
-    health = canvas.create_rectangle(0, 0, player_health, 20, fill="red")
-    player = canvas.create_oval(
-        WINDOW_WIDTH/2, WINDOW_HEIGHT/2, WINDOW_WIDTH/2+40, WINDOW_HEIGHT/2+40,
-        fill="red"
-    )
+    deploy_sprite(enemy_data_dictionary)
     print(player)
 
 
