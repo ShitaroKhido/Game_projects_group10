@@ -16,7 +16,7 @@ enemy_size = 20
 player_inventory = {}
 
 items_data_dictionary = {}
-item_img_list = [1,2,3,4]
+item_img_list = []
 
 #########################
 #>>>>>> FUNCTIONS <<<<<<#
@@ -118,16 +118,17 @@ def build_item(item_list_data):
 
 #>>>>>> GAME SPRITE DEPLOYMENTS <<<<<<#
 
-def deploy_sprite(enemy_data: list):
+def deploy_sprite(enemy_data: list, enemy_count:int):
     global player, health, player_crosshair
     enemy = MakeEnemy(enemy_data, enemy_img)
     enemy.create_enemy_data(enemy_count)
     enemy_lists = build_enemy(enemy_data)
     enemy_move(enemy_lists)
 
-    items = Items(items_data_dictionary, item_img_list)
-    items.generate_item_dict(10)
-    print(items_data_dictionary)
+    # items = Items(items_data_dictionary, item_img_list)
+    # items.generate_item_dict(enemy_count)
+    # print(items_data_dictionary)
+    
 
     health = canvas.create_rectangle(0, 0, player_health, 20, fill="red")
     player = canvas.create_oval(
@@ -136,6 +137,7 @@ def deploy_sprite(enemy_data: list):
     )
     player_crosshair = canvas.create_image(0, 0, image=player_crosshair_img)
 
+    
 #>>>>>> GUI CALL FUNCTION <<<<<<#
 
 def home():
@@ -176,9 +178,26 @@ def level_1():
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
                         2, image=background_level1_img)
-    deploy_sprite(enemy_data_dictionary)
+    deploy_sprite(enemy_data_dictionary, 10)
     print(player)
 
+
+def level_2():
+    start_frame.pack_forget()
+    canvas.pack(expand=True, fill=BOTH)
+    canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
+                        2, image=background_level2_img)
+    deploy_sprite(enemy_data_dictionary, 20)
+    print(player)
+
+
+def level_3():
+    start_frame.pack_forget()
+    canvas.pack(expand=True, fill=BOTH)
+    canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
+                        2, image=background_level3_img)
+    deploy_sprite(enemy_data_dictionary, 30)
+    print(player)
 
 #########################
 #>>>>>> MAIN CODE <<<<<<#
@@ -254,8 +273,8 @@ exit_btn = Button(home_frame, image=button_exit_img, command=quit)
 
 back_btn = Button(start_frame, image=button_back_img, command=home)
 level1_btn = Button(start_frame, image=button_level1_img, command=level_1)
-level2_btn = Button(start_frame, image=button_level2_img)
-level3_btn = Button(start_frame, image=button_level3_img)
+level2_btn = Button(start_frame, image=button_level2_img, command=level_2)
+level3_btn = Button(start_frame, image=button_level3_img, command=level_3)
 
 
 ############################################
