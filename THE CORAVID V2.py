@@ -150,9 +150,8 @@ def deploy_sprite(enemy_data: list, enemy_count:int):
 
     health = canvas.create_rectangle(0, 0, player_health, 20, fill="red")
     player_crosshair = canvas.create_image(0, 0, image=player_crosshair_img)
-    player = canvas.create_oval(
-        WINDOW_WIDTH/2, WINDOW_HEIGHT/2, WINDOW_WIDTH/2+40, WINDOW_HEIGHT/2+40,
-        fill="red"
+    player = canvas.create_image(
+        WINDOW_WIDTH/2, WINDOW_HEIGHT/2, image=player_img
     )
 
 
