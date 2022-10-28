@@ -51,10 +51,6 @@ def crosshair(event):
     canvas.moveto(player_crosshair, event.x-AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT)
 
 
-def uv_laser(event):
-    return canvas.create_line(canvas.coords(player)[0], canvas.coords(player)[0], event.x, event.y)    
-
-
 def shoot(event):
     global enemy_id
     hit = False
@@ -145,7 +141,7 @@ def build_item(item_list_data):
 #>>>>>> GAME SPRITE DEPLOYMENTS <<<<<<#
 
 def deploy_sprite(enemy_data: list, enemy_count:int):
-    global player, health, player_crosshair, enemy_lists
+    global player, health, player_crosshair, enemy_lists, player_laser
     
     enemy = MakeEnemy(enemy_data, enemy_img)
     enemy.create_enemy_data(enemy_count)
@@ -157,6 +153,7 @@ def deploy_sprite(enemy_data: list, enemy_count:int):
     player = canvas.create_image(
         WINDOW_WIDTH/2, WINDOW_HEIGHT/2, image=player_img
     )
+    player_laser = canvas.create_line(canvas.coords(player)[0], canvas.coords(player)[0],canvas.coords(player)[0], canvas.coords(player)[0])
 
 
 #>>>>>> GUI CALL FUNCTION <<<<<<#
