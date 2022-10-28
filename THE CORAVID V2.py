@@ -1,4 +1,3 @@
-
 from library.constant import *
 from library.sprite import *
 from tkinter import Button, Frame, Tk, Canvas, PhotoImage, Toplevel, mainloop, BOTH
@@ -67,6 +66,7 @@ def shoot(event):
     if hit:
         enemy_lists.pop(enemy_id)
         enemy_data_dictionary.pop(enemy_id)
+        # canvas.create_image(event.x,event.y)
     if len(enemy_lists) <= 0:
         canvas.delete("all")
         canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
@@ -119,7 +119,7 @@ def enemy_move(lists):
                                        text="YOU DIED", font=("impact", 150),
                                        fill="red"
                                        )
-
+                    
                 health = canvas.create_rectangle(
                     0, 0, player_health, 20, fill="red")
 
@@ -281,8 +281,13 @@ button_on_img = PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
 #>>>>>>>>> ITEM IMG <<<<<<<<#
-# green_virus_img=
-
+green_virus_img=PhotoImage(file=GREEN_VIRUS_LOCATION)
+heart_img=PhotoImage(file=HEART_LOCATION)
+red_virus_img=PhotoImage(file=RED_VIRUS_LOCATIO)
+vacinne_img=PhotoImage(file=VACINNE_LOCATION)
+virus_2_img=PhotoImage(file=VIRUS_2_LOCATION)
+virus_3_img=PhotoImage(file=VIRUS_3_LOCATION)
+blood_img=PhotoImage(file=BLOOD_LOCATION)
 
 #>>>>>> HOME FRAME BUTTON <<<<<<#
 

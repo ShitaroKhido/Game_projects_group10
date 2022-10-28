@@ -50,3 +50,4 @@ RED_VIRUS_LOCATIO="C:\Users\SeangEng.Ith\Desktop\Game\Game_projects_group10\\ass
 VACINNE_LOCATION="C:\Users\SeangEng.Ith\Desktop\Game\Game_projects_group10\\assets\image\item\\vacinne.png"
 VIRUS_2_LOCATION="C:\Users\SeangEng.Ith\Desktop\Game\Game_projects_group10\\assets\image\item\\virus2.png"
 VIRUS_3_LOCATION="C:\Users\SeangEng.Ith\Desktop\Game\Game_projects_group10\\assets\image\item\\virus3.png"
+BLOOD_LOCATION="C:\Users\SeangEng.Ith\Desktop\Game\Game_projects_group10\\assets\image\item\\blood.png"
