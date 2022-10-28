@@ -280,6 +280,9 @@ button_level3_img = PhotoImage(file=BUTTON_LEVEL3_IMG_LOCATION)
 button_on_img = PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
+#>>>>>>>>> ITEM IMG <<<<<<<<#
+# green_virus_img=
+
 
 #>>>>>> HOME FRAME BUTTON <<<<<<#
 
