@@ -2,7 +2,7 @@
 from library.constant import *
 from library.sprite import *
 from tkinter import Button, Frame, Tk, Canvas, PhotoImage, Toplevel, mainloop, BOTH
-from  winsound  import *
+from winsound import *
 
 
 player_position = [200, 200, 240, 240]
@@ -109,8 +109,6 @@ def enemy_move(lists):
                 player_health -= 4
                 if health != None:
                     canvas.delete(health)
-                    PlaySound("Game_projects_group10\\assets\Sound\eating-juicy-meat-7024.wav", SND_FILENAME |
-                        SND_ASYNC)
                 if player_health <= 0:
                     canvas.delete(player)
                     canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
@@ -193,22 +191,10 @@ def level_1():
     start_frame.pack_forget()
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
-<<<<<<< HEAD
-                        2, image=background_level3_img)
-    enemy = MakeEnemy(enemy_data_dictionary, enemy_img)
-    enemy.create_enemy_data(20)
-    lists = build_enemy(enemy_data_dictionary)
-    enemy_move(lists)
-    health = canvas.create_rectangle(0, 0, player_health, 20, fill="red")
-    player = canvas.create_oval(
-        WINDOW_WIDTH/2, WINDOW_HEIGHT/2, WINDOW_WIDTH/2+40, WINDOW_HEIGHT/2+40,
-        fill="red"
-    )
-=======
                         2, image=background_level1_img)
     deploy_sprite(enemy_data_dictionary, 10)
->>>>>>> 57a77adb5dd050f6c7574ad9ddfb8d59a9eaf927
     print(player)
+
 
 
 def level_2():
