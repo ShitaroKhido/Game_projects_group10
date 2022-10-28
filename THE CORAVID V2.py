@@ -9,7 +9,7 @@ player_position = [200, 200, 240, 240]
 bullet_count = []
 enemy_data_dictionary = {}
 player_health = 100
-text = None
+health_pos = [60,60]
 #########################
 #>>>>>> FUNCTIONS <<<<<<#
 #########################
@@ -45,7 +45,7 @@ def build_enemy(enemy_dict_data):
 
 
 def enemy_move(lists):
-    global player_health, text
+    global player_health, health
     for key in enemy_data_dictionary:
         if canvas.coords(lists[key])[0] >= WINDOW_WIDTH:
             enemy_data_dictionary[key]["volocity"][0] = - \
@@ -68,14 +68,15 @@ def enemy_move(lists):
 
         if len(over) > 2:
             if over[2] == player:
-                player_health -= 1
-                if text != None:
-                    canvas.delete(text)
+                player_health -= 4
+                if health != None:
+                    canvas.delete(health)
                 if player_health <= 0:
+                    canvas.delete(player)
                     canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2,
                                        text="Death", font=("impact", 40))
-                text = canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2,
-                                          text=player_health, font=("impact", 40))
+                                       
+                health = canvas.create_rectangle(0,0,player_health,20, fill="red")
         canvas.move(lists[key],
                     enemy_data_dictionary[key]["volocity"][0], enemy_data_dictionary[key]["volocity"][1])
     canvas.after(40, lambda: enemy_move(lists))
@@ -111,18 +112,20 @@ def setting():
     setting_canvas.create_image(500, 300, image=background_setting_img)
     back_btn.place(x=20, y=30)
 
+
 def level_1():
+    global player, health
     start_frame.pack_forget()
-    global player
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
                         2, image=background_level1_img)
     enemy = MakeEnemy(enemy_data_dictionary, enemy_img)
-    enemy.create_enemy_data(4)
+    enemy.create_enemy_data(20)
     lists = build_enemy(enemy_data_dictionary)
     enemy_move(lists)
+    health = canvas.create_rectangle(0,0,player_health,20, fill="red")
     player = canvas.create_oval(
-        WINDOW_WIDTH/2, WINDOW_HEIGHT/2, WINDOW_WIDTH/2+20, WINDOW_HEIGHT/2+20,
+        WINDOW_WIDTH/2, WINDOW_HEIGHT/2, WINDOW_WIDTH/2+40, WINDOW_HEIGHT/2+40,
         fill="red"
     )
     print(player)
@@ -189,12 +192,12 @@ button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 #>>>>>> HOME FRAME BUTTON <<<<<<#
 
 start_btn = Button(home_frame, image=button_start_img, command=start)
-setting_btn = Button(home_frame, image=button_setting_img,command=setting)
+setting_btn = Button(home_frame, image=button_setting_img, command=setting)
 exit_btn = Button(home_frame, image=button_exit_img, command=quit)
 
 #>>>>>> START FRAME BUTTON <<<<<<#
-back_btn=Button(start_frame, image=button_back_img, command=home)
-level1_btn = Button(start_frame, image=button_level1_img,command=level_1)
+back_btn = Button(start_frame, image=button_back_img, command=home)
+level1_btn = Button(start_frame, image=button_level1_img, command=level_1)
 level2_btn = Button(start_frame, image=button_level2_img)
 level3_btn = Button(start_frame, image=button_level3_img)
 
