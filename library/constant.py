@@ -42,12 +42,12 @@ MUSIC_CHOICE="Game_projects_group10\\assets\Sound\sound_music.wav"
 MUSIC_HOME="Game_projects_group10\\assets\Sound\sound_music.wav"
 MUSIC_IN_GAME="Game_projects_group10\\assets\Sound\choice.wav"
 
-### ITEHM ####
 
-GREEN_VIRUS_LOCATION="C:\Users\SeangEng.Ith\Desktop\Game\Game_projects_group10\\assets\image\item\green_virus.png"
-HEART_LOCATION="C:\Users\SeangEng.Ith\Desktop\Game\Game_projects_group10\\assets\image\item\heart.png"
-RED_VIRUS_LOCATIO="C:\Users\SeangEng.Ith\Desktop\Game\Game_projects_group10\\assets\image\item\\red_virus.png"
-VACINNE_LOCATION="C:\Users\SeangEng.Ith\Desktop\Game\Game_projects_group10\\assets\image\item\\vacinne.png"
-VIRUS_2_LOCATION="C:\Users\SeangEng.Ith\Desktop\Game\Game_projects_group10\\assets\image\item\\virus2.png"
-VIRUS_3_LOCATION="C:\Users\SeangEng.Ith\Desktop\Game\Game_projects_group10\\assets\image\item\\virus3.png"
-BLOOD_LOCATION="C:\Users\SeangEng.Ith\Desktop\Game\Game_projects_group10\\assets\image\item\\blood.png"
+
+GREEN_VIRUS_LOCATION="Game_projects_group10\\assets\image\item\green_virus.png"
+HEART_LOCATION="Game_projects_group10\\assets\image\item\heart.png"
+RED_VIRUS_LOCATIO="Game_projects_group10\\assets\image\item\\red_virus.png"
+VACINNE_LOCATION="Game_projects_group10\\assets\image\item\\vacinne.png"
+VIRUS_2_LOCATION="Game_projects_group10\\assets\image\item\\virus2.png"
+VIRUS_3_LOCATION="Game_projects_group10\\assets\image\item\\virus3.png"
+BLOOD_LOCATION="Game_projects_group10\\assets\image\item\\blood.png"

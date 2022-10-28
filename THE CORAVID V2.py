@@ -66,14 +66,13 @@ def shoot(event):
     if hit:
         enemy_lists.pop(enemy_id)
         enemy_data_dictionary.pop(enemy_id)
-        # canvas.create_image(event.x,event.y)
+        canvas.create_image(event.x,event.y,image=blood_img)
     if len(enemy_lists) <= 0:
         canvas.delete("all")
         canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
                                        text="YOU SURVIVED", font=("impact", 120),
                                        fill="green"
                                        )
-
 #>>>>>> ENEMY MOVEMENTS <<<<<<#
 
 def build_enemy(enemy_dict_data):
@@ -169,6 +168,8 @@ def home():
 
 
 def start():
+    canvas.delete('all')
+    canvas.pack_forget()
     home_frame.pack_forget()
     start_frame.pack(expand=True, fill=BOTH)
     start_canvas.pack(expand=True, fill=BOTH)
@@ -292,11 +293,12 @@ blood_img=PhotoImage(file=BLOOD_LOCATION)
 #>>>>>> HOME FRAME BUTTON <<<<<<#
 
 start_btn = Button(home_frame, image=button_start_img, command=start)
+
+# btn_back_to_start=
 setting_btn = Button(home_frame, image=button_setting_img, command=setting)
 exit_btn = Button(home_frame, image=button_exit_img, command=quit)
 
 #>>>>>> START FRAME BUTTON <<<<<<#
-
 back_btn = Button(start_frame, image=button_back_img, command=home)
 level1_btn = Button(start_frame, image=button_level1_img, command=level_1)
 level2_btn = Button(start_frame, image=button_level2_img, command=level_2)
