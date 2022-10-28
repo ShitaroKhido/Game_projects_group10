@@ -78,6 +78,7 @@ def enemy_move(lists):
 
                 health = canvas.create_rectangle(
                     0, 0, player_health, 20, fill="red")
+
         canvas.move(lists[key],
                     enemy_data_dictionary[key]["volocity"][0], enemy_data_dictionary[key]["volocity"][1])
     canvas.after(40, lambda: enemy_move(lists))
