@@ -51,6 +51,10 @@ def crosshair(event):
     canvas.moveto(player_crosshair, event.x-AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT)
 
 
+def uv_laser(event):
+    return canvas.create_line(canvas.coords(player)[0], canvas.coords(player)[0], event.x, event.y)    
+
+
 def shoot(event):
     global enemy_id
     hit = False
