@@ -79,6 +79,19 @@ def enemy_move(lists):
                     enemy_data_dictionary[key]["volocity"][0], enemy_data_dictionary[key]["volocity"][1])
     canvas.after(40, lambda: enemy_move(lists))
 
+def deploy_sprite():
+    global player
+    canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
+                        2, image=background_level1_img)
+    enemy = MakeEnemy(enemy_data_dictionary, enemy_img)
+    enemy.create_enemy_data(4)
+    lists = build_enemy(enemy_data_dictionary)
+    enemy_move(lists)
+    player = canvas.create_oval(
+        WINDOW_WIDTH/2, WINDOW_HEIGHT/2, WINDOW_WIDTH/2+20, WINDOW_HEIGHT/2+20,
+        fill="red"
+    )
+
 
 def home():
     home_frame.pack(expand=True, fill=BOTH)
@@ -110,17 +123,7 @@ def setting():
 
 
 def level_1():
-    global player
-    canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
-                        2, image=background_level1_img)
-    enemy = MakeEnemy(enemy_data_dictionary, enemy_img)
-    enemy.create_enemy_data(4)
-    lists = build_enemy(enemy_data_dictionary)
-    enemy_move(lists)
-    player = canvas.create_oval(
-        WINDOW_WIDTH/2, WINDOW_HEIGHT/2, WINDOW_WIDTH/2+20, WINDOW_HEIGHT/2+20,
-        fill="red"
-    )
+    deploy_sprite()
     print(player)
 
 
@@ -138,7 +141,7 @@ root.resizable(0, 0)
 
 #>>>>>> ROOT CANVAS <<<<<<#
 canvas = Canvas(root)
-# canvas.pack(expand=True, fill=BOTH)
+canvas.pack(expand=True, fill=BOTH)
 
 
 #>>>>>> Frame <<<<<<#
@@ -195,8 +198,8 @@ level1_btn = Button(start_frame, image=button_level1_img)
 level2_btn = Button(start_frame, image=button_level2_img)
 level3_btn = Button(start_frame, image=button_level3_img)
 
-home()
-
+# home()
+level_1()
 
 root.bind("<w>", move_up)
 root.bind("<a>", move_left)
