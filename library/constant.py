@@ -2,6 +2,7 @@ WINDOW_WIDTH = 1000
 WINDOW_HEIGHT = 600
 GAME_TITLE = "THE CORAVID"
 
+
 GAME_ICON_LOCATION = ""
 CHARACTER_IMG_LOCATION = "Game_projects_group10\\assets\image\character.png"
 BULLET_IMG_LOCATION = "Game_projects_group10\\assets\image\\b2.png"
@@ -9,11 +10,10 @@ CROSSHAIR = "Game_projects_group10\\assets\image\crosshairs.png"
 ENEMY_IMG_LOCATION = "Game_projects_group10\\assets\image\\virus2.png"
 AIM_ADJUSTMENT = 40
 
+
 NUMBER_OF_ENEMY_LEVEL_1 = 10
 NUMBER_OF_ENEMY_LEVEL_2 = 20
 NUMBER_OF_ENEMY_LEVEL_3 = 30
-
-
 
 
 BLACK_IMG_LOCATION="Game_projects_group10\\assets\image\Black_background.png"
