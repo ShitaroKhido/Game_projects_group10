@@ -1,3 +1,4 @@
+import winsound
 from library.constant import *
 from library.sprite import *
 from tkinter import Button, Frame, Tk, Canvas, PhotoImage, Toplevel, mainloop, BOTH
@@ -112,6 +113,8 @@ def enemy_move(lists):
                 player_health -= 4
                 if health != None:
                     canvas.delete(health)
+                    winsound.PlaySound(ENEMY_SOUND,winsound.SND_FILENAME |
+                       winsound.SND_ASYNC)
                 if player_health <= 0:
                     canvas.delete(player)
                     canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
