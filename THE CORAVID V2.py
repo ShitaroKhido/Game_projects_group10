@@ -70,6 +70,8 @@ def shoot(event):
                                        text="YOU SURVIVED", font=("impact", 100),
                                        fill="green"
                                        )
+        winsound.PlaySound(WIN_SOUND, winsound.SND_FILENAME |
+                       winsound.SND_ASYNC)
 
 
 #>>>>>> ENEMY MOVEMENTS <<<<<<#
@@ -111,18 +113,14 @@ def enemy_move(lists):
                 player_health -= 4
                 if health != None:
                     canvas.delete(health)
-                    winsound.PlaySound(ENEMY_SOUND,winsound.SND_FILENAME  )
                 if player_health <= 0:
-                    winsound.PlaySound(GAME_OVER_SOUND,winsound.SND_FILENAME  )
                     canvas.delete(player)
                     canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
                                        text="YOU DIED", font=("impact", 150),
                                        fill="red"
                                        )
-                    
                 health = canvas.create_rectangle(
                     0, 0, player_health, 20, fill="red")
-
         canvas.move(lists[key],
                     enemy_data_dictionary[key]["volocity"][0], enemy_data_dictionary[key]["volocity"][1])
     canvas.after(40, lambda: enemy_move(lists))
@@ -159,6 +157,8 @@ def deploy_sprite(enemy_data: list, enemy_count:int):
 #>>>>>> GUI CALL FUNCTION <<<<<<#
 
 def home():
+    winsound.PlaySound(MUSIC_HOME, winsound.SND_FILENAME |
+                       winsound.SND_ASYNC)
     start_frame.pack_forget()
     home_frame.pack(expand=True, fill=BOTH)
     home_canvas.pack(expand=True, fill=BOTH)
@@ -170,6 +170,8 @@ def home():
 
 
 def start():
+    winsound.PlaySound(MUSIC_CHOICE, winsound.SND_FILENAME |
+                       winsound.SND_ASYNC)
     canvas.delete('all')
     canvas.pack_forget()
     home_frame.pack_forget()
@@ -194,6 +196,7 @@ def setting():
 #>>>>>> GUI CALL FUNCTIONS LEVELS <<<<<<#
 
 def level_1():
+    in_game_music()
     start_frame.pack_forget()
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
@@ -204,6 +207,7 @@ def level_1():
 
 
 def level_2():
+    in_game_music()
     start_frame.pack_forget()
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
@@ -213,6 +217,7 @@ def level_2():
 
 
 def level_3():
+    in_game_music()
     start_frame.pack_forget()
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
@@ -220,6 +225,9 @@ def level_3():
     deploy_sprite(enemy_data_dictionary, 30)
     print(player)
 
+def in_game_music():
+    winsound.PlaySound(MUSIC_IN_GAME, winsound.SND_FILENAME |
+                       winsound.SND_ASYNC)
 #########################
 #>>>>>> MAIN CODE <<<<<<#
 #########################

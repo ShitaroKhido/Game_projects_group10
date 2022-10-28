@@ -38,12 +38,13 @@ BACKGROUND_LEVEL3_LOCATION="Game_projects_group10\\assets\image\LEVEL3.png"
 BACKGROUND_START_LOCATION='Game_projects_group10\\assets\image\wall.png'
 SETTING_IMAGE_LOCATION='Game_projects_group10\\assets\image\setting.png'
 
-MUSIC_CHOICE="Game_projects_group10\\assets\Sound\sound_music.wav"
+MUSIC_CHOICE="Game_projects_group10\\assets\Sound\choice.wav"
 MUSIC_HOME="Game_projects_group10\\assets\Sound\sound_music.wav"
-MUSIC_IN_GAME="Game_projects_group10\\assets\Sound\choice.wav"
+MUSIC_IN_GAME="Game_projects_group10\\assets\Sound\in_game.wav"
 
 ENEMY_SOUND="Game_projects_group10\\assets\Sound\enemy_bite.wav"
-GAME_OVER_SOUND="Game_projects_group10\\assets\Sound\game_over.wav"
+GAME_OVER_SOUND="Game_projects_group10\\assets\Sound\gave_over.wav"
+WIN_SOUND="Game_projects_group10\\assets\Sound\win.wav"
 
 GREEN_VIRUS_LOCATION="Game_projects_group10\\assets\image\item\green_virus.png"
 HEART_LOCATION="Game_projects_group10\\assets\image\item\heart.png"
