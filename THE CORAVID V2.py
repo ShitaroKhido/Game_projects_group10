@@ -45,6 +45,13 @@ def move_up(event):
     movement(y=-40)
 
 
+#>>>>>> PLAYERS CROSSHAIR AND AIMMING<<<<<<#
+
+def crosshair(event):
+    canvas.moveto(player_crosshair, event.x-AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT)
+
+
+
 #>>>>>> ENEMY MOVEMENTS <<<<<<#
 
 def build_enemy(enemy_dict_data):
@@ -112,7 +119,7 @@ def build_item(item_list_data):
 #>>>>>> GAME SPRITE DEPLOYMENTS <<<<<<#
 
 def deploy_sprite(enemy_data: list):
-    global player, health
+    global player, health, player_crosshair
     enemy = MakeEnemy(enemy_data, enemy_img)
     enemy.create_enemy_data(enemy_count)
     enemy_lists = build_enemy(enemy_data)
@@ -127,7 +134,7 @@ def deploy_sprite(enemy_data: list):
         WINDOW_WIDTH/2, WINDOW_HEIGHT/2, WINDOW_WIDTH/2+40, WINDOW_HEIGHT/2+40,
         fill="red"
     )
-
+    player_crosshair = canvas.create_image(0, 0, image=player_crosshair_img)
 
 #>>>>>> GUI CALL FUNCTION <<<<<<#
 
@@ -265,5 +272,6 @@ root.bind("<a>", move_left)
 root.bind("<s>", move_down)
 root.bind("<d>", move_right)
 
+root.bind("<Motion>", crosshair)
 
 root.mainloop()
