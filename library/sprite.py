@@ -1,5 +1,5 @@
 from random import randint
-from constant import WINDOW_HEIGHT, WINDOW_WIDTH
+from .constant import WINDOW_HEIGHT, WINDOW_WIDTH
 
 
 class MakeEnemy:

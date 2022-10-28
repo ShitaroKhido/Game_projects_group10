@@ -20,6 +20,8 @@ player_inventory = {}
 #########################
 
 
+#>>>>>> CHARACTER MOVEMENTS <<<<<<#
+
 def movement(x=0, y=0):
     canvas.move(player, x, y)
 
@@ -39,6 +41,8 @@ def move_down(event):
 def move_up(event):
     movement(y=-40)
 
+
+#>>>>>> ENEMY MOVEMENTS <<<<<<#
 
 def build_enemy(enemy_dict_data):
     enemy_dict = {}
@@ -92,6 +96,8 @@ def enemy_move(lists):
     canvas.after(40, lambda: enemy_move(lists))
 
 
+#>>>>>> GAME SPRITE DEPLOYMENTS <<<<<<#
+
 def deploy_sprite(enemy_data: list):
     global player, health
     enemy = MakeEnemy(enemy_data, enemy_img)
@@ -104,6 +110,8 @@ def deploy_sprite(enemy_data: list):
         fill="red"
     )
 
+
+#>>>>>> GUI CALL FUNCTION <<<<<<#
 
 def home():
     start_frame.pack_forget()
@@ -136,6 +144,8 @@ def setting():
     back_btn.place(x=20, y=30)
 
 
+#>>>>>> GUI CALL FUNCTIONS LEVELS <<<<<<#
+
 def level_1():
     start_frame.pack_forget()
     canvas.pack(expand=True, fill=BOTH)
@@ -145,12 +155,11 @@ def level_1():
     print(player)
 
 
-#>>>>>> CHARACTER MOVEMENTS <<<<<<#
-#>>>>>> SOUND <<<<<<#
 #########################
 #>>>>>> MAIN CODE <<<<<<#
 #########################
 # >>>>>> MAIN WINDOWS
+
 root = Tk()
 root.title(GAME_TITLE)
 root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
@@ -158,22 +167,26 @@ root.resizable(0, 0)
 
 
 #>>>>>> ROOT CANVAS <<<<<<#
+
 canvas = Canvas(root)
 # canvas.pack(expand=True, fill=BOTH)
 
 
 #>>>>>> Frame <<<<<<#
+
 home_frame = Frame(root)
 start_frame = Frame(root)
 setting_frame = Frame(root)
 
 #>>>>>> CANVAS <<<<<<#
+
 home_canvas = Canvas(home_frame)
 start_canvas = Canvas(start_frame)
 setting_canvas = Canvas(setting_frame)
 
 
 #>>>>>> PLAYER PROPERTIES <<<<<<#
+
 player_crosshair_img = PhotoImage(file=CROSSHAIR)
 enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 player_img = PhotoImage(file=CHARACTER_IMG_LOCATION)
@@ -181,7 +194,9 @@ bullet_img = PhotoImage(file=BULLET_IMG_LOCATION)
 player = None
 # player_crosshair = canvas.create_rectangle(player_position)
 
+
 #>>>>>> BACKGROUND <<<<<<#
+
 background_home_img = PhotoImage(file=HOME_BACKGROUND_IMAGE_LOCATION)
 background_black_img = PhotoImage(file=BLACK_IMG_LOCATION)
 background_level1_img = PhotoImage(file=BACKGROUND_LEVEL1_LOCATION)
@@ -192,6 +207,7 @@ background_setting_img = PhotoImage(file=SETTING_IMAGE_LOCATION)
 
 
 #>>>>>> BUTTON IMG<<<<<<#
+
 button_start_img = PhotoImage(file=BUTTON_START_IMG_LOCATION)
 button_setting_img = PhotoImage(file=BUTTON_SETTING_IMG_LOCATION)
 button_exit_img = PhotoImage(file=BUTTON_EXIT_IMG_LOCATION)
@@ -210,17 +226,26 @@ setting_btn = Button(home_frame, image=button_setting_img, command=setting)
 exit_btn = Button(home_frame, image=button_exit_img, command=quit)
 
 #>>>>>> START FRAME BUTTON <<<<<<#
+
 back_btn = Button(start_frame, image=button_back_img, command=home)
 level1_btn = Button(start_frame, image=button_level1_img, command=level_1)
 level2_btn = Button(start_frame, image=button_level2_img)
 level3_btn = Button(start_frame, image=button_level3_img)
 
+
+############################################
+#>>>>>> FUNCTIONS DEPLOYMENT HERE!!! <<<<<<#
+############################################
+
 home()
 
+
+#>>>>>> KEY BINDING <<<<<<#
 
 root.bind("<w>", move_up)
 root.bind("<a>", move_left)
 root.bind("<s>", move_down)
 root.bind("<d>", move_right)
-#>>>>>> HOME <<<<<<#
+
+
 root.mainloop()
