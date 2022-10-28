@@ -115,8 +115,9 @@ def enemy_move(lists):
                 player_health -= 4
                 if health != None:
                     canvas.delete(health)
-                    winsound.PlaySound(ENEMY_SOUND,winsound.SND_ALIAS)
+                    winsound.PlaySound(ENEMY_SOUND,winsound.SND_FILENAME  )
                 if player_health <= 0:
+                    winsound.PlaySound(GAME_OVER_SOUND,winsound.SND_FILENAME  )
                     canvas.delete(player)
                     canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
                                        text="YOU DIED", font=("impact", 150),
