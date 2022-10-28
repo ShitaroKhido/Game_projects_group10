@@ -9,7 +9,7 @@ player_position = [200, 200, 240, 240]
 bullet_count = []
 enemy_data_dictionary = {}
 player_health = 100
-health_pos = [60,60]
+health_pos = [60, 60]
 #########################
 #>>>>>> FUNCTIONS <<<<<<#
 #########################
@@ -75,8 +75,9 @@ def enemy_move(lists):
                     canvas.delete(player)
                     canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2,
                                        text="Death", font=("impact", 40))
-                                       
-                health = canvas.create_rectangle(0,0,player_health,20, fill="red")
+
+                health = canvas.create_rectangle(
+                    0, 0, player_health, 20, fill="red")
         canvas.move(lists[key],
                     enemy_data_dictionary[key]["volocity"][0], enemy_data_dictionary[key]["volocity"][1])
     canvas.after(40, lambda: enemy_move(lists))
@@ -123,7 +124,7 @@ def level_1():
     enemy.create_enemy_data(20)
     lists = build_enemy(enemy_data_dictionary)
     enemy_move(lists)
-    health = canvas.create_rectangle(0,0,player_health,20, fill="red")
+    health = canvas.create_rectangle(0, 0, player_health, 20, fill="red")
     player = canvas.create_oval(
         WINDOW_WIDTH/2, WINDOW_HEIGHT/2, WINDOW_WIDTH/2+40, WINDOW_HEIGHT/2+40,
         fill="red"
