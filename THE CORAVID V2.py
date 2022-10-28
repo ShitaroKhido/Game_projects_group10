@@ -7,12 +7,13 @@ from winsound import *
 player_position = [200, 200, 240, 240]
 bullet_count = []
 enemy_data_dictionary = {}
-
-
+player_health = 100
+text = None
 #########################
 #>>>>>> FUNCTIONS <<<<<<#
 #########################
-# .pack(expand=True, fill=BOTH)
+
+
 def movement(x=0, y=0):
     canvas.move(player, x, y)
 
@@ -43,6 +44,7 @@ def build_enemy(enemy_dict_data):
 
 
 def enemy_move(lists):
+    global player_health, text
     for key in enemy_data_dictionary:
         if canvas.coords(lists[key])[0] >= WINDOW_WIDTH:
             enemy_data_dictionary[key]["volocity"][0] = - \
@@ -65,9 +67,14 @@ def enemy_move(lists):
 
         if len(over) > 2:
             if over[2] == player:
-                canvas.delete("all")
-                canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2,
-                                   text="Death", font=("impact", 40))
+                player_health -= 1
+                if text != None:
+                    canvas.delete(text)
+                if player_health <= 0:
+                    canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2,
+                                       text="Death", font=("impact", 40))
+                text = canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2,
+                                          text=player_health, font=("impact", 40))
         canvas.move(lists[key],
                     enemy_data_dictionary[key]["volocity"][0], enemy_data_dictionary[key]["volocity"][1])
     canvas.after(40, lambda: enemy_move(lists))
