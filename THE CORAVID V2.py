@@ -15,6 +15,9 @@ enemy_size = 20
 
 player_inventory = {}
 
+items_data_dictionary = {}
+item_img_list = [1,2,3,4]
+
 #########################
 #>>>>>> FUNCTIONS <<<<<<#
 #########################
@@ -84,8 +87,8 @@ def enemy_move(lists):
                 if player_health <= 0:
                     canvas.delete(player)
                     canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
-                                       text="Death", font=("impact", 200),
-                                       fill="white"
+                                       text="YOU DIED", font=("impact", 150),
+                                       fill="red"
                                        )
 
                 health = canvas.create_rectangle(
@@ -96,14 +99,29 @@ def enemy_move(lists):
     canvas.after(40, lambda: enemy_move(lists))
 
 
+#>>>>>> PLAYERS ITEMS <<<<<<#
+
+def build_item(item_list_data):
+    item_list = {}
+    for key in item_list_data:
+        item_list[key] = canvas.create_image(item_list_data[key]["position"], image=item_list_data[key]["img_location"])
+    return item_list    
+    
+
+
 #>>>>>> GAME SPRITE DEPLOYMENTS <<<<<<#
 
 def deploy_sprite(enemy_data: list):
     global player, health
     enemy = MakeEnemy(enemy_data, enemy_img)
     enemy.create_enemy_data(enemy_count)
-    lists = build_enemy(enemy_data)
-    enemy_move(lists)
+    enemy_lists = build_enemy(enemy_data)
+    enemy_move(enemy_lists)
+
+    items = Items(items_data_dictionary, item_img_list)
+    items.generate_item_dict(10)
+    print(items_data_dictionary)
+
     health = canvas.create_rectangle(0, 0, player_health, 20, fill="red")
     player = canvas.create_oval(
         WINDOW_WIDTH/2, WINDOW_HEIGHT/2, WINDOW_WIDTH/2+40, WINDOW_HEIGHT/2+40,
