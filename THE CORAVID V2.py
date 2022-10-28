@@ -51,6 +51,24 @@ def crosshair(event):
     canvas.moveto(player_crosshair, event.x-AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT)
 
 
+def shoot(event):
+    global enemy_id
+    hit = False
+    target = (canvas.find_overlapping(event.x, event.y, event.x-AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT))
+    for i in enemy_lists:
+        if target[1] == enemy_lists[i]:
+            enemy_id = i
+            hit = True
+            print(target)
+    if hit:
+        enemy_lists.pop(enemy_id)
+        enemy_data_dictionary.pop(enemy_id)
+    if len(enemy_lists) <= 0:
+        canvas.delete("all")
+        canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
+                                       text="YOU SURVIVED", font=("impact", 120),
+                                       fill="green"
+                                       )
 
 #>>>>>> ENEMY MOVEMENTS <<<<<<#
 
@@ -119,25 +137,21 @@ def build_item(item_list_data):
 #>>>>>> GAME SPRITE DEPLOYMENTS <<<<<<#
 
 def deploy_sprite(enemy_data: list, enemy_count:int):
-    global player, health, player_crosshair
+    global player, health, player_crosshair, enemy_lists
+    
     enemy = MakeEnemy(enemy_data, enemy_img)
     enemy.create_enemy_data(enemy_count)
     enemy_lists = build_enemy(enemy_data)
     enemy_move(enemy_lists)
 
-    # items = Items(items_data_dictionary, item_img_list)
-    # items.generate_item_dict(enemy_count)
-    # print(items_data_dictionary)
-    
-
     health = canvas.create_rectangle(0, 0, player_health, 20, fill="red")
+    player_crosshair = canvas.create_image(0, 0, image=player_crosshair_img)
     player = canvas.create_oval(
         WINDOW_WIDTH/2, WINDOW_HEIGHT/2, WINDOW_WIDTH/2+40, WINDOW_HEIGHT/2+40,
         fill="red"
     )
-    player_crosshair = canvas.create_image(0, 0, image=player_crosshair_img)
 
-    
+
 #>>>>>> GUI CALL FUNCTION <<<<<<#
 
 def home():
@@ -292,5 +306,6 @@ root.bind("<s>", move_down)
 root.bind("<d>", move_right)
 
 root.bind("<Motion>", crosshair)
+root.bind("<Button-1>", shoot)
 
 root.mainloop()
