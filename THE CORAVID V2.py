@@ -1,3 +1,4 @@
+
 from library.constant import *
 from library.enemy import *
 from tkinter import Button, Frame, Tk, Canvas, PhotoImage, Toplevel, mainloop, BOTH
@@ -94,6 +95,7 @@ def deploy_sprite():
 
 
 def home():
+    start_frame.pack_forget()
     home_frame.pack(expand=True, fill=BOTH)
     home_canvas.pack(expand=True, fill=BOTH)
     home_canvas.create_image(500, 300, image=background_home_img)
@@ -104,7 +106,7 @@ def home():
 
 
 def start():
-    home_frame.destroy()
+    home_frame.pack_forget()
     start_frame.pack(expand=True, fill=BOTH)
     start_canvas.pack(expand=True, fill=BOTH)
     start_canvas.create_image(500, 300, image=background_start_img)
@@ -115,15 +117,28 @@ def start():
 
 
 def setting():
-    home_frame.destroy()
+    home_frame.pack_forget()
     setting_frame.pack(expand=True, fill=BOTH)
     setting_canvas.pack(expand=True, fill=BOTH)
     setting_canvas.create_image(500, 300, image=background_start_img)
     setting_canvas.create_image(500, 300, image=background_setting_img)
-
+    back_btn.place(x=20, y=30)
 
 def level_1():
     deploy_sprite()
+    start_frame.pack_forget()
+    global player
+    canvas.pack(expand=True, fill=BOTH)
+    canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
+                        2, image=background_level1_img)
+    enemy = MakeEnemy(enemy_data_dictionary, enemy_img)
+    enemy.create_enemy_data(4)
+    lists = build_enemy(enemy_data_dictionary)
+    enemy_move(lists)
+    player = canvas.create_oval(
+        WINDOW_WIDTH/2, WINDOW_HEIGHT/2, WINDOW_WIDTH/2+20, WINDOW_HEIGHT/2+20,
+        fill="red"
+    )
     print(player)
 
 
@@ -191,10 +206,9 @@ start_btn = Button(home_frame, image=button_start_img, command=start)
 setting_btn = Button(home_frame, image=button_setting_img,command=setting)
 exit_btn = Button(home_frame, image=button_exit_img, command=quit)
 
-
 #>>>>>> START FRAME BUTTON <<<<<<#
-back_btn = Button(start_frame, image=button_back_img)
-level1_btn = Button(start_frame, image=button_level1_img)
+back_btn=Button(start_frame, image=button_back_img, command=home)
+level1_btn = Button(start_frame, image=button_level1_img,command=level_1)
 level2_btn = Button(start_frame, image=button_level2_img)
 level3_btn = Button(start_frame, image=button_level3_img)
 
