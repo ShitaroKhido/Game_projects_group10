@@ -75,22 +75,31 @@ def enemy_move(lists):
 
 def home():
     home_frame.pack(expand=True, fill=BOTH)
-    start_btn.place(x=800, y=400)
-    setting_btn.place(x=800, y=450)
-    exit_btn.place(x=800, y=500)
+    home_canvas.pack(expand=True, fill=BOTH)
+    home_canvas.create_image(500, 300, image=background_home_img)
+    home_canvas.create_image(890, 500, image=background_black_img)
+    start_btn.place(x=810, y=400)
+    setting_btn.place(x=810, y=465)
+    exit_btn.place(x=810, y=530)
 
 
 def start():
     home_frame.destroy()
     start_frame.pack(expand=True, fill=BOTH)
+    start_canvas.pack(expand=True, fill=BOTH)
+    start_canvas.create_image(500, 300, image=background_start_img)
     back_btn.place(x=20, y=20)
-    level1_btn.place(x=140, y=150)
-    level2_btn.place(x=390, y=150)
-    level3_btn.place(x=640, y=150)
+    level1_btn.place(x=140, y=200)
+    level2_btn.place(x=390, y=200)
+    level3_btn.place(x=640, y=200)
 
 
 def setting():
+    home_frame.destroy()
     setting_frame.pack(expand=True, fill=BOTH)
+    setting_canvas.pack(expand=True, fill=BOTH)
+    setting_canvas.create_image(500, 300, image=background_start_img)
+    setting_canvas.create_image(500, 300, image=background_setting_img)
 
 
 def level_1():
@@ -122,7 +131,7 @@ root.resizable(0, 0)
 
 #>>>>>> ROOT CANVAS <<<<<<#
 canvas = Canvas(root)
-canvas.pack(expand=True, fill=BOTH)
+# canvas.pack(expand=True, fill=BOTH)
 
 
 #>>>>>> Frame <<<<<<#
@@ -169,7 +178,7 @@ button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 #>>>>>> HOME FRAME BUTTON <<<<<<#
 
 start_btn = Button(home_frame, image=button_start_img, command=start)
-setting_btn = Button(home_frame, image=button_setting_img)
+setting_btn = Button(home_frame, image=button_setting_img,command=setting)
 exit_btn = Button(home_frame, image=button_exit_img, command=quit)
 
 
@@ -179,7 +188,7 @@ level1_btn = Button(start_frame, image=button_level1_img)
 level2_btn = Button(start_frame, image=button_level2_img)
 level3_btn = Button(start_frame, image=button_level3_img)
 
-level_1()
+home()
 
 
 root.bind("<w>", move_up)
