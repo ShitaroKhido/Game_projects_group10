@@ -5,28 +5,42 @@ from tkinter import Button, Frame, Tk, Canvas, PhotoImage, Toplevel, mainloop, B
 from winsound import *
 
 
-player_position = [200, 200, 240, 240]
-bullet_count = []
-enemy_data_dictionary = {}
+player_inventory = {}
 player_health = 100
+
+bullet_count = []
 health_pos = [60, 60]
-enemy_count = 20
+
+enemy_data_dictionary = {}
 enemy_size = 20
 
-player_inventory = {}
-
 items_data_dictionary = {}
-item_img_list = []
+items_dictionary = {}
+item_img_list = [heart_img, vacinne_img]
+
+up_count = 0
 
 #########################
 #>>>>>> FUNCTIONS <<<<<<#
 #########################
 
-
+###################################
 #>>>>>> CHARACTER MOVEMENTS <<<<<<#
+###################################
+
 
 def movement(x=0, y=0):
-    canvas.move(player, x, y)
+    is_not_wall = True
+    if canvas.coords(player)[0] + x >= WINDOW_WIDTH or\
+            canvas.coords(player)[1] + y >= WINDOW_HEIGHT or\
+            canvas.coords(player)[0] + x <= 0 or\
+            canvas.coords(player)[1] + y <= 0:
+        is_not_wall = False
+        return_value = None
+
+    elif is_not_wall:
+        return_value = canvas.move(player, x, y)
+    return return_value
 
 
 def move_right(event):
@@ -45,36 +59,66 @@ def move_up(event):
     movement(y=-40)
 
 
+############################################
 #>>>>>> PLAYERS CROSSHAIR AND AIMMING<<<<<<#
+############################################
 
 def crosshair(event):
-    canvas.moveto(player_crosshair, event.x-AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT)
+    canvas.moveto(player_crosshair, event.x -
+                  AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT)
 
 
 def shoot(event):
-    global enemy_id
+    global enemy_id, up_count, enemy_data_dictionary, enemy_lists
     hit = False
-    target = (canvas.find_overlapping(event.x, event.y, event.x-AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT))
+    target = (canvas.find_overlapping(event.x, event.y,
+              event.x-AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT))
+    winsound.PlaySound(ENEMY_SOUND, winsound.SND_FILENAME |
+                       winsound.SND_ASYNC)
+    # >>> CHECK ENEMY ID WHEN
     for i in enemy_lists:
         if target[1] == enemy_lists[i]:
             enemy_id = i
             hit = True
             print(target)
+
+    # >>> IF HIT THE ENEMY RUN THIS BLOCK
     if hit:
+        canvas.delete(enemy_lists[enemy_id])
         enemy_lists.pop(enemy_id)
         enemy_data_dictionary.pop(enemy_id)
-        canvas.create_image(event.x,event.y,image=blood_img)
+        blood_splash = canvas.create_image(event.x, event.y, image=blood_img)
+        canvas.after(100, lambda: canvas.delete(blood_splash))
+
+    # >>> CHECK IF NO ENEMY
     if len(enemy_lists) <= 0:
         canvas.delete("all")
         canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
-                                       text="YOU SURVIVED", font=("impact", 100),
-                                       fill="green"
-                                       )
+                           text="YOU SURVIVED", font=("impact", 100),
+                           fill="green"
+                           )
         winsound.PlaySound(WIN_SOUND, winsound.SND_FILENAME |
-                       winsound.SND_ASYNC)
+                           winsound.SND_ASYNC)
+        enemy_data_dictionary.clear()
+        enemy_lists.clear()
+
+    print(len(enemy_lists))
 
 
+#############################
+#>>>>>> PLAYERS ITEMS <<<<<<#
+#############################
+
+def build_item(item_data, item_dict):
+    for key in item_data:
+        item_dict[key] = canvas.create_image(
+            item_data[key]["position"], image=item_data[key]["img_location"]
+        )
+
+
+###############################
 #>>>>>> ENEMY MOVEMENTS <<<<<<#
+###############################
 
 def build_enemy(enemy_dict_data):
     enemy_dict = {}
@@ -87,20 +131,21 @@ def build_enemy(enemy_dict_data):
 
 def enemy_move(lists):
     global player_health, health
+    intersect_adjustment = 30
     for key in enemy_data_dictionary:
-        if canvas.coords(lists[key])[0] >= WINDOW_WIDTH:
+        if canvas.coords(lists[key])[0] >= WINDOW_WIDTH-intersect_adjustment:
             enemy_data_dictionary[key]["volocity"][0] = - \
                 enemy_data_dictionary[key]["volocity"][0]
 
-        elif canvas.coords(lists[key])[1] >= WINDOW_HEIGHT:
+        elif canvas.coords(lists[key])[1] >= WINDOW_HEIGHT-intersect_adjustment:
             enemy_data_dictionary[key]["volocity"][1] = - \
                 enemy_data_dictionary[key]["volocity"][1]
 
-        elif canvas.coords(lists[key])[0] <= 0:
+        elif canvas.coords(lists[key])[0] <= intersect_adjustment:
             enemy_data_dictionary[key]["volocity"][0] = - \
                 1*enemy_data_dictionary[key]["volocity"][0]
 
-        elif canvas.coords(lists[key])[1] <= 0:
+        elif canvas.coords(lists[key])[1] <= intersect_adjustment:
             enemy_data_dictionary[key]["volocity"][1] = - \
                 1*enemy_data_dictionary[key]["volocity"][1]
 
@@ -117,8 +162,7 @@ def enemy_move(lists):
                     canvas.delete(player)
                     canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
                                        text="YOU DIED", font=("impact", 150),
-                                       fill="red"
-                                       )
+                                       fill="red")
                 health = canvas.create_rectangle(
                     0, 0, player_health, 20, fill="red")
         canvas.move(lists[key],
@@ -126,35 +170,33 @@ def enemy_move(lists):
     canvas.after(40, lambda: enemy_move(lists))
 
 
-#>>>>>> PLAYERS ITEMS <<<<<<#
-
-def build_item(item_list_data):
-    item_list = {}
-    for key in item_list_data:
-        item_list[key] = canvas.create_image(item_list_data[key]["position"], image=item_list_data[key]["img_location"])
-    return item_list    
-    
-
-
+#######################################
 #>>>>>> GAME SPRITE DEPLOYMENTS <<<<<<#
+#######################################
 
-def deploy_sprite(enemy_data: list, enemy_count:int):
+def deploy_sprite(enemy_data: list, enemy_count: int, enemy_img):
     global player, health, player_crosshair, enemy_lists, player_laser
-    
+
     enemy = MakeEnemy(enemy_data, enemy_img)
     enemy.create_enemy_data(enemy_count)
     enemy_lists = build_enemy(enemy_data)
     enemy_move(enemy_lists)
 
     health = canvas.create_rectangle(0, 0, player_health, 20, fill="red")
-    player_crosshair = canvas.create_image(0, 0, image=player_crosshair_img)
+
     player = canvas.create_image(
-        WINDOW_WIDTH/2, WINDOW_HEIGHT/2, image=player_img
-    )
-    player_laser = canvas.create_line(canvas.coords(player)[0], canvas.coords(player)[0],canvas.coords(player)[0], canvas.coords(player)[0])
+        WINDOW_WIDTH/2, WINDOW_HEIGHT/2, image=player_img)
+    player_laser = canvas.create_line(canvas.coords(player)[0], canvas.coords(
+        player)[0], canvas.coords(player)[0], canvas.coords(player)[0])
+    player_crosshair = canvas.create_image(0, 0, image=player_crosshair_img)
+
+    root.bind("<Motion>", crosshair)
+    root.bind("<Button-1>", shoot)
 
 
+#################################
 #>>>>>> GUI CALL FUNCTION <<<<<<#
+#################################
 
 def home():
     winsound.PlaySound(MUSIC_HOME, winsound.SND_FILENAME |
@@ -163,25 +205,24 @@ def home():
     home_frame.pack(expand=True, fill=BOTH)
     home_canvas.pack(expand=True, fill=BOTH)
     home_canvas.create_image(500, 300, image=background_home_img)
-    home_canvas.create_image(890, 500, image=background_black_img)
-    start_btn.place(x=810, y=400)
-    setting_btn.place(x=810, y=465)
-    exit_btn.place(x=810, y=530)
+    start_btn.place(x=800, y=340)
+    setting_btn.place(x=800, y=415)
+    exit_btn.place(x=800, y=490)
 
 
 def start():
-    winsound.PlaySound(MUSIC_CHOICE, winsound.SND_FILENAME |
-                       winsound.SND_ASYNC)
+    # winsound.PlaySound(MUSIC_HOME, winsound.SND_FILENAME |
+    #                    winsound.SND_ASYNC)
     canvas.delete('all')
     canvas.pack_forget()
     home_frame.pack_forget()
     start_frame.pack(expand=True, fill=BOTH)
     start_canvas.pack(expand=True, fill=BOTH)
     start_canvas.create_image(500, 300, image=background_start_img)
-    back_btn.place(x=20, y=20)
-    level1_btn.place(x=140, y=200)
-    level2_btn.place(x=390, y=200)
-    level3_btn.place(x=640, y=200)
+    back_btn.place(x=50, y=20)
+    level1_btn.place(x=50, y=200)
+    level2_btn.place(x=370, y=200)
+    level3_btn.place(x=690, y=200)
 
 
 def setting():
@@ -193,46 +234,44 @@ def setting():
     back_btn.place(x=20, y=30)
 
 
+#########################################
 #>>>>>> GUI CALL FUNCTIONS LEVELS <<<<<<#
+#########################################
+
 
 def level_1():
-    in_game_music()
     start_frame.pack_forget()
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
                         2, image=background_level1_img)
-    deploy_sprite(enemy_data_dictionary, 1)
-    print(player)
-
+    deploy_sprite(enemy_data_dictionary,
+                  NUMBER_OF_ENEMY_LEVEL_1, enemy_img_lv1)
 
 
 def level_2():
-    in_game_music()
     start_frame.pack_forget()
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
                         2, image=background_level2_img)
-    deploy_sprite(enemy_data_dictionary, 20)
-    print(player)
+    deploy_sprite(enemy_data_dictionary,
+                  NUMBER_OF_ENEMY_LEVEL_2, enemy_img_lv2)
 
 
 def level_3():
-    in_game_music()
     start_frame.pack_forget()
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
                         2, image=background_level3_img)
-    deploy_sprite(enemy_data_dictionary, 30)
-    print(player)
+    deploy_sprite(enemy_data_dictionary,
+                  NUMBER_OF_ENEMY_LEVEL_3, enemy_img_lv3)
 
-def in_game_music():
-    winsound.PlaySound(MUSIC_IN_GAME, winsound.SND_FILENAME |
-                       winsound.SND_ASYNC)
+
 #########################
 #>>>>>> MAIN CODE <<<<<<#
 #########################
-# >>>>>> MAIN WINDOWS
 
+
+# >>>>>> MAIN WINDOWS
 root = Tk()
 root.title(GAME_TITLE)
 root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
@@ -240,36 +279,36 @@ root.resizable(0, 0)
 
 
 #>>>>>> ROOT CANVAS <<<<<<#
-
 canvas = Canvas(root)
 # canvas.pack(expand=True, fill=BOTH)
 
 
 #>>>>>> Frame <<<<<<#
-
 home_frame = Frame(root)
 start_frame = Frame(root)
 setting_frame = Frame(root)
 
-#>>>>>> CANVAS <<<<<<#
 
+#>>>>>> CANVAS <<<<<<#
 home_canvas = Canvas(home_frame)
 start_canvas = Canvas(start_frame)
 setting_canvas = Canvas(setting_frame)
 
 
-#>>>>>> PLAYER PROPERTIES <<<<<<#
-
+#>>>>>> PLAYER IMG <<<<<<#
 player_crosshair_img = PhotoImage(file=CROSSHAIR)
-enemy_img = PhotoImage(file=ENEMY_IMG_LOCATION)
 player_img = PhotoImage(file=CHARACTER_IMG_LOCATION)
 bullet_img = PhotoImage(file=BULLET_IMG_LOCATION)
 player = None
-# player_crosshair = canvas.create_rectangle(player_position)
+
+
+#>>>>>> ENEMY IMG <<<<<<#
+enemy_img_lv1 = PhotoImage(file=ENEMY_IMG_LOCATION)
+enemy_img_lv2 = PhotoImage(file=ENEMY2_IMG_LOCATION)
+enemy_img_lv3 = PhotoImage(file=ENEMY3_IMG_LOCATION)
 
 
 #>>>>>> BACKGROUND <<<<<<#
-
 background_home_img = PhotoImage(file=HOME_BACKGROUND_IMAGE_LOCATION)
 background_black_img = PhotoImage(file=BLACK_IMG_LOCATION)
 background_level1_img = PhotoImage(file=BACKGROUND_LEVEL1_LOCATION)
@@ -279,8 +318,7 @@ background_start_img = PhotoImage(file=BACKGROUND_START_LOCATION)
 background_setting_img = PhotoImage(file=SETTING_IMAGE_LOCATION)
 
 
-#>>>>>> BUTTON IMG<<<<<<#
-
+#>>>>>> BUTTON IMG <<<<<<#
 button_start_img = PhotoImage(file=BUTTON_START_IMG_LOCATION)
 button_setting_img = PhotoImage(file=BUTTON_SETTING_IMG_LOCATION)
 button_exit_img = PhotoImage(file=BUTTON_EXIT_IMG_LOCATION)
@@ -292,43 +330,47 @@ button_on_img = PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 
 #>>>>>>>>> ITEM IMG <<<<<<<<#
-green_virus_img=PhotoImage(file=GREEN_VIRUS_LOCATION)
-heart_img=PhotoImage(file=HEART_LOCATION)
-red_virus_img=PhotoImage(file=RED_VIRUS_LOCATIO)
-vacinne_img=PhotoImage(file=VACINNE_LOCATION)
-virus_2_img=PhotoImage(file=VIRUS_2_LOCATION)
-virus_3_img=PhotoImage(file=VIRUS_3_LOCATION)
-blood_img=PhotoImage(file=BLOOD_LOCATION)
+green_virus_img = PhotoImage(file=GREEN_VIRUS_LOCATION)
+heart_img = PhotoImage(file=HEART_LOCATION)
+red_virus_img = PhotoImage(file=RED_VIRUS_LOCATION)
+vacinne_img = PhotoImage(file=VACINNE_LOCATION)
+blood_img = PhotoImage(file=BLOOD_LOCATION)
 
 #>>>>>> HOME FRAME BUTTON <<<<<<#
-
-start_btn = Button(home_frame, image=button_start_img, command=start)
-setting_btn = Button(home_frame, image=button_setting_img, command=setting)
-exit_btn = Button(home_frame, image=button_exit_img, command=quit)
+start_btn = Button(home_frame, bd=10, image=button_start_img, command=start)
+setting_btn = Button(
+    home_frame, bd=10, image=button_setting_img, command=setting)
+exit_btn = Button(home_frame, bd=10, image=button_exit_img, command=quit)
 
 
 #>>>>>> START FRAME BUTTON <<<<<<#
-back_btn = Button(start_frame, image=button_back_img, command=home)
-level1_btn = Button(start_frame, image=button_level1_img, command=level_1)
-level2_btn = Button(start_frame, image=button_level2_img, command=level_2)
-level3_btn = Button(start_frame, image=button_level3_img, command=level_3)
+back_btn = Button(start_frame, bd=10, image=button_back_img, command=home)
+level1_btn = Button(start_frame, bd=20,
+                    image=button_level1_img, command=level_1)
+level2_btn = Button(start_frame, bd=20,
+                    image=button_level2_img, command=level_2)
+level3_btn = Button(start_frame, bd=20,
+                    image=button_level3_img, command=level_3)
 
 
 ############################################
 #>>>>>> FUNCTIONS DEPLOYMENT HERE!!! <<<<<<#
 ############################################
 
-home()
+# home()
+item = Items(items_data_dictionary, item_img_list)
+item.generate_item_dict(10)
+build_item(items_data_dictionary, items_dictionary)
+print(items_dictionary)
 
-
+###########################
 #>>>>>> KEY BINDING <<<<<<#
+###########################
 
 root.bind("<w>", move_up)
 root.bind("<a>", move_left)
 root.bind("<s>", move_down)
 root.bind("<d>", move_right)
 
-root.bind("<Motion>", crosshair)
-root.bind("<Button-1>", shoot)
 
 root.mainloop()
