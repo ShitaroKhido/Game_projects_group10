@@ -12,9 +12,6 @@ health_pos = [60, 60]
 enemy_data_dictionary = {}
 enemy_size = 20
 
-item_dictionary = {}
-item_data = {}
-
 level_count = 0
 
 #########################
@@ -34,7 +31,6 @@ def movement(x=0, y=0):
             canvas.coords(player)[1] + y <= 0:
         is_not_wall = False
         return_value = None
-
     elif is_not_wall:
         return_value = canvas.move(player, x, y)
     return return_value
@@ -71,8 +67,8 @@ def shoot(event):
     target = (canvas.find_overlapping(event.x, event.y,
               event.x-AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT))
     shot_sound = PlaySound(LASER_SHOT, SND_FILENAME |
-                       SND_ASYNC)
-    
+                           SND_ASYNC)
+
     # >>> CHECK ENEMY ID WHEN
     for i in enemy_lists:
         if target[1] == enemy_lists[i]:
@@ -93,10 +89,10 @@ def shoot(event):
         canvas.delete("all")
         level_count += 1
         if level_count == 1:
-            win_screen("Moving to level 2","black", level_2)
-        elif level_count ==2:
+            win_screen("Moving to level 2", "black", level_2)
+        elif level_count == 2:
             win_screen("Moving to level 2", "black", level_3)
-            
+
         elif level_count == 3:
             win_screen("You have finish the game", "black", start)
         enemy_data_dictionary.clear()
@@ -104,30 +100,13 @@ def shoot(event):
 
     print(len(enemy_lists))
 
-def win_screen(text:str, color:str, toWhere):
+
+def win_screen(text: str, color: str, toWhere):
     canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
-                           text=text, font=("impact", 80),
-                           fill=color
-                           )
+                       text=text, font=("impact", 80),
+                       fill=color
+                       )
     root.after(1000, toWhere)
-
-
-#############################
-#>>>>>> PLAYERS ITEMS <<<<<<#
-#############################
-
-def build_item(item_data):
-    for key in item_data:
-        item_dictionary[key]=canvas.create_image(
-            item_data[key]["position"], image=item_data[key]["img_location"]
-        )
-
-def deploy_sprite():
-    items = Items(item_data, item_img)
-    items.generate_item_dict(10)
-    build_item(item_data)
-    print(item_dictionary)
-
 
 
 ###############################
@@ -144,7 +123,7 @@ def build_enemy(enemy_dict_data):
 
 
 def enemy_move(lists):
-    global player_health, health,restart_btn_level1
+    global player_health, health, restart_btn_level1
     intersect_adjustment = 40
     for key in enemy_data_dictionary:
         if canvas.coords(lists[key])[0] >= WINDOW_WIDTH-intersect_adjustment:
@@ -178,14 +157,14 @@ def enemy_move(lists):
                                        text="YOU DIED", font=("impact", 150),
                                        fill="red")
                     PlaySound(GAME_OVER_SOUND, SND_FILENAME |
-                           SND_ASYNC)
-                    if level_count==0:
-                        restart_btn_level1.place(x=400,y=400)
-                    elif level_count==1:
-                        restart_btn_level2.place(x=400,y=400)
-                    elif level_count==2:
-                        restart_btn_level3.place(x=400,y=400)
-                    player_health=200
+                              SND_ASYNC)
+                    if level_count == 0:
+                        restart_btn_level1.place(x=400, y=400)
+                    elif level_count == 1:
+                        restart_btn_level2.place(x=400, y=400)
+                    elif level_count == 2:
+                        restart_btn_level3.place(x=400, y=400)
+                    player_health = 200
                 health = canvas.create_rectangle(
                     0, 0, player_health, 20, fill="red")
         canvas.move(lists[key],
@@ -207,7 +186,6 @@ def deploy_sprite(enemy_data: list, enemy_count: int, enemy_img):
 
     health = canvas.create_rectangle(0, 0, player_health, 20, fill="red")
 
-
     root.bind("<Motion>", crosshair)
     root.bind("<Button-1>", shoot)
 
@@ -217,19 +195,29 @@ def deploy_sprite(enemy_data: list, enemy_count: int, enemy_img):
         player)[0], canvas.coords(player)[0], canvas.coords(player)[0])
     player_crosshair = canvas.create_image(0, 0, image=player_crosshair_img)
 
-    items = Items(item_data, item_img)
-    items.generate_item_dict(10)
-    build_item(item_data)
-    print(item_dictionary)
-
 
 #################################
 #>>>>>> GUI CALL FUNCTION <<<<<<#
 #################################
 
+def upgrade(event):
+    setting_window_ingame = Toplevel(root)
+    setting_window_ingame.geometry("250x200")
+    setting_window_ingame.resizable(0, 0)
+
+    add_health = Button(setting_window_ingame, text="ADD HEALTH", pady=20)
+    add_health.pack(expand=True, fill="x")
+
+    reset_game = Button(setting_window_ingame, text="Reset game", pady=20)
+    reset_game.pack(expand=True, fill="x")
+
+    exit_game = Button(setting_window_ingame, text="Exit", pady=20)
+    exit_game.pack(expand=True, fill="x")
+
+
 def home():
     PlaySound(MUSIC_HOME, SND_FILENAME |
-                       SND_ASYNC)
+              SND_ASYNC)
     start_frame.pack_forget()
     home_frame.pack(expand=True, fill=BOTH)
     home_canvas.pack(expand=True, fill=BOTH)
@@ -268,20 +256,23 @@ def restart_from_level_1():
     canvas.delete('all')
     level_1()
 
+
 def restart_from_level_2():
     canvas.delete('all')
     level_2()
 
+
 def restart_from_level_3():
     canvas.delete('all')
     level_3()
+
 
 def level_1():
     global main_window_sound, restart_btn_level1
     canvas.delete('all')
     restart_btn_level1.place_forget()
     main_window_sound = PlaySound(MUSIC_CHOICE, SND_FILENAME |
-                       SND_ASYNC)
+                                  SND_ASYNC)
     start_frame.pack_forget()
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
@@ -377,7 +368,7 @@ button_level2_img = PhotoImage(file=BUTTON_LEVEL2_IMG_LOCATION)
 button_level3_img = PhotoImage(file=BUTTON_LEVEL3_IMG_LOCATION)
 button_on_img = PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
-button_restart_img=PhotoImage(file=BUTTON_RESTART_IMG_LOCATION)
+button_restart_img = PhotoImage(file=BUTTON_RESTART_IMG_LOCATION)
 
 
 #>>>>>>>>> ITEM IMG <<<<<<<<#
@@ -394,9 +385,12 @@ start_btn = Button(home_frame, bd=10, image=button_start_img, command=start)
 setting_btn = Button(
     home_frame, bd=10, image=button_setting_img, command=setting)
 exit_btn = Button(home_frame, bd=10, image=button_exit_img, command=quit)
-restart_btn_level1=Button(root,bd=10,image=button_restart_img,command=restart_from_level_1)
-restart_btn_level2=Button(root,bd=10,image=button_restart_img,command=restart_from_level_2)
-restart_btn_level3=Button(root,bd=10,image=button_restart_img,command=restart_from_level_3)
+restart_btn_level1 = Button(
+    root, bd=10, image=button_restart_img, command=restart_from_level_1)
+restart_btn_level2 = Button(
+    root, bd=10, image=button_restart_img, command=restart_from_level_2)
+restart_btn_level3 = Button(
+    root, bd=10, image=button_restart_img, command=restart_from_level_3)
 
 
 #>>>>>> START FRAME BUTTON <<<<<<#
@@ -423,6 +417,6 @@ root.bind("<w>", move_up)
 root.bind("<a>", move_left)
 root.bind("<s>", move_down)
 root.bind("<d>", move_right)
-
+root.bind("<f>", upgrade)
 
 root.mainloop()
