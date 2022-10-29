@@ -32,7 +32,7 @@ BACKGROUND_LEVEL2_LOCATION="Game_projects_group10\\assets\image\LEVEL2.png"
 BACKGROUND_LEVEL3_LOCATION="Game_projects_group10\\assets\image\LEVEL3.png"
 BACKGROUND_START_LOCATION='Game_projects_group10\\assets\image\wall.png'
 SETTING_IMAGE_LOCATION='Game_projects_group10\\assets\image\setting.png'
-
+BACKGROUND_LAB_LOCATION="Game_projects_group10\\assets\image\lab.png"
 
 GREEN_VIRUS_LOCATION="Game_projects_group10\\assets\image\item\green_virus.png"
 HEART_LOCATION="Game_projects_group10\\assets\image\item\heart.png"
