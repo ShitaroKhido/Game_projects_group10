@@ -206,13 +206,20 @@ def in_game_setting(event):
     setting_window_ingame.resizable(0, 0)
     setting_window_ingame.title("Setting")
 
+    if level_count == 0:
+        go_to = restart_btn_level1
+    elif level_count == 0:
+        go_to = restart_btn_level2
+    elif level_count == 0:
+        go_to = restart_btn_level3
+
     add_health = Button(setting_window_ingame, text="ADD HEALTH", pady=20)
     add_health.pack(expand=True, fill="x")
 
-    reset_game = Button(setting_window_ingame, text="Reset game", pady=20)
+    reset_game = Button(setting_window_ingame, text="Reset game", pady=20, command=go_to)
     reset_game.pack(expand=True, fill="x")
 
-    exit_game = Button(setting_window_ingame, text="Exit", pady=20)
+    exit_game = Button(setting_window_ingame, text="Exit", pady=20, command=quit)
     exit_game.pack(expand=True, fill="x")
 
 
