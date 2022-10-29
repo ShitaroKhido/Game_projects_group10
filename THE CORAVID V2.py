@@ -12,8 +12,8 @@ health_pos = [60, 60]
 enemy_data_dictionary = {}
 enemy_size = 20
 
-items_data_dictionary = {}
-items_dictionary = {}
+item_dictionary = {}
+item_data = {}
 
 level_count = 0
 
@@ -116,11 +116,18 @@ def win_screen(text:str, color:str, toWhere):
 #>>>>>> PLAYERS ITEMS <<<<<<#
 #############################
 
-def build_item(item_data, item_dict):
+def build_item(item_data):
     for key in item_data:
-        item_dict[key] = canvas.create_image(
+        item_dictionary[key]=canvas.create_image(
             item_data[key]["position"], image=item_data[key]["img_location"]
         )
+
+def deploy_sprite():
+    items = Items(item_data, item_img)
+    items.generate_item_dict(10)
+    build_item(item_data)
+    print(item_dictionary)
+
 
 
 ###############################
