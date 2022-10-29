@@ -1,12 +1,10 @@
-import winsound
 from library.constant import *
 from library.sprite import *
 from tkinter import Button, Frame, Tk, Canvas, PhotoImage, Toplevel, mainloop, BOTH
 from winsound import *
 
-
 player_inventory = {}
-player_health = 100
+player_health = 200
 
 bullet_count = []
 health_pos = [60, 60]
@@ -17,7 +15,7 @@ enemy_size = 20
 items_data_dictionary = {}
 items_dictionary = {}
 
-up_count = 0
+level_count = 0
 
 #########################
 #>>>>>> FUNCTIONS <<<<<<#
@@ -68,12 +66,13 @@ def crosshair(event):
 
 
 def shoot(event):
-    global enemy_id, up_count, enemy_data_dictionary, enemy_lists, shot_sound
+    global enemy_id, up_count, enemy_data_dictionary, enemy_lists, shot_sound, level_count
     hit = False
     target = (canvas.find_overlapping(event.x, event.y,
               event.x-AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT))
-    shot_sound = winsound.PlaySound(LASER_SHOT, winsound.SND_FILENAME |
-                       winsound.SND_ASYNC)
+    shot_sound = PlaySound(LASER_SHOT, SND_FILENAME |
+                       SND_ASYNC)
+    
     # >>> CHECK ENEMY ID WHEN
     for i in enemy_lists:
         if target[1] == enemy_lists[i]:
@@ -92,17 +91,25 @@ def shoot(event):
     # >>> CHECK IF NO ENEMY
     if len(enemy_lists) <= 0:
         canvas.delete("all")
-        canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
-                           text="YOU SURVIVED", font=("impact", 100),
-                           fill="green"
-                           )
-        winsound.PlaySound(WIN_SOUND, winsound.SND_FILENAME |
-                           winsound.SND_ASYNC)
+        level_count += 1
+        if level_count == 1:
+            win_screen("Moving to level 2","black", level_2)
+        elif level_count ==2:
+            win_screen("Moving to level 2", "black", level_3)
+            
+        elif level_count == 3:
+            win_screen("You have finish the game", "black", start)
         enemy_data_dictionary.clear()
-        level_1.__delattr__
         enemy_lists.clear()
 
     print(len(enemy_lists))
+
+def win_screen(text:str, color:str, toWhere):
+    canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
+                           text=text, font=("impact", 80),
+                           fill=color
+                           )
+    root.after(1000, toWhere)
 
 
 #############################
@@ -163,6 +170,8 @@ def enemy_move(lists):
                     canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
                                        text="YOU DIED", font=("impact", 150),
                                        fill="red")
+                    PlaySound(MUSIC_IN_GAME, SND_FILENAME |
+                           SND_ASYNC)
                 health = canvas.create_rectangle(
                     0, 0, player_health, 20, fill="red")
         canvas.move(lists[key],
@@ -184,24 +193,23 @@ def deploy_sprite(enemy_data: list, enemy_count: int, enemy_img):
 
     health = canvas.create_rectangle(0, 0, player_health, 20, fill="red")
 
+
+    root.bind("<Motion>", crosshair)
+    root.bind("<Button-1>", shoot)
+
     player = canvas.create_image(
         WINDOW_WIDTH/2, WINDOW_HEIGHT/2, image=player_img)
     player_laser = canvas.create_line(canvas.coords(player)[0], canvas.coords(
         player)[0], canvas.coords(player)[0], canvas.coords(player)[0])
     player_crosshair = canvas.create_image(0, 0, image=player_crosshair_img)
 
-    root.bind("<Motion>", crosshair)
-    root.bind("<Button-1>", shoot)
-
-
 #################################
 #>>>>>> GUI CALL FUNCTION <<<<<<#
 #################################
 
 def home():
-    global main_window_sound
-    main_window_sound = winsound.PlaySound(MUSIC_HOME, winsound.SND_FILENAME |
-                       winsound.SND_ASYNC)
+    PlaySound(MUSIC_HOME, SND_FILENAME |
+                       SND_ASYNC)
     start_frame.pack_forget()
     home_frame.pack(expand=True, fill=BOTH)
     home_canvas.pack(expand=True, fill=BOTH)
@@ -212,8 +220,6 @@ def home():
 
 
 def start():
-    # winsound.PlaySound(MUSIC_HOME, winsound.SND_FILENAME |
-    #                    winsound.SND_ASYNC)
     canvas.delete('all')
     canvas.pack_forget()
     home_frame.pack_forget()
@@ -242,17 +248,18 @@ def setting():
 
 def level_1():
     global main_window_sound
-    main_window_sound = winsound.PlaySound(MUSIC_CHOICE, winsound.SND_FILENAME |
-                       winsound.SND_ASYNC)
+    main_window_sound = PlaySound(MUSIC_CHOICE, SND_FILENAME |
+                       SND_ASYNC)
     start_frame.pack_forget()
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
                         2, image=background_level1_img)
     deploy_sprite(enemy_data_dictionary,
-                  NUMBER_OF_ENEMY_LEVEL_1, enemy_img_lv1)
+                  1, enemy_img_lv1)
 
 
 def level_2():
+    canvas.delete("all")
     start_frame.pack_forget()
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
@@ -262,6 +269,7 @@ def level_2():
 
 
 def level_3():
+    canvas.delete("all")
     start_frame.pack_forget()
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
