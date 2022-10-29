@@ -170,8 +170,10 @@ def enemy_move(lists):
                     canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
                                        text="YOU DIED", font=("impact", 150),
                                        fill="red")
-                    PlaySound(MUSIC_IN_GAME, SND_FILENAME |
+                    PlaySound(GAME_OVER_SOUND, SND_FILENAME |
                            SND_ASYNC)
+                    restart_btn=Button(root,image=button_back_img,command=level_1)
+                    restart_btn.place(x=20,y=20)
                 health = canvas.create_rectangle(
                     0, 0, player_health, 20, fill="red")
         canvas.move(lists[key],
