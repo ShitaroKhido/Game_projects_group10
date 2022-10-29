@@ -16,7 +16,6 @@ enemy_size = 20
 
 items_data_dictionary = {}
 items_dictionary = {}
-item_img_list = [heart_img, vacinne_img]
 
 up_count = 0
 
@@ -69,11 +68,11 @@ def crosshair(event):
 
 
 def shoot(event):
-    global enemy_id, up_count, enemy_data_dictionary, enemy_lists
+    global enemy_id, up_count, enemy_data_dictionary, enemy_lists, shot_sound
     hit = False
     target = (canvas.find_overlapping(event.x, event.y,
               event.x-AIM_ADJUSTMENT, event.y-AIM_ADJUSTMENT))
-    winsound.PlaySound(ENEMY_SOUND, winsound.SND_FILENAME |
+    shot_sound = winsound.PlaySound(LASER_SHOT, winsound.SND_FILENAME |
                        winsound.SND_ASYNC)
     # >>> CHECK ENEMY ID WHEN
     for i in enemy_lists:
@@ -100,6 +99,7 @@ def shoot(event):
         winsound.PlaySound(WIN_SOUND, winsound.SND_FILENAME |
                            winsound.SND_ASYNC)
         enemy_data_dictionary.clear()
+        level_1.__delattr__
         enemy_lists.clear()
 
     print(len(enemy_lists))
@@ -131,7 +131,7 @@ def build_enemy(enemy_dict_data):
 
 def enemy_move(lists):
     global player_health, health
-    intersect_adjustment = 30
+    intersect_adjustment = 40
     for key in enemy_data_dictionary:
         if canvas.coords(lists[key])[0] >= WINDOW_WIDTH-intersect_adjustment:
             enemy_data_dictionary[key]["volocity"][0] = - \
@@ -199,7 +199,8 @@ def deploy_sprite(enemy_data: list, enemy_count: int, enemy_img):
 #################################
 
 def home():
-    winsound.PlaySound(MUSIC_HOME, winsound.SND_FILENAME |
+    global main_window_sound
+    main_window_sound = winsound.PlaySound(MUSIC_HOME, winsound.SND_FILENAME |
                        winsound.SND_ASYNC)
     start_frame.pack_forget()
     home_frame.pack(expand=True, fill=BOTH)
@@ -240,6 +241,9 @@ def setting():
 
 
 def level_1():
+    global main_window_sound
+    main_window_sound = winsound.PlaySound(MUSIC_CHOICE, winsound.SND_FILENAME |
+                       winsound.SND_ASYNC)
     start_frame.pack_forget()
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
@@ -357,11 +361,7 @@ level3_btn = Button(start_frame, bd=20,
 #>>>>>> FUNCTIONS DEPLOYMENT HERE!!! <<<<<<#
 ############################################
 
-# home()
-item = Items(items_data_dictionary, item_img_list)
-item.generate_item_dict(10)
-build_item(items_data_dictionary, items_dictionary)
-print(items_dictionary)
+home()
 
 ###########################
 #>>>>>> KEY BINDING <<<<<<#

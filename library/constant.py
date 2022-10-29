@@ -9,7 +9,6 @@ BULLET_IMG_LOCATION = "Game_projects_group10\\assets\image\\b2.png"
 CROSSHAIR = "Game_projects_group10\\assets\image\crosshairs.png"
 AIM_ADJUSTMENT = 40
 
-
 NUMBER_OF_ENEMY_LEVEL_1 = 10
 NUMBER_OF_ENEMY_LEVEL_2 = 40
 NUMBER_OF_ENEMY_LEVEL_3 = 20
@@ -49,5 +48,7 @@ MUSIC_CHOICE="Game_projects_group10\\assets\Sound\choice.wav"
 MUSIC_HOME="Game_projects_group10\\assets\Sound\sound_music.wav"
 MUSIC_IN_GAME="Game_projects_group10\\assets\Sound\in_game.wav"
 ENEMY_SOUND="Game_projects_group10\\assets\Sound\enemy_bite.wav"
+ENEMY_SOUND_2="Game_projects_group10\\assets\Sound\eating-juicy-meat-7024.wav"
 GAME_OVER_SOUND="Game_projects_group10\\assets\Sound\gave_over.wav"
 WIN_SOUND="Game_projects_group10\\assets\Sound\win.wav"
+LASER_SHOT = "Game_projects_group10\\assets\Sound\laser-cannon-shot.wav"
