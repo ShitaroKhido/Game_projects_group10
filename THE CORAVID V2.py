@@ -200,10 +200,11 @@ def deploy_sprite(enemy_data: list, enemy_count: int, enemy_img):
 #>>>>>> GUI CALL FUNCTION <<<<<<#
 #################################
 
-def upgrade(event):
+def in_game_setting(event):
     setting_window_ingame = Toplevel(root)
     setting_window_ingame.geometry("250x200")
     setting_window_ingame.resizable(0, 0)
+    setting_window_ingame.title("Setting")
 
     add_health = Button(setting_window_ingame, text="ADD HEALTH", pady=20)
     add_health.pack(expand=True, fill="x")
@@ -417,6 +418,6 @@ root.bind("<w>", move_up)
 root.bind("<a>", move_left)
 root.bind("<s>", move_down)
 root.bind("<d>", move_right)
-root.bind("<f>", upgrade)
+root.bind("<f>", in_game_setting)
 
 root.mainloop()
