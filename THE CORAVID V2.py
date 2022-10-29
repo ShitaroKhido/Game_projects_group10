@@ -95,6 +95,7 @@ def shoot(event):
 
         elif level_count == 3:
             win_screen("You have finish the game", "black", start)
+            level_count=0
         enemy_data_dictionary.clear()
         enemy_lists.clear()
 
@@ -169,6 +170,7 @@ def enemy_move(lists):
                     0, 0, player_health, 20, fill="red")
         canvas.move(lists[key],
                     enemy_data_dictionary[key]["volocity"][0], enemy_data_dictionary[key]["volocity"][1])
+        player_health = 200
     canvas.after(40, lambda: enemy_move(lists))
 
 
