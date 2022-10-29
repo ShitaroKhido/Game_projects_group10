@@ -34,7 +34,7 @@ class MakeEnemy(Generate_sprite):
 
 class Items(Generate_sprite):
     
-    def __init__(self, empty_dictionary=None, list_img=None):
+    def __init__(self, empty_dictionary, list_img):
         super().__init__(empty_dictionary, list_img)
         self._dict = empty_dictionary
         self._img_list  = list_img
