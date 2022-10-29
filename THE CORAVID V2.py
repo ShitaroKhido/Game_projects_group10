@@ -183,7 +183,7 @@ def enemy_move(lists):
                         restart_btn_level1.place(x=400,y=400)
                     elif level_count==1:
                         restart_btn_level2.place(x=400,y=400)
-                    else:
+                    elif level_count==2:
                         restart_btn_level3.place(x=400,y=400)
                     player_health=200
                 health = canvas.create_rectangle(
@@ -207,10 +207,6 @@ def deploy_sprite(enemy_data: list, enemy_count: int, enemy_img):
 
     health = canvas.create_rectangle(0, 0, player_health, 20, fill="red")
 
-    items = Items(item_data, item_img)
-    items.generate_item_dict(10)
-    build_item(item_data)
-    print(item_dictionary)
 
     root.bind("<Motion>", crosshair)
     root.bind("<Button-1>", shoot)
@@ -220,6 +216,12 @@ def deploy_sprite(enemy_data: list, enemy_count: int, enemy_img):
     player_laser = canvas.create_line(canvas.coords(player)[0], canvas.coords(
         player)[0], canvas.coords(player)[0], canvas.coords(player)[0])
     player_crosshair = canvas.create_image(0, 0, image=player_crosshair_img)
+
+    items = Items(item_data, item_img)
+    items.generate_item_dict(10)
+    build_item(item_data)
+    print(item_dictionary)
+
 
 #################################
 #>>>>>> GUI CALL FUNCTION <<<<<<#
