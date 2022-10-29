@@ -91,10 +91,10 @@ def shoot(event):
         if level_count == 1:
             win_screen("Moving to level 2", "black", level_2)
         elif level_count == 2:
-            win_screen("Moving to level 2", "black", level_3)
+            win_screen("Moving to level 3", "black", level_3)
 
         elif level_count == 3:
-            win_screen("You have finish the game", "black", start)
+            win_screen("", "black", start)
             level_count=0
         enemy_data_dictionary.clear()
         enemy_lists.clear()
@@ -107,7 +107,7 @@ def win_screen(text: str, color: str, toWhere):
                        text=text, font=("impact", 80),
                        fill=color
                        )
-    root.after(1000, toWhere)
+    root.bind("<space>", toWhere)
 
 
 ###############################
@@ -170,7 +170,6 @@ def enemy_move(lists):
                     0, 0, player_health, 20, fill="red")
         canvas.move(lists[key],
                     enemy_data_dictionary[key]["volocity"][0], enemy_data_dictionary[key]["volocity"][1])
-        player_health = 200
     canvas.after(40, lambda: enemy_move(lists))
 
 
@@ -185,18 +184,23 @@ def deploy_sprite(enemy_data: list, enemy_count: int, enemy_img):
     enemy.create_enemy_data(enemy_count)
     enemy_lists = build_enemy(enemy_data)
     enemy_move(enemy_lists)
-
-    health = canvas.create_rectangle(0, 0, player_health, 20, fill="red")
-
-    root.bind("<Motion>", crosshair)
-    root.bind("<Button-1>", shoot)
-
+   
     player = canvas.create_image(
         WINDOW_WIDTH/2, WINDOW_HEIGHT/2, image=player_img)
     player_laser = canvas.create_line(canvas.coords(player)[0], canvas.coords(
         player)[0], canvas.coords(player)[0], canvas.coords(player)[0])
     player_crosshair = canvas.create_image(0, 0, image=player_crosshair_img)
 
+    health = canvas.create_rectangle(0, 0, player_health, 20, fill="red")
+
+    root.bind("<Motion>", crosshair)
+    root.bind("<Button-1>", shoot)
+
+
+
+def add_healths():
+    global player_health
+    player_health += 30
 
 #################################
 #>>>>>> GUI CALL FUNCTION <<<<<<#
@@ -215,7 +219,7 @@ def in_game_setting(event):
     elif level_count == 0:
         go_to = restart_btn_level3
 
-    add_health = Button(setting_window_ingame, text="ADD HEALTH", pady=20)
+    add_health = Button(setting_window_ingame, text="ADD HEALTH", pady=20, command=add_healths)
     add_health.pack(expand=True, fill="x")
 
     reset_game = Button(setting_window_ingame, text="Reset game", pady=20, command=go_to)
