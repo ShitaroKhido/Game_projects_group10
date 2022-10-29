@@ -40,6 +40,7 @@ class Items(Generate_sprite):
         self._img_list  = list_img
     
     def generate_item_dict(self, count):
+        tag = "items"
         for i in range(count):
             key = f"item_{i+1}"
 
@@ -47,10 +48,14 @@ class Items(Generate_sprite):
             rand_x = randint(1, WINDOW_WIDTH-100)
             
             imgs = self._img_list[randint(0,len(self._img_list)-1)]
+            
+            if self._img[0] == imgs:
+                tag = "vaccine"
 
             self._dict[key] = {
                 "position": [rand_x, rand_y],
-                "img_location": imgs
+                "img_location": imgs,
+                "item": tag
             }
 
 
