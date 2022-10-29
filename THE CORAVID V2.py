@@ -1,3 +1,4 @@
+from email.mime import image
 from library.constant import *
 from library.sprite import *
 from tkinter import Button, Frame, Tk, Canvas, PhotoImage, Toplevel, mainloop, BOTH
@@ -300,6 +301,7 @@ def level_1():
 def level_2():
     global restart_btn_level2
     canvas.delete('all')
+    canvas.create_image(500,300,image=background_lab_img)
 
     restart_btn_level2.place_forget()
     start_frame.pack_forget()
@@ -375,7 +377,7 @@ background_level3_img = PhotoImage(file=BACKGROUND_LEVEL3_LOCATION)
 background_level3_end_img = PhotoImage(file=BACKGROUND_LEVEL3_END_LOCATION)
 background_start_img = PhotoImage(file=BACKGROUND_START_LOCATION)
 background_setting_img = PhotoImage(file=SETTING_IMAGE_LOCATION)
-
+background_lab_img = PhotoImage(file=BACKGROUND_LAB_LOCATION)
 
 #>>>>>> BUTTON IMG <<<<<<#
 button_start_img = PhotoImage(file=BUTTON_START_IMG_LOCATION)
