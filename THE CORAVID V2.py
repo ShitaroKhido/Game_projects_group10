@@ -207,6 +207,10 @@ def deploy_sprite(enemy_data: list, enemy_count: int, enemy_img):
 
     health = canvas.create_rectangle(0, 0, player_health, 20, fill="red")
 
+    items = Items(item_data, item_img)
+    items.generate_item_dict(10)
+    build_item(item_data)
+    print(item_dictionary)
 
     root.bind("<Motion>", crosshair)
     root.bind("<Button-1>", shoot)
@@ -373,12 +377,15 @@ button_on_img = PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
 button_restart_img=PhotoImage(file=BUTTON_RESTART_IMG_LOCATION)
 
+
 #>>>>>>>>> ITEM IMG <<<<<<<<#
 green_virus_img = PhotoImage(file=GREEN_VIRUS_LOCATION)
 heart_img = PhotoImage(file=HEART_LOCATION)
 red_virus_img = PhotoImage(file=RED_VIRUS_LOCATION)
 vacinne_img = PhotoImage(file=VACINNE_LOCATION)
 blood_img = PhotoImage(file=BLOOD_LOCATION)
+item_img = [heart_img, vacinne_img]
+
 
 #>>>>>> HOME FRAME BUTTON <<<<<<#
 start_btn = Button(home_frame, bd=10, image=button_start_img, command=start)
