@@ -137,7 +137,7 @@ def build_enemy(enemy_dict_data):
 
 
 def enemy_move(lists):
-    global player_health, health
+    global player_health, health,restart_btn_level1
     intersect_adjustment = 40
     for key in enemy_data_dictionary:
         if canvas.coords(lists[key])[0] >= WINDOW_WIDTH-intersect_adjustment:
@@ -172,8 +172,13 @@ def enemy_move(lists):
                                        fill="red")
                     PlaySound(GAME_OVER_SOUND, SND_FILENAME |
                            SND_ASYNC)
-                    restart_btn=Button(root,image=button_back_img,command=level_1)
-                    restart_btn.place(x=20,y=20)
+                    if level_count==0:
+                        restart_btn_level1.place(x=400,y=400)
+                    elif level_count==1:
+                        restart_btn_level2.place(x=400,y=400)
+                    else:
+                        restart_btn_level3.place(x=400,y=400)
+                    player_health=200
                 health = canvas.create_rectangle(
                     0, 0, player_health, 20, fill="red")
         canvas.move(lists[key],
@@ -246,10 +251,22 @@ def setting():
 #########################################
 #>>>>>> GUI CALL FUNCTIONS LEVELS <<<<<<#
 #########################################
+def restart_from_level_1():
+    canvas.delete('all')
+    level_1()
 
+def restart_from_level_2():
+    canvas.delete('all')
+    level_2()
+
+def restart_from_level_3():
+    canvas.delete('all')
+    level_3()
 
 def level_1():
-    global main_window_sound
+    global main_window_sound, restart_btn_level1
+    canvas.delete('all')
+    restart_btn_level1.place_forget()
     main_window_sound = PlaySound(MUSIC_CHOICE, SND_FILENAME |
                        SND_ASYNC)
     start_frame.pack_forget()
@@ -261,7 +278,10 @@ def level_1():
 
 
 def level_2():
-    canvas.delete("all")
+    global restart_btn_level2
+    canvas.delete('all')
+
+    restart_btn_level2.place_forget()
     start_frame.pack_forget()
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
@@ -271,8 +291,10 @@ def level_2():
 
 
 def level_3():
-    canvas.delete("all")
+    global restart_btn_level3
+    canvas.delete('all')
     start_frame.pack_forget()
+    restart_btn_level3.place_forget()
     canvas.pack(expand=True, fill=BOTH)
     canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT /
                         2, image=background_level3_img)
@@ -342,6 +364,7 @@ button_level2_img = PhotoImage(file=BUTTON_LEVEL2_IMG_LOCATION)
 button_level3_img = PhotoImage(file=BUTTON_LEVEL3_IMG_LOCATION)
 button_on_img = PhotoImage(file=BUTTON_ON_IMG_LOCATION)
 button_off_img = PhotoImage(file=BUTTON_OFF_IMG_LOCATION)
+button_restart_img=PhotoImage(file=BUTTON_RESTART_IMG_LOCATION)
 
 #>>>>>>>>> ITEM IMG <<<<<<<<#
 green_virus_img = PhotoImage(file=GREEN_VIRUS_LOCATION)
@@ -355,6 +378,9 @@ start_btn = Button(home_frame, bd=10, image=button_start_img, command=start)
 setting_btn = Button(
     home_frame, bd=10, image=button_setting_img, command=setting)
 exit_btn = Button(home_frame, bd=10, image=button_exit_img, command=quit)
+restart_btn_level1=Button(root,bd=10,image=button_restart_img,command=restart_from_level_1)
+restart_btn_level2=Button(root,bd=10,image=button_restart_img,command=restart_from_level_2)
+restart_btn_level3=Button(root,bd=10,image=button_restart_img,command=restart_from_level_3)
 
 
 #>>>>>> START FRAME BUTTON <<<<<<#

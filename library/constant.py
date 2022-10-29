@@ -24,7 +24,7 @@ BUTTON_LEVEL2_IMG_LOCATION='Game_projects_group10\\assets\image\\2.png'
 BUTTON_LEVEL3_IMG_LOCATION='Game_projects_group10\\assets\image\\3.png'
 BUTTON_ON_IMG_LOCATION='Game_projects_group10\\assets\image\\no.png'
 BUTTON_OFF_IMG_LOCATION='Game_projects_group10\\assets\image\off.png'
-
+BUTTON_RESTART_IMG_LOCATION="Game_projects_group10\\assets\image\\restart.png"
 
 HOME_BACKGROUND_IMAGE_LOCATION="Game_projects_group10\\assets\image\\background.png"
 BACKGROUND_LEVEL1_LOCATION="Game_projects_group10\\assets\image\LEVEL1.png"
