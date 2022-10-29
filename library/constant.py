@@ -28,8 +28,11 @@ BUTTON_RESTART_IMG_LOCATION="Game_projects_group10\\assets\image\\restart.png"
 
 HOME_BACKGROUND_IMAGE_LOCATION="Game_projects_group10\\assets\image\\background.png"
 BACKGROUND_LEVEL1_LOCATION="Game_projects_group10\\assets\image\LEVEL1.png"
+BACKGROUND_LEVEL1_END_LOCATION="Game_projects_group10\\assets\image\win1.png"
 BACKGROUND_LEVEL2_LOCATION="Game_projects_group10\\assets\image\LEVEL2.png"
+BACKGROUND_LEVEL2_END_LOCATION="Game_projects_group10\\assets\image\win2.png"
 BACKGROUND_LEVEL3_LOCATION="Game_projects_group10\\assets\image\LEVEL3.png"
+BACKGROUND_LEVEL3_END_LOCATION="Game_projects_group10\\assets\image\win3.png"
 BACKGROUND_START_LOCATION='Game_projects_group10\\assets\image\wall.png'
 SETTING_IMAGE_LOCATION='Game_projects_group10\\assets\image\setting.png'
 BACKGROUND_LAB_LOCATION="Game_projects_group10\\assets\image\lab.png"

@@ -19,8 +19,8 @@ class MakeEnemy(Generate_sprite):
     def create_enemy_data(self, count):
         for i in range(count):
             key = f"enemy_{i+1}"
-            rand_y = randint(20, WINDOW_HEIGHT-150)
-            rand_x = randint(20, WINDOW_WIDTH-150)
+            rand_y = randint(100, WINDOW_HEIGHT-150)
+            rand_x = randint(100, WINDOW_WIDTH-150)
 
             vol_x = randint(1,5)
             vol_y = randint(1,5)

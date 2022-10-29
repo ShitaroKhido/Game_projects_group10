@@ -89,12 +89,12 @@ def shoot(event):
         canvas.delete("all")
         level_count += 1
         if level_count == 1:
-            win_screen("Moving to level 2", "black", level_2)
+            win_screen(background_level1_end_img, level_2)
         elif level_count == 2:
-            win_screen("Moving to level 3", "black", level_3)
+            win_screen(background_level2_end_img, level_3)
 
         elif level_count == 3:
-            win_screen("", "black", start)
+            win_screen(background_level3_end_img, build_cure_level)
             level_count=0
         enemy_data_dictionary.clear()
         enemy_lists.clear()
@@ -102,14 +102,11 @@ def shoot(event):
     print(len(enemy_lists))
 
 
-def win_screen(text: str, color: str, toWhere):
-    canvas.create_text(WINDOW_WIDTH/2, WINDOW_HEIGHT/2-40,
-                       text=text, font=("impact", 80),
-                       fill=color
+def win_screen(img: str, toWhere):
+    canvas.create_image(WINDOW_WIDTH/2, WINDOW_HEIGHT/2,
+                       image=img,
                        )
-    root.bind("<space>", toWhere)
-
-
+    root.after(4000, toWhere)
 ###############################
 #>>>>>> ENEMY MOVEMENTS <<<<<<#
 ###############################
@@ -200,7 +197,8 @@ def deploy_sprite(enemy_data: list, enemy_count: int, enemy_img):
 
 def add_healths():
     global player_health
-    player_health += 30
+    if player_health < 200:
+        player_health += 30
 
 #################################
 #>>>>>> GUI CALL FUNCTION <<<<<<#
@@ -227,6 +225,10 @@ def in_game_setting(event):
 
     exit_game = Button(setting_window_ingame, text="Exit", pady=20, command=quit)
     exit_game.pack(expand=True, fill="x")
+
+
+def build_cure_level():
+    canvas.delete("all")
 
 
 def home():
@@ -366,8 +368,11 @@ enemy_img_lv3 = PhotoImage(file=ENEMY3_IMG_LOCATION)
 background_home_img = PhotoImage(file=HOME_BACKGROUND_IMAGE_LOCATION)
 background_black_img = PhotoImage(file=BLACK_IMG_LOCATION)
 background_level1_img = PhotoImage(file=BACKGROUND_LEVEL1_LOCATION)
+background_level1_end_img = PhotoImage(file=BACKGROUND_LEVEL1_END_LOCATION)
 background_level2_img = PhotoImage(file=BACKGROUND_LEVEL2_LOCATION)
+background_level2_end_img = PhotoImage(file=BACKGROUND_LEVEL2_END_LOCATION)
 background_level3_img = PhotoImage(file=BACKGROUND_LEVEL3_LOCATION)
+background_level3_end_img = PhotoImage(file=BACKGROUND_LEVEL3_END_LOCATION)
 background_start_img = PhotoImage(file=BACKGROUND_START_LOCATION)
 background_setting_img = PhotoImage(file=SETTING_IMAGE_LOCATION)
 
