@@ -26,7 +26,7 @@ score_count = 0
 ####>>> FUNCTION <<<####
 ########################
 
-####>>> PLAYER MOVEMENTS <<<####
+####>>> PLAYER FUNCTION <<<####
 
 
 def movements(x=0, y=0):
@@ -92,7 +92,7 @@ def shoot(event):
                 enemy_dict.pop(enemy_key)
                 enemy_data.pop(enemy_key)
                 score_count += 10
-                canvas.itemconfig(score_draw, text=score_count)
+                canvas.itemconfigure("update_score", text=score_count)
         # >>> CHECK IF THERE IS NO ENEMY
         if len(enemy_dict) == 0:
             level_count += 1
@@ -107,9 +107,23 @@ def shoot(event):
             root.bind("<space>", goto_level)
         print(aim_overlap)
         print(len(enemy_data))
-        canvas.itemconfig(alcohol_draw, text=player_alcohol_status)
+        canvas.itemconfigure("update_alcohol", text=player_alcohol_status)
         canvas.after(20, lambda: canvas.delete(lasser))
 
+
+def player_info_bar():
+    global score_draw, health_draw, mask_draw, alcohol_draw
+    score_draw = canvas.create_text(
+        WINDOW_WIDTH-100, 50, text=score_count, font=("impact", 20), fill="white", tags="update_score")
+    health_draw = canvas.create_rectangle(
+        0, 10, player_health_status, 30, fill="red")
+    mask_draw = canvas.create_rectangle(
+        0, 30, player_mask_status, 45, fill="cyan")
+    alcohol_draw = score_draw = canvas.create_text(
+        WINDOW_WIDTH-100, 80, text=player_alcohol_status, font=("impact", 20), fill="white", tags="update_alcohol")
+
+
+####>>> ENEMY FUNCTION <<<####
 
 def build_enemy(e_data, e_dict):
     for key in e_data:
@@ -161,16 +175,7 @@ def move_enemy(enemy_dict):
         canvas.after(40, lambda: move_enemy(enemy_dict))
 
 
-def player_info_bar():
-    global score_draw, health_draw, mask_draw, alcohol_draw
-    score_draw = canvas.create_text(
-        WINDOW_WIDTH-100, 50, text=score_count, font=("impact", 20), fill="white")
-    health_draw = canvas.create_rectangle(
-        0, 10, player_health_status, 30, fill="red")
-    mask_draw = canvas.create_rectangle(
-        0, 30, player_mask_status, 45, fill="cyan")
-    alcohol_draw = score_draw = canvas.create_text(
-        WINDOW_WIDTH-100, 80, text=player_alcohol_status, font=("impact", 20), fill="white")
+####>>> SPRITE DEPLOYMENT FUNCTION <<<####
 
 def deploy_sprite(number_of_enemy: int, enemy_img):
     global player, player_crosshair
@@ -232,24 +237,29 @@ def shoping_window(event):
     alcohol_info = shops_canvas.create_text(
         74, 270, text=f"Alcohol : {player_alcohol_status}", font=("verdana", 12))
     buy_mask_btn = Button(
-        shops, text=f"Use Mask {mask_count}", padx=20, pady=10, command=lambda: add_to_player("mask"))
+        shops, text=f"Buy Mask 100/150pt", padx=20, pady=10, command=lambda: add_to_player("mask"))
     buy_alcohol_btn = Button(shops, text="Buy Alcohol Plasma 20/100pt",
-                             padx=20, pady=10, command=lambda: add_to_player("mask"))
+                             padx=20, pady=10, command=lambda: add_to_player("alcohol"))
     buy_mask_btn.place(x=20, y=20)
     buy_alcohol_btn.place(x=140, y=20)
 
 
 def add_to_player(item: str):
-    global score_count, player_mask_status, player_alcohol_status
-    if score_count >= 100:
+    global score_count, player_mask_status, player_alcohol_status, mask_draw
+    if score_count >= 50:
         if item == "mask" and (180 >= player_mask_status >= 0):
             player_mask_status += 20
-            score_count -= 100
-            canvas.itemconfig(score_draw, text=score_count)
-            print(player_health_status)
+            score_count -= 50
+            canvas.delete(mask_draw)
+            mask_draw = canvas.create_rectangle(
+        0, 30, player_mask_status, 45, fill="cyan")
+            print(player_mask_status)
         elif item == "alcohol":
             player_alcohol_status += 20
-            score_count -= 100
+            score_count -= 50
+            canvas.itemconfigure("update_alcohol", text=player_alcohol_status)
+        canvas.itemconfigure("update_score", text=score_count)
+            
     else:
         messagebox.askokcancel(title="insufficient points!!",
                                message="You don't have enough point to buy!")
@@ -295,15 +305,15 @@ def build_level(enemy_count=0, enemy_img=None, bg_img=None, ):
 
 def level_1():
     home_frame.pack_forget()
-    build_level(1, enemy_img_lv1, level1_bg)
+    build_level(10, enemy_img_lv1, level1_bg)
 
 
 def level_2():
-    build_level(1, enemy_img_lv2, level2_bg)
+    build_level(10, enemy_img_lv2, level2_bg)
 
 
 def level_3():
-    build_level(1, enemy_img_lv3, level3_bg)
+    build_level(10, enemy_img_lv3, level3_bg)
 
 
 def the_cure():
