@@ -65,47 +65,50 @@ def crosshair_aim(event):
 
 
 def shoot(event):
-    global enemy_dict, enemy_data, score_count, score_draw, level_count, enemy_key
-    it_hit = False
-    overlaps_point_adj = 20
-    lasser = canvas.create_line(
-        canvas.coords(player)[0], canvas.coords(player)[1], event.x, event.y,
-        width=6, fill="cyan")
-    # >>> GUNSHOT SOUND EFFECT
-    PlaySound(LASER_SHOT, SND_FILENAME | SND_ASYNC)
-    aim_overlap = canvas.find_overlapping(
-        event.x, event.y, event.x-overlaps_point_adj, event.y-overlaps_point_adj)
-    # >>> CHECK IF HIT THE ENEMY
-    if len(enemy_dict) > 0:
-        for key in enemy_dict:
-            if aim_overlap[1] == enemy_dict[key]:
-                enemy_key = key
-                it_hit = True
-        # >>> IF HIT TRUE >>> REMOVE ENEMY
-        if it_hit:
-            blood_splash = canvas.create_image(
-                event.x, event.y, image=blood_img)
-            canvas.after(100, lambda: canvas.delete(blood_splash))
-            canvas.delete(enemy_dict[enemy_key])
-            enemy_dict.pop(enemy_key)
-            enemy_data.pop(enemy_key)
-            score_count += 10
-            canvas.itemconfig(score_draw, text=score_count)
-    # >>> CHECK IF THERE IS NO ENEMY
-    if len(enemy_dict) == 0:
-        level_count += 1
-        canvas.delete("all")
-        root.bind("<Button-1>", clear_bind)
-        if level_count == 2:
-            canvas.create_image(bg_img_pos, image=level1_end_bg)
-        elif level_count == 3:
-            canvas.create_image(bg_img_pos, image=level2_end_bg)
-        elif level_count == 4:
-            canvas.create_image(bg_img_pos, image=level3_end_bg)
-        root.bind("<space>", goto_level)
-    print(aim_overlap)
-    print(len(enemy_data))
-    canvas.after(20, lambda: canvas.delete(lasser))
+    global enemy_dict, enemy_data, score_count, score_draw, level_count, enemy_key, player_alcohol_status
+    if player_alcohol_status > 0:
+        player_alcohol_status -= 1
+        it_hit = False
+        overlaps_point_adj = 20
+        lasser = canvas.create_line(
+            canvas.coords(player)[0], canvas.coords(player)[1], event.x, event.y,
+            width=6, fill="cyan")
+        # >>> GUNSHOT SOUND EFFECT
+        PlaySound(LASER_SHOT, SND_FILENAME | SND_ASYNC)
+        aim_overlap = canvas.find_overlapping(
+            event.x, event.y, event.x-overlaps_point_adj, event.y-overlaps_point_adj)
+        # >>> CHECK IF HIT THE ENEMY
+        if len(enemy_dict) > 0:
+            for key in enemy_dict:
+                if aim_overlap[1] == enemy_dict[key]:
+                    enemy_key = key
+                    it_hit = True
+            # >>> IF HIT TRUE >>> REMOVE ENEMY
+            if it_hit:
+                blood_splash = canvas.create_image(
+                    event.x, event.y, image=blood_img)
+                canvas.after(100, lambda: canvas.delete(blood_splash))
+                canvas.delete(enemy_dict[enemy_key])
+                enemy_dict.pop(enemy_key)
+                enemy_data.pop(enemy_key)
+                score_count += 10
+                canvas.itemconfig(score_draw, text=score_count)
+        # >>> CHECK IF THERE IS NO ENEMY
+        if len(enemy_dict) == 0:
+            level_count += 1
+            canvas.delete("all")
+            root.bind("<Button-1>", clear_bind)
+            if level_count == 2:
+                canvas.create_image(bg_img_pos, image=level1_end_bg)
+            elif level_count == 3:
+                canvas.create_image(bg_img_pos, image=level2_end_bg)
+            elif level_count == 4:
+                canvas.create_image(bg_img_pos, image=level3_end_bg)
+            root.bind("<space>", goto_level)
+        print(aim_overlap)
+        print(len(enemy_data))
+        canvas.itemconfig(alcohol_draw, text=player_alcohol_status)
+        canvas.after(20, lambda: canvas.delete(lasser))
 
 
 def build_enemy(e_data, e_dict):
@@ -159,14 +162,15 @@ def move_enemy(enemy_dict):
 
 
 def player_info_bar():
-    global score_draw, health_draw, mask_draw
+    global score_draw, health_draw, mask_draw, alcohol_draw
     score_draw = canvas.create_text(
         WINDOW_WIDTH-100, 50, text=score_count, font=("impact", 20), fill="white")
     health_draw = canvas.create_rectangle(
         0, 10, player_health_status, 30, fill="red")
     mask_draw = canvas.create_rectangle(
         0, 30, player_mask_status, 45, fill="cyan")
-
+    alcohol_draw = score_draw = canvas.create_text(
+        WINDOW_WIDTH-100, 80, text=player_alcohol_status, font=("impact", 20), fill="white")
 
 def deploy_sprite(number_of_enemy: int, enemy_img):
     global player, player_crosshair
