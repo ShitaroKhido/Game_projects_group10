@@ -231,14 +231,17 @@ def shoping_window(event):
         90, 245, text=f"Mask shield : {player_mask_status}", font=("verdana", 12))
     alcohol_info = shops_canvas.create_text(
         74, 270, text=f"Alcohol : {player_alcohol_status}", font=("verdana", 12))
-    
-    buy_mask_btn = Button(shops, text=f"Use Mask {mask_count}", padx=20, pady=10, command=lambda:add_to_player("mask"))
-    buy_alcohol_btn = Button(shops, text="Buy Alcohol Plasma 20/100pt", padx=20, pady=10, command=lambda:add_to_player("mask"))
+
+    buy_mask_btn = Button(
+        shops, text=f"Use Mask {mask_count}", padx=20, pady=10, command=lambda: add_to_player("mask"))
+    buy_alcohol_btn = Button(shops, text="Buy Alcohol Plasma 20/100pt",
+                             padx=20, pady=10, command=lambda: add_to_player("mask"))
 
     buy_mask_btn.place(x=20, y=20)
     buy_alcohol_btn.place(x=140, y=20)
 
-def add_to_player(item:str):
+
+def add_to_player(item: str):
     global score_count, player_mask_status, player_alcohol_status
     if score_count >= 100:
         if item == "mask" and (180 >= player_mask_status >= 0):
@@ -250,7 +253,8 @@ def add_to_player(item:str):
             player_alcohol_status += 20
             score_count -= 100
     else:
-        messagebox.askokcancel(title="insufficient points!!", message="You don't have enough point to buy!")
+        messagebox.askokcancel(title="insufficient points!!",
+                               message="You don't have enough point to buy!")
 
 
 ####>>> GAME LEVELS <<<####
@@ -328,7 +332,7 @@ def clear_bind(event):
 
 ####>>> ROOT WINDOWS <<<####
 root = Tk()
-root.resizable(0,0)
+root.resizable(0, 0)
 root.title(WINDOW_TITLE)
 root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 
