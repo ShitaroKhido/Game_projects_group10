@@ -132,6 +132,10 @@ def player_info_bar():
         235, 20, text="Health", font=("verdana", 10, "bold"), fill="white")
     mask_label = canvas.create_text(
         230, 40, text="Mask", font=("verdana", 10, "bold"), fill="white")
+    info_lebel = canvas.create_text(
+        WINDOW_WIDTH/2, WINDOW_HEIGHT-20, text="Press I to access shops.", fill="white",
+        font=("verdana", 10, "bold")
+    )
 
 ####>>> ENEMY FUNCTION <<<####
 
@@ -144,7 +148,7 @@ def build_enemy(e_data, e_dict):
 
 def move_enemy(enemy_dict):
     global player, player_health_status, health_draw, failed_text,\
-         player_mask_status, mask_draw, shops_canvas
+        player_mask_status, mask_draw, shops_canvas
     size_adjust = 20
     if len(enemy_dict) > 0 and player_health_status != 0:
         for key in enemy_dict:
@@ -179,7 +183,7 @@ def move_enemy(enemy_dict):
                             0, 10, player_health_status, 30, fill="red")
                 if player_health_status <= 0:
                     canvas.delete("all")
-                    PlaySound(GAME_OVER_SOUND,SND_FILENAME|SND_ASYNC )
+                    PlaySound(GAME_OVER_SOUND, SND_FILENAME | SND_ASYNC)
                     failed_text = canvas.create_text(bg_img_pos, text="YOU DIED",
                                                      fill="red", font=("impact", 100))
                     restart_btn.place(x=420, y=400)
