@@ -10,6 +10,7 @@ from tkinter import Button, Tk, Canvas, Toplevel, mainloop, PhotoImage, BOTH, Fr
 
 bg_img_pos = [WINDOW_WIDTH/2, WINDOW_HEIGHT/2]
 player_start_pos = [WINDOW_WIDTH/2, WINDOW_HEIGHT]
+
 player_movement_size = 40
 player_health_status = 200
 player_mask_status = 200
@@ -69,8 +70,7 @@ def shoot(event):
     overlaps_point_adj = 20
     lasser = canvas.create_line(
         canvas.coords(player)[0], canvas.coords(player)[1], event.x, event.y,
-        width=6, fill="cyan"
-    )
+        width=6, fill="cyan")
     # >>> GUNSHOT SOUND EFFECT
     PlaySound(LASER_SHOT, SND_FILENAME | SND_ASYNC)
     aim_overlap = canvas.find_overlapping(
@@ -132,13 +132,11 @@ def move_enemy(enemy_dict):
             elif canvas.coords(enemy_dict[key])[1] <= 0:
                 enemy_data[key]["volocity"][1] = - \
                     1*enemy_data[key]["volocity"][1]
-
             # OVERLAPING COORDS
             overlap_player = canvas.find_overlapping(
                 canvas.coords(enemy_dict[key])[
                     0]-size_adjust, canvas.coords(enemy_dict[key])[1]-size_adjust,
                 canvas.coords(enemy_dict[key])[0]+size_adjust, canvas.coords(enemy_dict[key])[1]+size_adjust)
-
             # CHECK IF ENEMY OVERLAPING PLAYER
             if len(overlap_player) > 2:
                 if overlap_player[1] == player:
@@ -221,22 +219,18 @@ def shoping_window(event):
     global shops_canvas, health_info, mask_info, alcohol_info, shops_canvas, buy_mask_btn, buy_alcohol_btn
     shops = Toplevel(root)
     top_window(shops, "Inventory", 400, 300)
-
     shops_canvas = Canvas(shops)
     shops_canvas.pack(expand=True, fill=BOTH)
-
     health_info = shops_canvas.create_text(
         70, 220, text=f"Health : {player_health_status}", font=("verdana", 12))
     mask_info = shops_canvas.create_text(
         90, 245, text=f"Mask shield : {player_mask_status}", font=("verdana", 12))
     alcohol_info = shops_canvas.create_text(
         74, 270, text=f"Alcohol : {player_alcohol_status}", font=("verdana", 12))
-
     buy_mask_btn = Button(
         shops, text=f"Use Mask {mask_count}", padx=20, pady=10, command=lambda: add_to_player("mask"))
     buy_alcohol_btn = Button(shops, text="Buy Alcohol Plasma 20/100pt",
                              padx=20, pady=10, command=lambda: add_to_player("mask"))
-
     buy_mask_btn.place(x=20, y=20)
     buy_alcohol_btn.place(x=140, y=20)
 
