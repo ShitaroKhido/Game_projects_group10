@@ -114,14 +114,17 @@ def shoot(event):
 def player_info_bar():
     global score_draw, health_draw, mask_draw, alcohol_draw
     score_draw = canvas.create_text(
-        WINDOW_WIDTH-100, 50, text=score_count, font=("impact", 20), fill="white", tags="update_score")
+        WINDOW_WIDTH-100, 50, text=score_count, font=("impact", 14), fill="white", tags="update_score")
+    alcohol_draw = score_draw = canvas.create_text(
+        WINDOW_WIDTH-100, 80, text=player_alcohol_status, font=("impact", 14), fill="white", tags="update_alcohol")
+    score_label = canvas.create_text( WINDOW_WIDTH-150, 50, text="POINT: ", font=("verdana", 10, "bold"), fill="white")
+    alcohol_label = canvas.create_text( WINDOW_WIDTH-150, 80, text="ALCOHOL: ", font=("verdana", 10, "bold"), fill="white")
     health_draw = canvas.create_rectangle(
         0, 10, player_health_status, 30, fill="red")
     mask_draw = canvas.create_rectangle(
         0, 30, player_mask_status, 45, fill="cyan")
-    alcohol_draw = score_draw = canvas.create_text(
-        WINDOW_WIDTH-100, 80, text=player_alcohol_status, font=("impact", 20), fill="white", tags="update_alcohol")
-
+    health_label = canvas.create_text(10,10, text="Health")
+    mask_label = canvas.create_text(10,70, text="Mask")
 
 ####>>> ENEMY FUNCTION <<<####
 
