@@ -179,6 +179,7 @@ def move_enemy(enemy_dict):
                             0, 10, player_health_status, 30, fill="red")
                 if player_health_status <= 0:
                     canvas.delete("all")
+                    PlaySound(GAME_OVER_SOUND,SND_FILENAME|SND_ASYNC )
                     failed_text = canvas.create_text(bg_img_pos, text="YOU DIED",
                                                      fill="red", font=("impact", 100))
                     restart_btn.place(x=420, y=400)
