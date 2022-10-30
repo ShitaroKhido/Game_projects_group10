@@ -22,6 +22,8 @@ enemy_dict = {}
 level_count = 1
 mask_count = 0
 score_count = 0
+
+
 ########################
 ####>>> FUNCTION <<<####
 ########################
@@ -71,7 +73,8 @@ def shoot(event):
         it_hit = False
         overlaps_point_adj = 20
         lasser = canvas.create_line(
-            canvas.coords(player)[0], canvas.coords(player)[1], event.x, event.y,
+            canvas.coords(player)[0], canvas.coords(
+                player)[1], event.x, event.y,
             width=6, fill="cyan")
         # >>> GUNSHOT SOUND EFFECT
         PlaySound(LASER_SHOT, SND_FILENAME | SND_ASYNC)
@@ -117,16 +120,21 @@ def player_info_bar():
         WINDOW_WIDTH-100, 50, text=score_count, font=("impact", 14), fill="white", tags="update_score")
     alcohol_draw = score_draw = canvas.create_text(
         WINDOW_WIDTH-100, 80, text=player_alcohol_status, font=("impact", 14), fill="white", tags="update_alcohol")
-    score_label = canvas.create_text( WINDOW_WIDTH-150, 50, text="POINT: ", font=("verdana", 10, "bold"), fill="white")
-    alcohol_label = canvas.create_text( WINDOW_WIDTH-150, 80, text="ALCOHOL: ", font=("verdana", 10, "bold"), fill="white")
+    score_label = canvas.create_text(
+        WINDOW_WIDTH-150, 50, text="POINT: ", font=("verdana", 10, "bold"), fill="white")
+    alcohol_label = canvas.create_text(
+        WINDOW_WIDTH-150, 80, text="ALCOHOL: ", font=("verdana", 10, "bold"), fill="white")
     health_draw = canvas.create_rectangle(
         0, 10, player_health_status, 30, fill="red")
     mask_draw = canvas.create_rectangle(
         0, 30, player_mask_status, 45, fill="cyan")
-    health_label = canvas.create_text(235,20, text="Health", font=("verdana", 10, "bold"), fill="white")
-    mask_label = canvas.create_text(230,40, text="Mask", font=("verdana", 10, "bold"), fill="white")
+    health_label = canvas.create_text(
+        235, 20, text="Health", font=("verdana", 10, "bold"), fill="white")
+    mask_label = canvas.create_text(
+        230, 40, text="Mask", font=("verdana", 10, "bold"), fill="white")
 
 ####>>> ENEMY FUNCTION <<<####
+
 
 def build_enemy(e_data, e_dict):
     for key in e_data:
@@ -135,7 +143,8 @@ def build_enemy(e_data, e_dict):
 
 
 def move_enemy(enemy_dict):
-    global player, player_health_status, health_draw, failed_text, player_mask_status, mask_draw, shops_canvas
+    global player, player_health_status, health_draw, failed_text,\
+         player_mask_status, mask_draw, shops_canvas
     size_adjust = 20
     if len(enemy_dict) > 0 and player_health_status != 0:
         for key in enemy_dict:
@@ -255,14 +264,14 @@ def add_to_player(item: str):
             score_count -= 50
             canvas.delete(mask_draw)
             mask_draw = canvas.create_rectangle(
-        0, 30, player_mask_status, 45, fill="cyan")
+                0, 30, player_mask_status, 45, fill="cyan")
             print(player_mask_status)
         elif item == "alcohol":
             player_alcohol_status += 20
             score_count -= 50
             canvas.itemconfigure("update_alcohol", text=player_alcohol_status)
         canvas.itemconfigure("update_score", text=score_count)
-            
+
     else:
         messagebox.askokcancel(title="insufficient points!!",
                                message="You don't have enough point to buy!")
@@ -292,7 +301,8 @@ def goto_level(event):
     elif level_count == 3:
         level_3()
     elif level_count == 4:
-        the_cure()
+        canvas.pack_forget()
+        game_start()
 
 
 def build_level(enemy_count=0, enemy_img=None, bg_img=None, ):
@@ -317,17 +327,6 @@ def level_2():
 
 def level_3():
     build_level(10, enemy_img_lv3, level3_bg)
-
-
-def the_cure():
-    canvas.delete("all")
-    root.bind("<Button-1>", clear_bind)
-    root.bind("<w>", clear_bind)
-    root.bind("<a>", clear_bind)
-    root.bind("<s>", clear_bind)
-    root.bind("<d>", clear_bind)
-    canvas.create_image(bg_img_pos, image=lab_bg)
-    canvas.create_rectangle(100, 100, 900, 500, fill="black")
 
 
 ####>>> CLEAR KEY BINDING <<<####
@@ -410,7 +409,7 @@ setting_btn = Button(home_frame, image=button_setting_img,
 exit_btn = Button(home_frame, image=button_exit_img)
 level_1_continue = Button(root, image=button_start_img, command=level_2)
 level_2_continue = Button(root, image=button_start_img, command=level_3)
-level_3_continue = Button(root, image=button_start_img, command=the_cure)
+level_3_continue = Button(root, image=button_start_img, command=game_start)
 
 ########################################
 #>>>>>> DEPLOY FUNCTION HERE !!! <<<<<<#
