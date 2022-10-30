@@ -47,11 +47,6 @@ ENEMY3_IMG_LOCATION = ".\\assets\\image\\item\\virus3.png"
 BLOOD_LOCATION = ".\\assets\\image\\item\\blood.png"
 
 
-MUSIC_CHOICE = ".\\assets\\Sound\\choice.wav"
 MUSIC_HOME = ".\\assets\\Sound\\sound_music.wav"
-MUSIC_IN_GAME = ".\\assets\\Sound\\in_game.wav"
-ENEMY_SOUND = ".\\assets\\Sound\\enemy_bite.wav"
-ENEMY_SOUND_2 = ".\\assets\\Sound\\eating-juicy-meat-7024.wav"
 GAME_OVER_SOUND = ".\\assets\\Sound\\gave_over.wav"
-WIN_SOUND = ".\\assets\\Sound\\win.wav"
 LASER_SHOT = ".\\assets\\Sound\\laser-cannon-shot.wav"
