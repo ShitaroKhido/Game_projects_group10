@@ -15,7 +15,6 @@ NUMBER_OF_ENEMY_LEVEL_2 = 40
 NUMBER_OF_ENEMY_LEVEL_3 = 20
 
 
-BLACK_IMG_LOCATION = ".\\assets\\image\\Black_background.png"
 BUTTON_START_IMG_LOCATION = '.\\assets\\image\\button_start.png'
 BUTTON_SETTING_IMG_LOCATION = '.\\assets\\image\\button_setting.png'
 BUTTON_EXIT_IMG_LOCATION = '.\\assets\\image\\button_exit.png'
@@ -23,8 +22,6 @@ BUTTON_BACK_IMG_LOCATION = '.\\assets\\image\\button_back.png'
 BUTTON_LEVEL1_IMG_LOCATION = '.\\assets\\image\\1.png'
 BUTTON_LEVEL2_IMG_LOCATION = '.\\assets\\image\\2.png'
 BUTTON_LEVEL3_IMG_LOCATION = '.\\assets\\image\\3.png'
-BUTTON_ON_IMG_LOCATION = '.\\assets\\image\\\no.png'
-BUTTON_OFF_IMG_LOCATION = '.\\assets\\image\\off.png'
 BUTTON_RESTART_IMG_LOCATION = ".\\assets\\image\\restart.png"
 
 
