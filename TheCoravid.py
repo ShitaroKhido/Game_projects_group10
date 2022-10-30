@@ -10,15 +10,17 @@ from tkinter import Button, Tk, Canvas, Toplevel, mainloop, PhotoImage, BOTH, Fr
 
 bg_img_pos = [WINDOW_WIDTH/2, WINDOW_HEIGHT/2]
 player_start_pos = [WINDOW_WIDTH/2, WINDOW_HEIGHT]
-player_health_status = 200
 player_movement_size = 40
-
+player_health_status = 200
+player_mask_status = 200
+player_alcohol_status = 20
 
 enemy_data = {}
 enemy_dict = {}
 
 level_count = 1
-
+mask_count = 0
+score_count = 0
 ########################
 ####>>> FUNCTION <<<####
 ########################
@@ -62,12 +64,12 @@ def crosshair_aim(event):
 
 
 def shoot(event):
-    global enemy_dict, enemy_data, player_score, score_draw, level_count
+    global enemy_dict, enemy_data, score_count, score_draw, level_count, enemy_key
     it_hit = False
     overlaps_point_adj = 20
     lasser = canvas.create_line(
         canvas.coords(player)[0], canvas.coords(player)[1], event.x, event.y,
-        width=6, fill="purple"
+        width=6, fill="cyan"
     )
     # >>> GUNSHOT SOUND EFFECT
     PlaySound(LASER_SHOT, SND_FILENAME | SND_ASYNC)
@@ -87,8 +89,8 @@ def shoot(event):
             canvas.delete(enemy_dict[enemy_key])
             enemy_dict.pop(enemy_key)
             enemy_data.pop(enemy_key)
-            player_score += 10
-            canvas.itemconfig(score_draw, text=player_score)
+            score_count += 10
+            canvas.itemconfig(score_draw, text=score_count)
     # >>> CHECK IF THERE IS NO ENEMY
     if len(enemy_dict) == 0:
         level_count += 1
@@ -103,7 +105,7 @@ def shoot(event):
         root.bind("<space>", goto_level)
     print(aim_overlap)
     print(len(enemy_data))
-    canvas.after(40, lambda: canvas.delete(lasser))
+    canvas.after(20, lambda: canvas.delete(lasser))
 
 
 def build_enemy(e_data, e_dict):
@@ -113,7 +115,7 @@ def build_enemy(e_data, e_dict):
 
 
 def move_enemy(enemy_dict):
-    global player, player_health_status, health_draw, failed_text
+    global player, player_health_status, health_draw, failed_text, player_mask_status, mask_draw, inventory_canvas
     size_adjust = 20
     if len(enemy_dict) > 0 and player_health_status != 0:
         for key in enemy_dict:
@@ -140,24 +142,32 @@ def move_enemy(enemy_dict):
             # CHECK IF ENEMY OVERLAPING PLAYER
             if len(overlap_player) > 2:
                 if overlap_player[1] == player:
-                    player_health_status -= 1
-                    health_draw = canvas.create_rectangle(
-                        0, 10, player_health_status, 30, fill="red")
+                    if player_mask_status > 0:
+                        player_mask_status -= 1
+                        mask_draw = canvas.create_rectangle(
+                            0, 30, player_mask_status, 45, fill="cyan")
+                    elif mask_count <= 0:
+                        player_health_status -= 1
+                        health_draw = canvas.create_rectangle(
+                            0, 10, player_health_status, 30, fill="red")
                 if player_health_status <= 0:
+                    canvas.delete("all")
                     failed_text = canvas.create_text(bg_img_pos, text="YOU DIED",
                                                      fill="red", font=("impact", 100))
                     restart_btn.place(x=420, y=400)
             canvas.move(enemy_dict[key], enemy_data[key]
                         ["volocity"][0], enemy_data[key]["volocity"][1])
-        canvas.after(30, lambda: move_enemy(enemy_dict))
+        canvas.after(40, lambda: move_enemy(enemy_dict))
 
 
 def player_info_bar():
-    global score_draw, health_draw
+    global score_draw, health_draw, mask_draw
     score_draw = canvas.create_text(
-        WINDOW_WIDTH-100, 50, text=player_score, font=("impact", 20), fill="white")
+        WINDOW_WIDTH-100, 50, text=score_count, font=("impact", 20), fill="white")
     health_draw = canvas.create_rectangle(
         0, 10, player_health_status, 30, fill="red")
+    mask_draw = canvas.create_rectangle(
+        0, 30, player_mask_status, 45, fill="cyan")
 
 
 def deploy_sprite(number_of_enemy: int, enemy_img):
@@ -173,7 +183,7 @@ def deploy_sprite(number_of_enemy: int, enemy_img):
     print(enemy_dict)
     root.bind("<Motion>", crosshair_aim)
     root.bind("<Button-1>", shoot)
-    root.bind("<i>", inventory_window)
+    root.bind("<i>", shoping_window)
 
 
 ####>>> GAME FUNCTION <<<####
@@ -207,18 +217,36 @@ def setting_window():
     sound_off_btn.place(x=20, y=130)
 
 
-def inventory_window(event):
-    inventory = Toplevel(root)
-    top_window(inventory, "Inventory", 400, 300)
+def shoping_window(event):
+    global inventory_canvas, health_info, mask_info, alcohol_info
+    shops = Toplevel(root)
+    top_window(shops, "Inventory", 400, 300)
+
+    inventory_canvas = Canvas(shops)
+    inventory_canvas.pack(expand=True, fill=BOTH)
+
+    health_info = inventory_canvas.create_text(
+        70, 220, text=f"Health : {player_health_status}", font=("verdana", 12))
+    mask_info = inventory_canvas.create_text(
+        90, 245, text=f"Mask shield : {player_mask_status}", font=("verdana", 12))
+    alcohol_info = inventory_canvas.create_text(
+        74, 270, text=f"Alcohol : {player_alcohol_status}", font=("verdana", 12))
+    
+    buy_mask_btn = Button(shops, text=f"Use Mask {mask_count}", padx=20, pady=10)
+    buy_alcohol_btn = Button(shops, text="Buy Alcohol Plasma 20/100pt", padx=20, pady=10)
+
+    buy_mask_btn.place(x=20, y=20)
+    buy_alcohol_btn.place(x=140, y=20)
+
 
 ####>>> GAME LEVELS <<<####
 
-
 def restart_level():
-    global player_health_status
+    global player_health_status, player_mask_status
     canvas.delete(failed_text)
-    restart_btn.pack_forget()
+    restart_btn.place_forget()
     player_health_status = 200
+    player_mask_status = 200
     if level_count == 1:
         level_1()
     elif level_count == 2:
@@ -251,7 +279,7 @@ def build_level(enemy_count=0, enemy_img=None, bg_img=None, ):
 
 def level_1():
     home_frame.pack_forget()
-    build_level(1, enemy_img_lv1, level1_bg)
+    build_level(50, enemy_img_lv1, level1_bg)
 
 
 def level_2():
@@ -265,12 +293,19 @@ def level_3():
 def the_cure():
     canvas.delete("all")
     root.bind("<Button-1>", clear_bind)
+    root.bind("<w>", clear_bind)
+    root.bind("<a>", clear_bind)
+    root.bind("<s>", clear_bind)
+    root.bind("<d>", clear_bind)
     canvas.create_image(bg_img_pos, image=lab_bg)
     canvas.create_rectangle(100, 100, 900, 500, fill="black")
 
 
+####>>> CLEAR KEY BINDING <<<####
+
 def clear_bind(event):
     pass
+
 
 #########################
 ####>>> MAIN CODE <<<####
@@ -279,7 +314,7 @@ def clear_bind(event):
 
 ####>>> ROOT WINDOWS <<<####
 root = Tk()
-root.resizable(0, 0)
+root.resizable(0,0)
 root.title(WINDOW_TITLE)
 root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 
