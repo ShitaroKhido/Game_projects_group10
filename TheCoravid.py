@@ -16,7 +16,6 @@ player_movement_size = 40
 
 enemy_data = {}
 enemy_dict = {}
-player_score = 0
 
 level_count = 1
 
