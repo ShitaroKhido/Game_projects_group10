@@ -32,31 +32,3 @@ class MakeEnemy(Generate_sprite):
             }
 
 
-class Items(Generate_sprite):
-    
-    def __init__(self, empty_dictionary, list_img):
-        super().__init__(empty_dictionary, list_img)
-        self._dict = empty_dictionary
-        self._img_list  = list_img
-    
-    def generate_item_dict(self, count):
-        tag = "items"
-        for i in range(count):
-            key = f"item_{i+1}"
-
-            rand_y = randint(1, WINDOW_HEIGHT-100)
-            rand_x = randint(1, WINDOW_WIDTH-100)
-            
-            imgs = self._img_list[randint(0,len(self._img_list)-1)]
-            
-            if self._img[0] == imgs:
-                tag = "vaccine"
-
-            self._dict[key] = {
-                "position": [rand_x, rand_y],
-                "img": imgs,
-                "item": tag
-            }
-
-
-
