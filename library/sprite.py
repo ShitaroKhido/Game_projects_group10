@@ -28,7 +28,7 @@ class MakeEnemy(Generate_sprite):
             self._dict[key] = {
                 "position": [rand_x, rand_y],
                 "volocity": [vol_x, vol_y],
-                "img_location": self._img
+                "img": self._img
             }
 
 
@@ -54,7 +54,7 @@ class Items(Generate_sprite):
 
             self._dict[key] = {
                 "position": [rand_x, rand_y],
-                "img_location": imgs,
+                "img": imgs,
                 "item": tag
             }
 
