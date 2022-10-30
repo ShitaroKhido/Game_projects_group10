@@ -1,7 +1,7 @@
 from library.constant import *
 from library.sprite import *
 from winsound import PlaySound, SND_FILENAME, SND_ASYNC
-from tkinter import Button, Tk, Canvas, Toplevel, mainloop, PhotoImage, BOTH, Frame
+from tkinter import Button, Tk, Canvas, Toplevel, mainloop, PhotoImage, BOTH, Frame, messagebox
 
 
 #########################
@@ -115,7 +115,7 @@ def build_enemy(e_data, e_dict):
 
 
 def move_enemy(enemy_dict):
-    global player, player_health_status, health_draw, failed_text, player_mask_status, mask_draw, inventory_canvas
+    global player, player_health_status, health_draw, failed_text, player_mask_status, mask_draw, shops_canvas
     size_adjust = 20
     if len(enemy_dict) > 0 and player_health_status != 0:
         for key in enemy_dict:
@@ -218,25 +218,39 @@ def setting_window():
 
 
 def shoping_window(event):
-    global inventory_canvas, health_info, mask_info, alcohol_info
+    global shops_canvas, health_info, mask_info, alcohol_info, shops_canvas, buy_mask_btn, buy_alcohol_btn
     shops = Toplevel(root)
     top_window(shops, "Inventory", 400, 300)
 
-    inventory_canvas = Canvas(shops)
-    inventory_canvas.pack(expand=True, fill=BOTH)
+    shops_canvas = Canvas(shops)
+    shops_canvas.pack(expand=True, fill=BOTH)
 
-    health_info = inventory_canvas.create_text(
+    health_info = shops_canvas.create_text(
         70, 220, text=f"Health : {player_health_status}", font=("verdana", 12))
-    mask_info = inventory_canvas.create_text(
+    mask_info = shops_canvas.create_text(
         90, 245, text=f"Mask shield : {player_mask_status}", font=("verdana", 12))
-    alcohol_info = inventory_canvas.create_text(
+    alcohol_info = shops_canvas.create_text(
         74, 270, text=f"Alcohol : {player_alcohol_status}", font=("verdana", 12))
     
-    buy_mask_btn = Button(shops, text=f"Use Mask {mask_count}", padx=20, pady=10)
-    buy_alcohol_btn = Button(shops, text="Buy Alcohol Plasma 20/100pt", padx=20, pady=10)
+    buy_mask_btn = Button(shops, text=f"Use Mask {mask_count}", padx=20, pady=10, command=lambda:add_to_player("mask"))
+    buy_alcohol_btn = Button(shops, text="Buy Alcohol Plasma 20/100pt", padx=20, pady=10, command=lambda:add_to_player("mask"))
 
     buy_mask_btn.place(x=20, y=20)
     buy_alcohol_btn.place(x=140, y=20)
+
+def add_to_player(item:str):
+    global score_count, player_mask_status, player_alcohol_status
+    if score_count >= 100:
+        if item == "mask" and (180 >= player_mask_status >= 0):
+            player_mask_status += 20
+            score_count -= 100
+            canvas.itemconfig(score_draw, text=score_count)
+            print(player_health_status)
+        elif item == "alcohol":
+            player_alcohol_status += 20
+            score_count -= 100
+    else:
+        messagebox.askokcancel(title="insufficient points!!", message="You don't have enough point to buy!")
 
 
 ####>>> GAME LEVELS <<<####
@@ -279,7 +293,7 @@ def build_level(enemy_count=0, enemy_img=None, bg_img=None, ):
 
 def level_1():
     home_frame.pack_forget()
-    build_level(50, enemy_img_lv1, level1_bg)
+    build_level(1, enemy_img_lv1, level1_bg)
 
 
 def level_2():
