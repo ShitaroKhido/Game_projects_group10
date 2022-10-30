@@ -123,8 +123,8 @@ def player_info_bar():
         0, 10, player_health_status, 30, fill="red")
     mask_draw = canvas.create_rectangle(
         0, 30, player_mask_status, 45, fill="cyan")
-    health_label = canvas.create_text(10,10, text="Health")
-    mask_label = canvas.create_text(10,70, text="Mask")
+    health_label = canvas.create_text(235,20, text="Health", font=("verdana", 10, "bold"), fill="white")
+    mask_label = canvas.create_text(230,40, text="Mask", font=("verdana", 10, "bold"), fill="white")
 
 ####>>> ENEMY FUNCTION <<<####
 
@@ -244,7 +244,7 @@ def shoping_window(event):
     buy_alcohol_btn = Button(shops, text="Buy Alcohol Plasma 20/100pt",
                              padx=20, pady=10, command=lambda: add_to_player("alcohol"))
     buy_mask_btn.place(x=20, y=20)
-    buy_alcohol_btn.place(x=140, y=20)
+    buy_alcohol_btn.place(x=180, y=20)
 
 
 def add_to_player(item: str):
